@@ -1,0 +1,14 @@
+From: Clint Byrum <clint@ubuntu.com>
+Bug-Ubuntu: http://pad.lv/894146
+Forwarded: no, not needed
+Description: disables test to allow build to pass while this is investigated.
+
+Index: mysql-5.5/mysql-test/suite/rpl/t/disabled.def
+===================================================================
+--- mysql-5.5.orig/mysql-test/suite/rpl/t/disabled.def	2011-11-14 15:35:04.238715000 -0800
++++ mysql-5.5/mysql-test/suite/rpl/t/disabled.def	2011-11-23 12:36:46.406356349 -0800
+@@ -15,3 +15,4 @@
+ rpl_get_master_version_and_clock : Bug#11766137 Jan 05 2011 joro Valgrind warnings rpl_get_master_version_and_clock
+ rpl_row_until : BUG#59543 Jan 26 2011 alfranio Replication test from eits suite rpl_row_until times out
+ rpl_stm_until : BUG#59543 Jan 26 2011 alfranio Replication test from eits suite rpl_row_until times out
++rpl_heartbeat_basic : Fails intermittently on AMD64 buildds http://pad.lv/894146

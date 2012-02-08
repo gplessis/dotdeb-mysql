@@ -1,0 +1,10 @@
+Index: mysql-5.5.17/mysql-test/t/disabled.def
+===================================================================
+--- mysql-5.5.17.orig/mysql-test/t/disabled.def	2011-10-12 05:10:24.000000000 -0700
++++ mysql-5.5.17/mysql-test/t/disabled.def	2011-11-08 12:05:58.830579964 -0800
+@@ -17,3 +17,5 @@
+ archive-big              : Bug#11817185 2011-03-10 Anitha Disabled since this leads to timeout on Solaris Sparc
+ log_tables-big           : Bug#11756699 2010-11-15 mattiasj report already exists
+ mysql_embedded           : Bug#12561297 2011-05-14 Anitha Dependent on PB2 changes - eventum#41836
++partition_rename_longfilename : Fails when building with sbuild and schroots
++file_contents            : Fails without bzr revision id
