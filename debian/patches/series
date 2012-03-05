@@ -1,4 +1,5 @@
 38_scripts__mysqld_safe.sh__signals.patch
+40_explicitly_set_debug.patch
 62_disable_tests.patch
 70_mysql_va_list.patch
 71_disable_rpl_tests.patch

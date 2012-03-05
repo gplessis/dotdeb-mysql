@@ -1,3 +1,11 @@
+mysql-5.5 (5.5.21-1~dotdeb.0) stable; urgency=low
+
+  * New upstream release
+  * Explicitly sets debug to allow third party storage engines
+  * Replaces deprecated options for slow query logging. Closes #1
+
+ -- Guillaume Plessis <gui@dotdeb.org>  Mon,  5 Mar 2012 17:44:42 +0100
+
 mysql-5.5 (5.5.20-1~dotdeb.0) stable; urgency=low
 
   * Rebuilt for Dotdeb
