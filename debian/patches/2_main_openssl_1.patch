@@ -1,0 +1,22 @@
+Author: Nicholas Bamber <nicholas@periapt.co.uk>
+Debian-Bug: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=660799
+Forwarded: no
+Last-Update: 2012-03-02
+Subject: This test fails in the presence of libssl-dev
+ and SSL functionality seems to fail without it.
+
+--- a/mysql-test/r/openssl_1.result
++++ b/mysql-test/r/openssl_1.result
+@@ -44,9 +44,9 @@
+ drop user ssl_user1@localhost, ssl_user2@localhost,
+ ssl_user3@localhost, ssl_user4@localhost, ssl_user5@localhost;
+ drop table t1;
+-mysqltest: Could not open connection 'default': 2026 SSL connection error: ASN: bad other signature confirmation
+-mysqltest: Could not open connection 'default': 2026 SSL connection error: ASN: bad other signature confirmation
+-mysqltest: Could not open connection 'default': 2026 SSL connection error: ASN: bad other signature confirmation
++mysqltest: Could not open connection 'default': 2026 SSL connection error: error:00000001:lib(0):func(0):reason(1)
++mysqltest: Could not open connection 'default': 2026 SSL connection error: error:00000001:lib(0):func(0):reason(1)
++mysqltest: Could not open connection 'default': 2026 SSL connection error: error:00000001:lib(0):func(0):reason(1)
+ SSL error: Unable to get private key from ''
+ mysqltest: Could not open connection 'default': 2026 SSL connection error: Unable to get private key
+ SSL error: Unable to get certificate from ''

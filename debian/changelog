@@ -1,23 +1,15 @@
-mysql-5.5 (5.5.21-1~dotdeb.0) stable; urgency=low
+mysql-5.5 (5.5.22-1~dotdeb.0) stable; urgency=low
 
   * New upstream release
-  * Explicitly sets debug to allow third party storage engines
-  * Replaces deprecated options for slow query logging. Closes #1
 
- -- Guillaume Plessis <gui@dotdeb.org>  Mon,  5 Mar 2012 17:44:42 +0100
-
-mysql-5.5 (5.5.20-1~dotdeb.0) stable; urgency=low
-
-  * Rebuilt for Dotdeb
-  * Enables Linux native AIO
-
- -- Guillaume Plessis <gui@dotdeb.org>  Wed,  8 Feb 2012 18:09:42 +0100
+ -- Guillaume Plessis <gui@dotdeb.org>  Tue, 27 Mar 2012 15:40:42 +0200
 
 mysql-5.5 (5.5.20-1) UNRELEASED; urgency=low
 
   [ Guillaume Plessis ]
   * d/rules: Enabling ARCHIVE, BLACKHOLE, and FEDERATED engines.
     (Closes: #649484)
+  * d/rules: Turn off embedded libedit/readline.(Closes: #659566)
 
   [ Clint Byrum ]
   * New Upstream Release
@@ -52,7 +44,17 @@ mysql-5.5 (5.5.20-1) UNRELEASED; urgency=low
       * d/patches/70_mysql_va_list.patch: cherry pick patch from
         upstream bug tracker to fix ARM build failure. (LP: #700982)
 
- -- Clint Byrum <clint@ubuntu.com>  Mon, 23 Jan 2012 15:46:40 -0800
+  [ Nicholas Bamber ]
+  * Added myself to Uploaders
+  * Added libssl-dev as a build dependency and patched main.openssl_1 test
+    so that it works with that library (Closes: #660799)
+  * Added patch to provide cmake options for GNU/Hurd (Closes: #651002)
+    and tweaked debian/rules so that only 'make test' is run on Hurd.
+  * Tweaked debian/rules to make build logs verbose (Closes: #651003)
+  * Refreshed patches
+  * Switched on native AIO in linux builds (Closes: #659565)
+
+ -- Clint Byrum <clint@ubuntu.com>  Tue, 14 Feb 2012 11:48:47 -0800
 
 mysql-5.5 (5.5.17-4) experimental; urgency=low
 

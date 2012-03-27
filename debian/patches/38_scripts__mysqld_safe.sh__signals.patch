@@ -2,10 +2,8 @@ From: 38_scripts__mysqld_safe.sh__signals.dpatch by  <ch@debian.org>
 Subject: Executes /etc/init.d/mysql on signals
 Bug: http://bugs.mysql.com/bug.php?id=31361
 
-Index: mysql-5.5-sid/scripts/mysqld_safe.sh
-===================================================================
---- mysql-5.5-sid.orig/scripts/mysqld_safe.sh	2011-06-03 00:18:11.404604000 -0700
-+++ mysql-5.5-sid/scripts/mysqld_safe.sh	2011-06-03 00:53:07.785651661 -0700
+--- a/scripts/mysqld_safe.sh
++++ b/scripts/mysqld_safe.sh
 @@ -29,8 +29,6 @@
  syslog_tag_mysqld=mysqld
  syslog_tag_mysqld_safe=mysqld_safe
@@ -24,7 +22,7 @@ Index: mysql-5.5-sid/scripts/mysqld_safe.sh
        ;;
      *)
        echo "Internal program error (non-fatal):" \
-@@ -708,6 +706,13 @@
+@@ -711,6 +709,13 @@
  fi
  
  #

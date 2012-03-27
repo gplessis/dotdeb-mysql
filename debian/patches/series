@@ -1,3 +1,5 @@
+1_hurd.patch
+2_main_openssl_1.patch
 38_scripts__mysqld_safe.sh__signals.patch
 40_explicitly_set_debug.patch
 62_disable_tests.patch
