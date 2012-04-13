@@ -1,6 +1,12 @@
-From: 38_scripts__mysqld_safe.sh__signals.dpatch by  <ch@debian.org>
+Author: Christian Hammers  <ch@debian.org>
 Subject: Executes /etc/init.d/mysql on signals
+ Note if you check the bug report on mysql.com the patch is accepted
+ as interesting but they were waiting on Christian Hammers to sign an SCA.
+ Meanwhile this bug report fell off in the transition from 5.0 to 5.1.
 Bug: http://bugs.mysql.com/bug.php?id=31361
+Debian-Bug: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=527623
+Last-Update: 2012-03-07
+Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
 
 --- a/scripts/mysqld_safe.sh
 +++ b/scripts/mysqld_safe.sh

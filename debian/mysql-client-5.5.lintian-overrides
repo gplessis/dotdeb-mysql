@@ -1,5 +1,5 @@
-mysql-client-5.5: package-has-a-duplicate-relation
+# There is a patched bug report to split out innotop - #660087
 mysql-client-5.5: wrong-name-for-upstream-changelog usr/share/doc/mysql-client-5.5/changelog.innotop.gz
-mysql-client-5.5: pkg-not-in-package-test innotop
+# Will look at man pages later 
+# 2012-03-08 periapt
 mysql-client-5.5: binary-without-manpage usr/bin/innochecksum
-mysql-client-5.5: binary-without-manpage usr/bin/mysqltest_embedded

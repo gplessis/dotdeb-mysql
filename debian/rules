@@ -267,18 +267,6 @@ install install-pic: build
 	install -m 0755 debian/additions/echo_stderr $(TMP)/usr/share/mysql/
 	install -m 0755 debian/additions/debian-start $(TMP)/etc/mysql/
 	install -m 0755 debian/additions/debian-start.inc.sh $(TMP)/usr/share/mysql/
-	# lintian overrides
-	#mkdir -p $(TMP)/usr/share/lintian/overrides/
-	#cp debian/mysql-common.lintian-overrides     $(TMP)/usr/share/lintian/overrides/mysql-common
-	#cp debian/mysql-server-5.5.lintian-overrides $(TMP)/usr/share/lintian/overrides/mysql-server-5.5
-	#cp debian/mysql-client-5.5.lintian-overrides $(TMP)/usr/share/lintian/overrides/mysql-client-5.5
-
-	# For 5.0 -> 5.1 transition
-	#d=$(TMP)/usr/share/mysql-common/internal-use-only/; \
-	#mkdir -p $$d; \
-	#cp debian/mysql-server-5.1.mysql.init $$d/_etc_init.d_mysql; \
-	#cp debian/mysql-server-5.1.mysql-server.logrotate $$d/_etc_logrotate.d_mysql-server; \
-	#cp debian/additions/debian-start $$d/_etc_mysql_debian-start;
 
 	install -D -m 0644 $(EXPORTED_SOURCE_TARBALL) $(TMP)/usr/src/mysql/`basename $(EXPORTED_SOURCE_TARBALL)`
 
@@ -303,6 +291,7 @@ binary-indep: build install
 	dh_installlogcheck -i
 	dh_installchangelogs -i
 	dh_link -i
+	dh_lintian -i
 	dh_compress -i
 	dh_fixperms -i
 	dh_installdeb -i
@@ -337,6 +326,7 @@ binary-arch: build install
 	dh_link -a	# .so muss nach .so.1.2.3 installier werden!
 	dh_compress -a
 	dh_fixperms -a
+	dh_lintian -a
 	#dh_makeshlibs -a
 	dh_makeshlibs -plibmysqlclient18 -V'libmysqlclient18 (>= 5.5.13-1)'
 	dh_installdeb -a

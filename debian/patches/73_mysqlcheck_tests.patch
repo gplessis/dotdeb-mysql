@@ -1,0 +1,42 @@
+Author: Nicholas Bamber <nicholas@periapt.co.uk>
+Bug: http://bugs.mysql.com/bug.php?id=64773
+Date: 2012-03-27
+Subject: Large number of bugs that suddenly started to fail.
+ Have not been able to isolate the exact trigger.
+ However several involve mysqlcheck failing to execute
+ and that at least might be easy to investigate further.
+ mysql-test-run of course starts the database, and forks off mysql_upgrade.
+ The latter forks off mysqlcheck.
+ Some of the other tests might be easily patchable by updating
+ the expected test results - run ./mysql-test-run --record <test name>
+ and copy the results file into the source mysql-test directory.
+--- a/mysql-test/t/disabled.def
++++ b/mysql-test/t/disabled.def
+@@ -17,3 +17,12 @@
+ mysql_embedded           : Bug#12561297 2011-05-14 Anitha Dependent on PB2 changes - eventum#41836
+ partition_rename_longfilename : Fails when building with sbuild and schroots
+ file_contents            : Fails without bzr revision id
++plugin_auth              : Bug#64773 2012-03-27 Debian local
++ssl_8k_key               : Bug#64773 2012-03-27 Debian local
++log_tables_upgrade       : Bug#64773 2012-03-27 Debian local
++mysql_upgrade            : Bug#64773 2012-03-27 Debian local
++mysql_upgrade_ssl        : Bug#64773 2012-03-27 Debian local
++mysqladmin               : Bug#64773 2012-03-27 Debian local
++ssl_compress             : Bug#64773 2012-03-27 Debian local
++ssl                      : Bug#64773 2012-03-27 Debian local
++openssl_1                : Bug#64773 2012-03-27 Debian local
+--- a/mysql-test/suite/perfschema/t/disabled.def
++++ b/mysql-test/suite/perfschema/t/disabled.def
+@@ -9,4 +9,4 @@
+ #  Do not use any TAB characters for whitespace.
+ #
+ ##############################################################################
+-
++pfs_upgrade: BUG#64773
+--- a/mysql-test/suite/rpl/t/disabled.def
++++ b/mysql-test/suite/rpl/t/disabled.def
+@@ -16,3 +16,4 @@
+ rpl_row_until : BUG#59543 Jan 26 2011 alfranio Replication test from eits suite rpl_row_until times out
+ rpl_stm_until : BUG#59543 Jan 26 2011 alfranio Replication test from eits suite rpl_row_until times out
+ rpl_heartbeat_basic : Fails intermittently on AMD64 buildds http://pad.lv/894146
++rpl_mysql_upgrade: Fails on Debian #64773

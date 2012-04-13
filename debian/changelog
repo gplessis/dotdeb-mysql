@@ -1,8 +1,8 @@
-mysql-5.5 (5.5.22-1~dotdeb.0) stable; urgency=low
+mysql-5.5 (5.5.23-1~dotdeb.0) stable; urgency=low
 
   * New upstream release
 
- -- Guillaume Plessis <gui@dotdeb.org>  Tue, 27 Mar 2012 15:40:42 +0200
+ -- Guillaume Plessis <gui@dotdeb.org>  Fri, 13 Apr 2012 11:24:42 +0200
 
 mysql-5.5 (5.5.20-1) UNRELEASED; urgency=low
 
@@ -51,8 +51,23 @@ mysql-5.5 (5.5.20-1) UNRELEASED; urgency=low
   * Added patch to provide cmake options for GNU/Hurd (Closes: #651002)
     and tweaked debian/rules so that only 'make test' is run on Hurd.
   * Tweaked debian/rules to make build logs verbose (Closes: #651003)
-  * Refreshed patches
+  * Refreshed patches - and added a new patch to disable a further flurry
+    of failing tests
   * Switched on native AIO in linux builds (Closes: #659565)
+  * Numerous minor changes to improve lintian cleanliness (Closes: #663354)
+    - Added dh_lintian lines to debian/rules to ensure that lintian
+      overrides take effect and removed old commented out lines
+    - Clarified Hurd procps dependency in debian/control
+    - Rewrote short description of the libmysqld-pic package to be more accurate
+    - Depersonalised long description of mysql-client
+    - Removed dependencies relating to mysql-common-4.1
+    - Tightened Breaks clauses for mysql-common
+    - Removed duplicate entry from Replaces clauses for mysql-server-core-5.5
+    - Rexpressed Conflicts clause as versioned dependency
+      for mysql-testsuite-5.5
+    - Added DEP-5 header fields to two patches
+    - Refreshed and commented all lintian overrides and added override
+      concerning lack of upstream changelog to all packages
 
  -- Clint Byrum <clint@ubuntu.com>  Tue, 14 Feb 2012 11:48:47 -0800
 

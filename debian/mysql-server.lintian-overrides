@@ -1,2 +1,2 @@
 # See http://dev.mysql.com/doc/refman/5.5/en/news-5-5-x.html
-mysql-server-5.5: no-upstream-changelog
+mysql-server: no-upstream-changelog
