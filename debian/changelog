@@ -1,10 +1,45 @@
-mysql-5.5 (5.5.23-1~dotdeb.0) stable; urgency=low
+mysql-5.5 (5.5.24-1~dotdeb.0) stable; urgency=low
 
   * New upstream release
 
- -- Guillaume Plessis <gui@dotdeb.org>  Fri, 13 Apr 2012 11:24:42 +0200
+ -- Guillaume Plessis <gui@dotdeb.org>  Tue, 08 May 2012 12:22:42 +0200
 
-mysql-5.5 (5.5.20-1) UNRELEASED; urgency=low
+mysql-5.5 (5.5.23-2) unstable; urgency=low
+
+  * Stopped overriding the -j build parameter (Closes: #512964)
+  * Stopped testing for /proc filesystem. It is no longer used
+    for determining the number of CPUs.
+  * Removed unnecessary build dependencies:
+    - procps as it is required by cmake, cf. #96768
+    - zlib1g newer version required by cmake
+    - libtool obsoleted by cmake
+    - file required by debhelper
+  * Migrated libmysqld-dev, libmysqld-pic, libmysqlclient18 to using
+    dh_install rather than dh_movefiles
+  * Changed /var/run to /run as required by Debian Policy 3.9.3 (9.1.1)
+  * Raised standards version to 3.9.3
+  * Moved '-e' from shebang line to explicit 'set -e' as requested by lintian
+  * Restored ha_example.so to mysql-server-5.5 but added Breaks/Replaces
+    clauses (cf. LP: #912487) and (Closes: #666721)
+  * Added additional Breaks/Replaces clauses for other clashes:
+    - mysql-server-5.5 overwrites perror from mysql-client-5.1
+    - mysql-server-core-5.5 overwrites my_print_defaults from mysql-client-5.1
+
+ -- Nicholas Bamber <nicholas@periapt.co.uk>  Tue, 08 May 2012 05:59:09 +0100
+
+mysql-5.5 (5.5.23-1) experimental; urgency=low
+
+  * Added patch to test suite to accept socket paths less than 40
+    characters long (Closes: #540153)
+  * Disabled some more tests including some reported by Olaf van der Speck
+  * Removed ha_example.so from mysql-server-5.5 install (Closes: #666721)
+  * New upstream release: unspecified security issues CVE-2012-1697,
+    CVE-2012-1696 
+  * Added patch to correct spelling mistakes: preceeding -> preceding
+
+ -- Nicholas Bamber <nicholas@periapt.co.uk>  Thu, 03 May 2012 18:03:34 +0100
+
+mysql-5.5 (5.5.20-1) experimental; urgency=low
 
   [ Guillaume Plessis ]
   * d/rules: Enabling ARCHIVE, BLACKHOLE, and FEDERATED engines.
@@ -68,8 +103,21 @@ mysql-5.5 (5.5.20-1) UNRELEASED; urgency=low
     - Added DEP-5 header fields to two patches
     - Refreshed and commented all lintian overrides and added override
       concerning lack of upstream changelog to all packages
+    - Cleaned up debian/copyright
+      * upgraded to latest version of DEP-5
+      * encoding issues
+      * out of date FSF address
+      * Updated License short name from "PD" to "public-domain"
+  * Converted to short form debhelper rules
+    - Renamed stamp files to end in '-stamp' so that they are cleaned up
+      automatically by dh_clean
+    - Removed commented out lines
+    - Removed obsolete -DINSTALL_LIBDIR clause from pic build
+    - Overrode dh_auto_install so that the rules only run once
+    - Migrated mysql-source, mysql-testsuite, mysql-common from
+    dh_movefiles to dh_install
 
- -- Clint Byrum <clint@ubuntu.com>  Tue, 14 Feb 2012 11:48:47 -0800
+ -- Nicholas Bamber <nicholas@periapt.co.uk>  Sat, 28 Apr 2012 15:02:16 +0100
 
 mysql-5.5 (5.5.17-4) experimental; urgency=low
 

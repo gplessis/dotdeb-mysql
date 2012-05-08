@@ -1,4 +1,4 @@
-Format: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?rev=174
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: MySQL 5.5
 Upstream-Contact: http://bugs.mysql.com/
 Source: http://dev.mysql.com/downloads/mysql/5.5.html
@@ -26,21 +26,21 @@ Comments: originally produced by a modified version of licensecheck2dep5
  > .
  > Updated July 1, 2010
  > .
- > What is the FOSS License Exception?  Oracle¿s Free and Open Source
+ > What is the FOSS License Exception?  Oracle's Free and Open Source
  > Software ("FOSS") License Exception (formerly known as the FLOSS
  > License Exception) allows developers of FOSS applications to include
  > Oracle's MySQL Client Libraries (also referred to as "MySQL Drivers"
  > or "MySQL Connectors") with their FOSS applications. MySQL Client
  > Libraries are typically licensed pursuant to version 2 of the General
  > Public License ("GPL"), but this exception permits distribution of
- > certain MySQL Client Libraries with a developer¿s FOSS applications
+ > certain MySQL Client Libraries with a developer's FOSS applications
  > licensed under the terms of another FOSS license listed below,
  > even though such other FOSS license may be incompatible with the GPL.
  > .
  > The following terms and conditions describe the circumstances under
- > which Oracle¿s FOSS License Exception applies.
+ > which Oracle's FOSS License Exception applies.
  > .
- > Oracle¿s FOSS License Exception Terms and Conditions Definitions.
+ > Oracle's FOSS License Exception Terms and Conditions Definitions.
  > "Derivative Work" means a derivative work, as defined under applicable
  > copyright law, formed entirely from the Program and one or more
  > FOSS Applications.
@@ -51,14 +51,14 @@ Comments: originally produced by a modified version of licensecheck2dep5
  > .
  > "FOSS Notice" means a notice placed by Oracle or MySQL in a copy
  > of the MySQL Client Libraries stating that such copy of the MySQL
- > Client Libraries may be distributed under Oracle's or MySQL¿s FOSS
+ > Client Libraries may be distributed under Oracle's or MySQL's FOSS
  > (or FLOSS) License Exception.
  > .
  > "Independent Work" means portions of the Derivative Work that are not
  > derived from the Program and can reasonably be considered independent
  > and separate works.
  > .
- > "Program" means a copy of Oracle¿s MySQL Client Libraries that
+ > "Program" means a copy of Oracle's MySQL Client Libraries that
  > contains a FOSS Notice.
  > . 
  > A FOSS application developer ("you" or "your") may distribute a
@@ -117,7 +117,7 @@ Comments: originally produced by a modified version of licensecheck2dep5
  > Terms and Conditions.
  .
  The above text is subject to this copyright notice:
- © 2010, Oracle and/or its affiliats.
+ Â© 2010, Oracle and/or its affiliates.
 
 Files: cmd-line-utils/libedit/config.h
  dbug/example1.c
@@ -402,7 +402,7 @@ Files: scripts/mysqld_safe.sh
  support-files/mysql-multi.server.sh
  support-files/mysql.server.sh
 Copyright: 1996 Abandoned TCX DataKonsult AB & Monty Program KB & Detron HB
-License: PD
+License: public-domain
  This file is public domain and comes with NO WARRANTY of any kind
 
 Files: sql/sql_yacc.cc
@@ -429,8 +429,8 @@ License: GPL-2
  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  .
  You should have received a copy of the GNU General Public License along with
- this program; if not, write to the Free Software Foundation, Inc., 59 Temple
- Place, Suite 330, Boston, MA 02111-1307 USA
+ this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
 Files: storage/innobase/include/srv0srv.h
  storage/innobase/srv/srv0start.c
@@ -477,13 +477,13 @@ License: ISC
 Files: sql/nt_servc.cc
  sql/nt_servc.h
 Copyright: 1998 Abandoned Irena Pancirov - Irnet Snc
-License: PD
+License: public-domain
  This file is public domain and comes with NO WARRANTY of any kind
 
 Files: dbug/dbug.c
  dbug/dbug_long.h
 Copyright: 1987 Abandoned Fred Fish
-License: UNKNOWN
+License: public-domain
  N O T I C E				      
  .
  Copyright Abandoned, 1987, Fred Fish		      
@@ -541,12 +541,12 @@ Copyright: 2008-2009 Sun Microsystems Inc
 License: BSD (3 clause)
 
 Files: storage/ndb/test/src/getarg.c
-Copyright: 1997-2000 - Kungliga Tekniska Högskolan
+Copyright: 1997-2000 - Kungliga Tekniska HÃ¶gskolan
 License: BSD (3 clause)
 
 Files: storage/ndb/test/include/getarg.h
 Copyright: 2003 MySQL AB
- 1997-1999 Kungliga Tekniska Högskolan
+ 1997-1999 Kungliga Tekniska HÃ¶gskolan
 License: BSD (3 clause) GPL-2
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -558,10 +558,10 @@ License: BSD (3 clause) GPL-2
  GNU General Public License for more details.
  .
  You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA */
+ along with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  .
- Copyright (c) 1997, 1999 Kungliga Tekniska Högskolan
+ Copyright (c) 1997, 1999 Kungliga Tekniska HÃ¶gskolan
  (Royal Institute of Technology, Stockholm, Sweden). 
  All rights reserved. 
  .
@@ -655,12 +655,12 @@ License: SWsoft
 
 Files: tests/mail_to_db.pl
 Copyright: 1998 Abandoned TCX DataKonsult AB & Monty Program KB & Detron HB
-License: PD
+License: public-domain
  This file is public domain and comes with NO WARRANTY of any kind
 
 Files: dbug/dbug_analyze.c
 Copyright: 1987 June Binayak Banerjee
-License: PD
+License: public-domain
  This program may be freely distributed under the same terms and
  conditions as Fred Fish's Dbug package.
 
@@ -692,8 +692,8 @@ License: GPL-2
  GNU General Public License for more details.
  .
  You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301  USA */
+ along with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
  .
  On Debian and systems the full text of the GNU General Public
  License version 2 can be found in the file

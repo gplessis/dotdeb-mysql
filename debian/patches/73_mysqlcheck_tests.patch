@@ -12,10 +12,10 @@ Subject: Large number of bugs that suddenly started to fail.
  and copy the results file into the source mysql-test directory.
 --- a/mysql-test/t/disabled.def
 +++ b/mysql-test/t/disabled.def
-@@ -17,3 +17,12 @@
- mysql_embedded           : Bug#12561297 2011-05-14 Anitha Dependent on PB2 changes - eventum#41836
- partition_rename_longfilename : Fails when building with sbuild and schroots
- file_contents            : Fails without bzr revision id
+@@ -20,3 +20,12 @@
+ mysqlslap		 : n/a	2012-04-29 Failed once on kfreebsd
+ mysqlhotcopy_isam	 : n/a  2012-04-29 Olaf van der Spek reported this failure
+ mysqlhotcopy_archive	 : n/a  2012-04-29 Olaf van der Spek reported this failure
 +plugin_auth              : Bug#64773 2012-03-27 Debian local
 +ssl_8k_key               : Bug#64773 2012-03-27 Debian local
 +log_tables_upgrade       : Bug#64773 2012-03-27 Debian local
