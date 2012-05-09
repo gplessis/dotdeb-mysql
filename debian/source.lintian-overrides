@@ -4,4 +4,4 @@
 maintainer-script-lacks-debhelper-token debian/mysql-server-5.5.postrm
 # Probably best to keep the debhelper version low in
 # case someone needs to backport
-package-needs-versioned-debhelper-build-depends 8
+package-needs-versioned-debhelper-build-depends 9

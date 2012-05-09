@@ -2,7 +2,7 @@ Source: mysql-5.5
 Section: database
 Priority: optional
 Maintainer: Guillaume Plessis <gui@dotdeb.org>
-Build-Depends: debhelper (>= 8.0.0), libaio-dev[linux-any], libncurses5-dev (>= 5.0-6), perl, libwrap0-dev (>= 7.6-8.3), libreadline-dev, po-debconf, psmisc, chrpath, doxygen, ghostscript,  gawk, bison, lsb-release, hardening-wrapper, cmake, libssl-dev
+Build-Depends: debhelper (>= 8.1.3~), libaio-dev[linux-any], libncurses5-dev (>= 5.0-6), perl, libwrap0-dev (>= 7.6-8.3), libreadline-dev, po-debconf, psmisc, chrpath, doxygen, ghostscript,  gawk, bison, lsb-release, hardening-wrapper, cmake, libssl-dev
 Standards-Version: 3.9.3
 Homepage: http://dev.mysql.com/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-mysql/mysql-5.5/
