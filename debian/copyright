@@ -2,7 +2,11 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: MySQL 5.5
 Upstream-Contact: http://bugs.mysql.com/
 Source: http://dev.mysql.com/downloads/mysql/5.5.html
-Comments: originally produced by a modified version of licensecheck2dep5
+Comments:
+ The file Docs/mysql.info is removed from the upstream source
+ because it is incompatible with the Debian Free Software Guidelines.
+ .
+ Originally produced by a modified version of licensecheck2dep5
  from CDBS by Clint Byrum <clint@ubuntu.com>. Hand modified to reduce 
  redundancy in the output and add appropriate license text.
  .
@@ -160,6 +164,7 @@ License: GPL-2
  of which version of the GPL is applied is otherwise unspecified.
 
 Files: BUILD/*
+ Docs/*
  client/*
  client/echo.c
  client/get_password.c

@@ -1,0 +1,6 @@
+usr/bin/mysql_config
+usr/include/mysql/*
+usr/lib/libmysqlclient.a
+usr/lib/libmysqlclient.so
+usr/lib/libmysqlclient_r.a
+usr/share/aclocal/mysql.m4

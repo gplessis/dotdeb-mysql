@@ -1,7 +1,7 @@
 Author <nicholas@periapt.co.uk>
 Subject: spelling errors
  Preceeding -> preceding
-Last-Update: 2012-05-02
+Last-Update: 2012-05-19
 Forwarded: no
 --- a/libmysql/errmsg.c
 +++ b/libmysql/errmsg.c
@@ -29,7 +29,7 @@ Forwarded: no
  #       effects like failing 'sync_slave_with_master', crashes of the slave or
 --- a/mysql-test/extra/rpl_tests/rpl_row_basic.test
 +++ b/mysql-test/extra/rpl_tests/rpl_row_basic.test
-@@ -186,7 +186,7 @@
+@@ -221,7 +221,7 @@
  SELECT * FROM t7 ORDER BY C1;
  
  # since bug#31552/31609 idempotency is not default any longer. In order
@@ -38,7 +38,7 @@ Forwarded: no
  # temprorarily
  set @@global.slave_exec_mode= 'IDEMPOTENT';
  
-@@ -225,7 +225,7 @@
+@@ -260,7 +260,7 @@
  SELECT * FROM t8 ORDER BY a;
  
  # since bug#31552/31609 idempotency is not default any longer. In order

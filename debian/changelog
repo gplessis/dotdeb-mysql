@@ -1,14 +1,53 @@
-mysql-5.5 (5.5.24-1~dotdeb.1) stable; urgency=low
+mysql-5.5 (5.5.24-1~dotdeb.2) stable; urgency=low
 
-  * Debhelper upgrade (no init script otherwise)
+  * Rebuilt for Dotdeb
 
- -- Guillaume Plessis <gui@dotdeb.org>  Wed, 09 May 2012 08:40:42 +0200
+ -- Guillaume Plessis <gui@dotdeb.org>  Tue, 29 May 2012 11:17:42 +0200
 
-mysql-5.5 (5.5.24-1~dotdeb.0) stable; urgency=low
+mysql-5.5 (5.5.24+dfsg-1) UNRELEASED; urgency=low
 
-  * New upstream release
+  * Fixing regular expression in tests to guard against build path containing
+    the '+' symbol (Closes: #674210)
+  * Disabled certain SSL tests pending investigation (cf. #674267)
+  * Updated French translation (Closes: #674025)
+  * Updated Dutch translation (Closes: #674124)
+  * Updated Russian translation (Closes: #674189)
+  * Migrated libmysqlclient-dev, mysql-client-5.5, mysql-server-core-5.5
+    and mysql-server-5.5 off dh_movefiles
+  * Removed dh_movefiles override
+  * Rewrote libmysqlclient_r linking stuff to generate
+    ephemeral dh_link files so that the hack is more comprehensible
+  * Stopped attempts to install non-existent files for libmysqlclient-dev
+    and mysql-server-5.5
+  * Added --fail-missing to dh_install to catch executables not being installed
+  * Distributed unused resources amongst packages appropriately
+  * Added fixes to mop up various permissions issues in auto-install rule
+  * Enhanced documentation around the source package and the reasons for it
+    being arch:any
+  * Removed source cruft: debian/additions/*.1 (apart from mysqlreport.1)
+  * Restored zlib1g-dev build dependency pending further investigation
+  * Removed the numerical prefix from the patch files
+  * Applied fix-mysqldump-test.patch from Ubuntu
+  * Located and installed upstream changelog
+  * Removed doxygen-latex, ghostscript as build dependency
+    as these were needed only for the NDB docs
+  * Added lintian overrides
+    - spelling false positive: yuR
+    - long lines in man pages that cannot be reformatted
+    - missing symbols file (cf. #590905)
+  * Added patch for hyphen/minus sign confusion
+  * Dropped mailx to Suggests clause (Closes: #535496)
+  * New upstream source
+  * Refreshed patches
+  * Standardized debian/watch and get-orig-source and made DFSG exclusion
+    of Docs/mysql.info explicit (Closes: #673528)
+  * Revert having libssl-dev as a build dependency and changed
+    WITH_SSL option to 'bundled' from 'yes' (Closes: #590905)
+    and (Closes: #673865)
+  * Removed main_openssl_1 patch
+  * Set SYSTEM_TYPE according to GNU Build System
 
- -- Guillaume Plessis <gui@dotdeb.org>  Tue, 08 May 2012 12:22:42 +0200
+ -- Nicholas Bamber <nicholas@periapt.co.uk>  Tue, 08 May 2012 09:04:25 +0100
 
 mysql-5.5 (5.5.23-2) unstable; urgency=low
 

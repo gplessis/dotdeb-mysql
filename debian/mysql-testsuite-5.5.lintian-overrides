@@ -1,2 +1,4 @@
-# See http://dev.mysql.com/doc/refman/5.5/en/news-5-5-x.html
-mysql-testsuite-5.5: no-upstream-changelog
+# These are random occurrences of a pseudo word in a binary.
+mysql-testsuite-5.5: spelling-error-in-binary usr/bin/mysql_client_test_embedded yuR your
+mysql-testsuite-5.5: spelling-error-in-binary usr/bin/mysql_embedded yuR your
+mysql-testsuite-5.5: spelling-error-in-binary usr/bin/mysqltest_embedded yuR your

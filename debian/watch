@@ -1,3 +1,9 @@
+# This watch file depends on repack.sh being in your PATH.
+# See http://anonscm.debian.org/gitweb/?p=pkg-perl/scripts.git;a=blob_plain;f=repack.sh;hb=HEAD
 version=3
-opts="uversionmangle=s/-(rc|beta)/$1/" \
-  ftp://sunsite.informatik.rwth-aachen.de/pub/mirror/www.mysql.com/Downloads/MySQL-5.5/mysql-([\d\.]*(?:-beta|-rc)?).tar.gz debian
+opts=dversionmangle=s/\+dfsg\d*$// \
+    http://mysql.linux.cz/Downloads/MySQL-5.5/mysql-([\d\.]+).tar.gz \
+    debian sh debian/repack.stub
+opts=dversionmangle=s/\+dfsg\d*$// \
+    http://ftp.gwdg.de/pub/misc/mysql/Downloads/MySQL-5.5/mysql-([\d\.]+).tar.gz \
+    debian sh debian/repack.stub

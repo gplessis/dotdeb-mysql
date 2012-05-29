@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the mysql-dfsg-* packages.
 #
 # Translators:
-# Christian Perrier <bubulle@debian.org>, 2004, 2006, 2007, 2009.
+# Christian Perrier <bubulle@debian.org>, 2004, 2006, 2007, 2009, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: mysql-5.5@packages.debian.org\n"
 "POT-Creation-Date: 2011-11-08 11:42-0800\n"
-"PO-Revision-Date: 2009-08-08 14:56+0200\n"
+"PO-Revision-Date: 2012-05-22 08:30+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "debian.org>\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #. Type: boolean
@@ -177,10 +177,6 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:8001
-#, fuzzy
-#| msgid ""
-#| "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for "
-#| "more information."
 msgid ""
 "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for more "
 "information."
@@ -211,18 +207,13 @@ msgstr "Abandon de la gestion de NDB"
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:10001
-#, fuzzy
-#| msgid ""
-#| "MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the "
-#| "new mysql-cluster package and remove all lines starting with \"ndb\" from "
-#| "all config files below /etc/mysql/."
 msgid ""
 "MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the new "
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
 "La version 5.5 de MySQL ne gère plus les grappes NDB. Vous devriez utiliser "
-"le paquet mysql-cluster et supprimer toutes les lignes commençant par "
+"le paquet mysql-cluster-server et supprimer toutes les lignes commençant par "
 "« ndb » des fichiers de configuration situés dans /etc/mysql."
 
 #~ msgid ""

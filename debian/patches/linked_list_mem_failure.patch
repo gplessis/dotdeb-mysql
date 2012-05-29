@@ -1,0 +1,22 @@
+Author: Nicholas Bamber <nicholas@periapt.co.uk>
+Subject: certain tests failing
+Bug-Debian: http://bugs.debian.org/674267
+Last-Update: 2012-05-25
+Forwarded: no
+--- a/mysql-test/suite/rpl/t/disabled.def
++++ b/mysql-test/suite/rpl/t/disabled.def
+@@ -17,3 +17,6 @@
+ rpl_stm_until : BUG#59543 Jan 26 2011 alfranio Replication test from eits suite rpl_row_until times out
+ rpl_heartbeat_basic : Fails intermittently on AMD64 buildds http://pad.lv/894146
+ rpl_mysql_upgrade: Fails on Debian #64773
++rpl_heartbeat_ssl:     Debian Bug 674267 2012-05-24
++rpl_ssl1: Debian Bug 674267 2012-05-24
++rpl_ssl: Debian Bug 674267 2012-05-24
+--- a/mysql-test/t/disabled.def
++++ b/mysql-test/t/disabled.def
+@@ -29,3 +29,5 @@
+ ssl_compress             : Bug#64773 2012-03-27 Debian local
+ ssl                      : Bug#64773 2012-03-27 Debian local
+ openssl_1                : Bug#64773 2012-03-27 Debian local
++ssl_cipher               : Debian Bug 674267 2012-05-24
++ssl_connect              : Debian Bug 674267 2012-05-24

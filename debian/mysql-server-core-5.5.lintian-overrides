@@ -1,2 +1,2 @@
-# See http://dev.mysql.com/doc/refman/5.5/en/news-5-5-x.html
-mysql-server-core-5.5: no-upstream-changelog
+# These are random occurrences of a pseudo word in a binary.
+mysql-server-core-5.5: spelling-error-in-binary usr/sbin/mysqld yuR your

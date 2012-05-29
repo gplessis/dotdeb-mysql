@@ -1,5 +1,7 @@
-# There is a patched bug report to split out innotop - #660087
-mysql-client-5.5: wrong-name-for-upstream-changelog usr/share/doc/mysql-client-5.5/changelog.innotop.gz
 # Will look at man pages later 
 # 2012-03-08 periapt
 mysql-client-5.5: binary-without-manpage usr/bin/innochecksum
+# These long lines reproduce actual output and to reformat them
+# would damage the integrity of the man page.
+mysql-client-5.5: manpage-has-errors-from-man usr/share/man/man1/mysqladmin.1.gz 28: warning [p 1, 1.5i]: can't break line
+mysql-client-5.5: manpage-has-errors-from-man usr/share/man/man1/mysqldump.1.gz 2151: warning [p 12, 6.5i, div `3tbd2,1', 0.2i]: can't break line
