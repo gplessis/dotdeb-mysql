@@ -1,42 +1,97 @@
 Author: Nicholas Bamber <nicholas@periapt.co.uk>
-Bug: http://bugs.mysql.com/bug.php?id=64773
-Date: 2012-03-27
-Subject: Large number of bugs that suddenly started to fail.
- Have not been able to isolate the exact trigger.
- However several involve mysqlcheck failing to execute
- and that at least might be easy to investigate further.
- mysql-test-run of course starts the database, and forks off mysql_upgrade.
- The latter forks off mysqlcheck.
- Some of the other tests might be easily patchable by updating
- the expected test results - run ./mysql-test-run --record <test name>
- and copy the results file into the source mysql-test directory.
---- a/mysql-test/t/disabled.def
-+++ b/mysql-test/t/disabled.def
-@@ -20,3 +20,12 @@
- mysqlslap		 : n/a	2012-04-29 Failed once on kfreebsd
- mysqlhotcopy_isam	 : n/a  2012-04-29 Olaf van der Spek reported this failure
- mysqlhotcopy_archive	 : n/a  2012-04-29 Olaf van der Spek reported this failure
-+plugin_auth              : Bug#64773 2012-03-27 Debian local
-+ssl_8k_key               : Bug#64773 2012-03-27 Debian local
-+log_tables_upgrade       : Bug#64773 2012-03-27 Debian local
-+mysql_upgrade            : Bug#64773 2012-03-27 Debian local
-+mysql_upgrade_ssl        : Bug#64773 2012-03-27 Debian local
-+mysqladmin               : Bug#64773 2012-03-27 Debian local
-+ssl_compress             : Bug#64773 2012-03-27 Debian local
-+ssl                      : Bug#64773 2012-03-27 Debian local
-+openssl_1                : Bug#64773 2012-03-27 Debian local
---- a/mysql-test/suite/perfschema/t/disabled.def
-+++ b/mysql-test/suite/perfschema/t/disabled.def
-@@ -9,4 +9,4 @@
- #  Do not use any TAB characters for whitespace.
+Bug: http://bugs.mysql.com/bug.php?id=65288
+Date: 2012-05-28
+Subject: child process picking up external config files
+ The effect of the patch should be that the affected tests
+ run inside a clean chroot, but are skipped where stray
+ config files may upset the tests. These failed tests
+ are usually indicated by mysqlcheck triggering a FATAL ERROR.
+--- /dev/null
++++ b/mysql-test/include/debian-fail-local_my_cnf.inc
+@@ -0,0 +1,5 @@
++if ($FOUND_LOCAL_MY_CNF)
++{
++  skip See Oracle Bug#65288 (Debian);
++}
++
+--- a/mysql-test/mysql-test-run.pl
++++ b/mysql-test/mysql-test-run.pl
+@@ -2462,6 +2462,17 @@
+   }
+ 
+   # ----------------------------------------------------
++  # found_local_my_cnf
++  # ----------------------------------------------------
++  my $found_local_my_cnf =
++    mtr_file_exists("~/.my.cnf") ||
++    mtr_file_exists("/etc/my.cnf") ||
++    mtr_file_exists("/etc/mysql/my.cnf");
++  if ($found_local_my_cnf) {
++    $ENV{'FOUND_LOCAL_MY_CNF'} = $found_local_my_cnf;
++  }
++
++  # ----------------------------------------------------
+   # perror
+   # ----------------------------------------------------
+   my $exe_perror= mtr_exe_exists(vs_config_dirs('extra', 'perror'),
+--- a/mysql-test/t/mysqladmin.test
++++ b/mysql-test/t/mysqladmin.test
+@@ -1,4 +1,5 @@
+ # Embedded server doesn't support external clients
++--source include/debian-fail-local_my_cnf.inc
+ --source include/not_embedded.inc
  #
- ##############################################################################
--
-+pfs_upgrade: BUG#64773
---- a/mysql-test/suite/rpl/t/disabled.def
-+++ b/mysql-test/suite/rpl/t/disabled.def
-@@ -16,3 +16,4 @@
- rpl_row_until : BUG#59543 Jan 26 2011 alfranio Replication test from eits suite rpl_row_until times out
- rpl_stm_until : BUG#59543 Jan 26 2011 alfranio Replication test from eits suite rpl_row_until times out
- rpl_heartbeat_basic : Fails intermittently on AMD64 buildds http://pad.lv/894146
-+rpl_mysql_upgrade: Fails on Debian #64773
+ # Test "mysqladmin ping"
+--- a/mysql-test/t/log_tables_upgrade.test
++++ b/mysql-test/t/log_tables_upgrade.test
+@@ -1,3 +1,5 @@
++
++-- source include/debian-fail-local_my_cnf.inc
+ --source include/not_embedded.inc
+ --source include/have_csv.inc
+ 
+--- a/mysql-test/t/mysql_upgrade.test
++++ b/mysql-test/t/mysql_upgrade.test
+@@ -1,3 +1,5 @@
++
++-- source include/debian-fail-local_my_cnf.inc
+ -- source include/mysql_upgrade_preparation.inc
+ 
+ #
+--- a/mysql-test/t/mysql_upgrade_ssl.test
++++ b/mysql-test/t/mysql_upgrade_ssl.test
+@@ -1,5 +1,6 @@
+ # mysql_upgrade tests requiring SSL support
+ 
++-- source include/debian-fail-local_my_cnf.inc
+ -- source include/have_ssl_communication.inc
+ -- source include/mysql_upgrade_preparation.inc
+ 
+--- a/mysql-test/t/plugin_auth.test
++++ b/mysql-test/t/plugin_auth.test
+@@ -1,3 +1,5 @@
++
++-- source include/debian-fail-local_my_cnf.inc
+ --source include/have_plugin_auth.inc
+ --source include/not_embedded.inc
+ --source include/mysql_upgrade_preparation.inc
+--- a/mysql-test/suite/perfschema/t/pfs_upgrade.test
++++ b/mysql-test/suite/perfschema/t/pfs_upgrade.test
+@@ -3,6 +3,7 @@
+ # database.
+ # 
+ 
++-- source include/debian-fail-local_my_cnf.inc
+ --source include/not_embedded.inc
+ --source include/have_perfschema.inc
+ --source include/have_lowercase0.inc
+--- a/mysql-test/suite/rpl/t/rpl_mysql_upgrade.test
++++ b/mysql-test/suite/rpl/t/rpl_mysql_upgrade.test
+@@ -5,6 +5,7 @@
+ # options are added into mysql_upgrade. These options control whether sql
+ # statements are binlogged or not. 
+ #############################################################################
++-- source include/debian-fail-local_my_cnf.inc
+ --source include/master-slave.inc
+ 
+ # Only run test if "mysql_upgrade" is found

@@ -1,14 +1,14 @@
 # Portuguese translation for mysql-dfsg-5.5's debconf messages
 # Copyright (C) 2006 Miguel Figueiredo <elmig@debianpt.org>
 # This file is distributed under the same license as the mysql-dfsg-5.5 package.
-# Miguel Figueiredo <elmig@debianpt.org>
+# Miguel Figueiredo <elmig@debianpt.org>, 2012
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mysql-dfsg-5.5\n"
 "Report-Msgid-Bugs-To: mysql-5.5@packages.debian.org\n"
 "POT-Creation-Date: 2011-11-08 11:42-0800\n"
-"PO-Revision-Date: 2007-05-05 21:01+0100\n"
+"PO-Revision-Date: 2012-05-28 22:40+0100\n"
 "Last-Translator: Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "Language: pt\n"
@@ -26,12 +26,11 @@ msgstr "Deseja mesmo fazer downgrade?"
 #. Description
 #: ../mysql-server-5.5.templates:2001
 msgid "A file named /var/lib/mysql/debian-*.flag exists on this system."
-msgstr "Existe um ficheiro chamado /var/lib/mysql/debian-*.flag neste sistema."
+msgstr "Existe, neste sistema, um ficheiro chamado /var/lib/mysql/debian-*.flag."
 
 #. Type: boolean
 #. Description
 #: ../mysql-server-5.5.templates:2001
-#, fuzzy
 #| msgid ""
 #| "Such file is an indication that a mysql-server package with a higher "
 #| "version has been installed earlier."
@@ -39,8 +38,8 @@ msgid ""
 "Such a file is an indication that a mysql-server package with a higher "
 "version has been installed previously."
 msgstr ""
-"Tal ficheiro significa que anteriormente foi instalado um pacote mysql-"
-"server com um número de versão superior."
+"A existência de tal ficheiro é um indicador que anteriormente foi instalado "
+"um pacote mysql-server com um número de versão superior."
 
 #. Type: boolean
 #. Description
@@ -65,11 +64,12 @@ msgid ""
 "Using MySQL under NIS/YP requires a mysql user account to be added on the "
 "local system with:"
 msgstr ""
+"Utilizar MySQL com NIS/YP necessita que seja adicionada uma conta de "
+"utilizador de mysql ao sistema local com:"
 
 #. Type: note
 #. Description
 #: ../mysql-server-5.5.templates:3001
-#, fuzzy
 #| msgid ""
 #| "You should also check the permissions and the owner of the /var/lib/mysql "
 #| "directory:"
@@ -77,7 +77,7 @@ msgid ""
 "You should also check the permissions and ownership of the /var/lib/mysql "
 "directory:"
 msgstr ""
-"Deve também verificar as permissões e o dono do directório /var/lib/mysql :"
+"Deve também verificar as permissões e o dono do directório /var/lib/mysql:"
 
 #. Type: boolean
 #. Description
@@ -104,7 +104,7 @@ msgid ""
 "should be kept."
 msgstr ""
 "Se está a remover o pacote MySQL de modo a posteriormente instalar uma "
-"versão mais recente ou se um pacote mysq-server já está os está a utilizar, "
+"versão mais recente ou se um pacote mysql-server já está os está a utilizar, "
 "os dados devem ser mantidos."
 
 #. Type: boolean
@@ -136,25 +136,23 @@ msgid ""
 "While not mandatory, it is highly recommended that you set a password for "
 "the MySQL administrative \"root\" user."
 msgstr ""
-"Embora não seja mandatório, É fortemente recomendado que defina uma palavra-"
+"Embora não seja obrigatório, é fortemente recomendado que defina uma palavra-"
 "passe para o utilizador administrativo \"root\" do MySQL."
 
 #. Type: password
 #. Description
 #: ../mysql-server-5.5.templates:6001
-#, fuzzy
 #| msgid "If that field is left blank, the password will not be changed."
 msgid "If this field is left blank, the password will not be changed."
 msgstr ""
-"Se esse campo for deixado em branco, a palavra-passe não irá ser alterada."
+"Se este campo for deixado em branco, a palavra-passe não irá ser alterada."
 
 #. Type: password
 #. Description
 #: ../mysql-server-5.5.templates:7001
-#, fuzzy
 #| msgid "New password for the MySQL \"root\" user:"
 msgid "Repeat password for the MySQL \"root\" user:"
-msgstr "Nova palavra-passe para o utilizador \"root\" do MySQL:"
+msgstr "Repita a palavra-passe para o utilizador \"root\" de MySQL:"
 
 #. Type: error
 #. Description
@@ -172,14 +170,13 @@ msgid ""
 "because of a communication problem with the MySQL server."
 msgstr ""
 "Ocorreu um erro enquanto era definida a palavra-passe para o utilizador "
-"administrativo do MySQL. Isto pode ter acontecido porque a cona já tem uma "
+"administrativo do MySQL. Isto pode ter acontecido porque a conta já tem uma "
 "palavra-passe, ou porque ocorreu um problema ao comunicação com o servidor "
 "MySQL."
 
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:8001
-#, fuzzy
 #| msgid ""
 #| "You should check the account's password after tha package installation."
 msgid "You should check the account's password after the package installation."
@@ -189,7 +186,6 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:8001
-#, fuzzy
 #| msgid ""
 #| "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for "
 #| "more information."
@@ -197,26 +193,27 @@ msgid ""
 "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for more "
 "information."
 msgstr ""
-"Para mais informação por favor leia o ficheiro /usr/share/doc/mysql-"
-"server-5.5/README.Debian."
+"Para mais informações, por favor leia o ficheiro "
+"/usr/share/doc/mysql-server-5.5/README.Debian."
 
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:9001
 msgid "Password input error"
-msgstr ""
+msgstr "Erro de entrada da palavra-passe"
 
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:9001
 msgid "The two passwords you entered were not the same. Please try again."
-msgstr ""
+msgstr "As duas palavras-passe que introduziu não são as mesmas. Por favor "
+"tente novamente."
 
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:10001
 msgid "NDB Cluster seems to be in use"
-msgstr ""
+msgstr "NDB Cluster parece estar a ser utilizado"
 
 #. Type: error
 #. Description
@@ -226,6 +223,9 @@ msgid ""
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
+"MySQL-5.5 já não disponibiliza suporte para NDB Cluster. Por favor migre "
+"para o novo pacote mysql-cluster-server e remova todas as linhas que "
+"comecem por \"ndb\" em todos os ficheiros de configuração em /etc/mysql/."
 
 #~ msgid ""
 #~ "To use MySQL, the following entries for users and groups should be added "

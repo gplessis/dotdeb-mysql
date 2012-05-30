@@ -1,16 +1,16 @@
-# Translation of mysql-dfsg-5.5 debconf template to Swedish
-# Copyright (C) 2009 Martin Bagge <brother@bsnet.se>
-# This file is distributed under the same license as the mysql-dfsg-5.5 package.
+# Translation of mysql-5.5 debconf template to Swedish
+# Copyright (C) 2009, 2012 Martin Bagge <brother@bsnet.se>
+# This file is distributed under the same license as the mysql-5.5 package.
 # 
 # Andreas Henriksson <andreas@fatal.se>, 2007
-# Martin Bagge <brother@bsnet.se>, 2009
+# Martin Bagge <brother@bsnet.se>, 2009, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: mysql-dfsg-5.5 5.0.21-3\n"
 "Report-Msgid-Bugs-To: mysql-5.5@packages.debian.org\n"
 "POT-Creation-Date: 2011-11-08 11:42-0800\n"
-"PO-Revision-Date: 2009-09-08 21:42+0100\n"
-"Last-Translator: Martin Bagge <brother@bsnet.se>\n"
+"PO-Revision-Date: 2012-05-30 00:29+0100\n"
+"Last-Translator: Martin Bagge / brother <brother@bsnet.se>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -176,7 +176,6 @@ msgstr "Du bör kontrollera kontots lösenord efter installationen av paketet."
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:8001
-#, fuzzy
 #| msgid ""
 #| "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for "
 #| "more information."
@@ -207,7 +206,6 @@ msgstr "NDB-kluster används inte"
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:10001
-#, fuzzy
 #| msgid ""
 #| "MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the "
 #| "new mysql-cluster package and remove all lines starting with \"ndb\" from "
@@ -218,8 +216,8 @@ msgid ""
 "all config files below /etc/mysql/."
 msgstr ""
 "Stödet för NDB-kluster har tagits bort i MySQL-5.5. Migrera till det nya "
-"paketet mysql-cluster och ta bort alla rader som inleds med \"ndb\" från "
-"alla inställlningsfiler i /etc/mysql/."
+"paketet mysql-cluster-server  och ta bort alla rader som inleds med \"ndb\" "
+"från alla inställlningsfiler i /etc/mysql/."
 
 #~ msgid ""
 #~ "To use MySQL, the following entries for users and groups should be added "

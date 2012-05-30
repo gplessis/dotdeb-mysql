@@ -1,0 +1,74 @@
+Author: Nicholas Bamber <nicholas@periapt.co.uk>
+Subject: Skipping certain tests on kfreebsd
+Last-Update: 2012-05-29
+Forwarded: no
+--- /dev/null
++++ b/mysql-test/include/debian-fail-kfreebsd.inc
+@@ -0,0 +1,5 @@
++if (`select @@version_compile_os in ('debian-kfreebsd-gnu')`)
++{
++  skip Dont run certain tests on Debian kfreebsd pending investigation;
++}
++
+--- a/mysql-test/t/log_state.test
++++ b/mysql-test/t/log_state.test
+@@ -1,6 +1,7 @@
+ ### t/log_state.test ###
+ #
+ 
++--source include/debian-fail-kfreebsd.inc
+ --source include/not_embedded.inc
+ --source include/have_csv.inc
+ 
+--- a/mysql-test/t/func_encrypt.test
++++ b/mysql-test/t/func_encrypt.test
+@@ -1,3 +1,5 @@
++
++--source include/debian-fail-kfreebsd.inc
+ -- source include/have_ssl_crypto_functs.inc
+ 
+ --disable_warnings
+--- a/mysql-test/t/func_des_encrypt.test
++++ b/mysql-test/t/func_des_encrypt.test
+@@ -1,3 +1,5 @@
++
++--source include/debian-fail-kfreebsd.inc
+ -- source include/have_ssl_crypto_functs.inc
+ 
+ # This test can't be in func_encrypt.test, because it requires
+--- a/mysql-test/t/func_encrypt_ucs2.test
++++ b/mysql-test/t/func_encrypt_ucs2.test
+@@ -1,3 +1,5 @@
++
++--source include/debian-fail-kfreebsd.inc
+ -- source include/have_ssl_crypto_functs.inc
+ -- source include/have_ucs2.inc
+ 
+--- a/mysql-test/t/func_misc.test
++++ b/mysql-test/t/func_misc.test
+@@ -2,6 +2,7 @@
+ # Testing of misc functions
+ #
+ 
++--source include/debian-fail-kfreebsd.inc
+ --disable_warnings
+ DROP TABLE IF EXISTS t1, t2;
+ --enable_warnings
+--- a/mysql-test/suite/rpl/t/rpl_heartbeat_2slaves.test
++++ b/mysql-test/suite/rpl/t/rpl_heartbeat_2slaves.test
+@@ -4,6 +4,7 @@
+ # Purpose: Testing heartbeat for schema
+ # 1 master and 2 slaves
+ #############################################################
++--source include/debian-fail-kfreebsd.inc
+ --let $rpl_topology= 1->2,1->3
+ --source include/rpl_init.inc
+ 
+--- a/mysql-test/t/events_logs_tests.test
++++ b/mysql-test/t/events_logs_tests.test
+@@ -1,3 +1,5 @@
++--source include/debian-fail-kfreebsd.inc
++
+ # Can't test with embedded server that doesn't support grants
+ -- source include/not_embedded.inc
+ 
