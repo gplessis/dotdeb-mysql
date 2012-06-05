@@ -14,10 +14,10 @@
 # Thomas Mueller <thomas.mueller@tmit.eu>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: mysql-dfsg-5.5_5.5.37-1_de\n"
+"Project-Id-Version: mysql-dfsg 5.5.23-2\n"
 "Report-Msgid-Bugs-To: mysql-5.5@packages.debian.org\n"
 "POT-Creation-Date: 2011-11-08 11:42-0800\n"
-"PO-Revision-Date: 2009-08-27 22:41+0200\n"
+"PO-Revision-Date: 2012-06-03 10:33+0200\n"
 "Last-Translator: Thomas Mueller <thomas.mueller@tmit.eu>\n"
 "Language-Team: german <debian-l10n-german@lists.debian.org>\n"
 "Language: \n"
@@ -189,10 +189,6 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:8001
-#, fuzzy
-#| msgid ""
-#| "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for "
-#| "more information."
 msgid ""
 "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for more "
 "information."
@@ -223,17 +219,12 @@ msgstr "NDB-Cluster scheint gerade benutzt zu werden"
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:10001
-#, fuzzy
-#| msgid ""
-#| "MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the "
-#| "new mysql-cluster package and remove all lines starting with \"ndb\" from "
-#| "all config files below /etc/mysql/."
 msgid ""
 "MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the new "
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
 "all config files below /etc/mysql/."
 msgstr ""
 "MySQL-5.5 bietet keine NDB-Clusterunterstützung mehr. Bitte migrieren Sie "
-"Ihr System zum neuen »mysql-cluster«-Paket und entfernen Sie alle Zeilen, "
+"Ihr System zum neuen »mysql-cluster-server«-Paket und entfernen Sie alle Zeilen, "
 "die mit »ndb« beginnen aus allen Konfigurationsdateien im Verzeichnis /etc/"
 "mysql/."

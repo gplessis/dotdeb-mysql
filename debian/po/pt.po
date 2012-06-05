@@ -26,14 +26,12 @@ msgstr "Deseja mesmo fazer downgrade?"
 #. Description
 #: ../mysql-server-5.5.templates:2001
 msgid "A file named /var/lib/mysql/debian-*.flag exists on this system."
-msgstr "Existe, neste sistema, um ficheiro chamado /var/lib/mysql/debian-*.flag."
+msgstr ""
+"Existe, neste sistema, um ficheiro chamado /var/lib/mysql/debian-*.flag."
 
 #. Type: boolean
 #. Description
 #: ../mysql-server-5.5.templates:2001
-#| msgid ""
-#| "Such file is an indication that a mysql-server package with a higher "
-#| "version has been installed earlier."
 msgid ""
 "Such a file is an indication that a mysql-server package with a higher "
 "version has been installed previously."
@@ -70,9 +68,6 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../mysql-server-5.5.templates:3001
-#| msgid ""
-#| "You should also check the permissions and the owner of the /var/lib/mysql "
-#| "directory:"
 msgid ""
 "You should also check the permissions and ownership of the /var/lib/mysql "
 "directory:"
@@ -142,7 +137,6 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../mysql-server-5.5.templates:6001
-#| msgid "If that field is left blank, the password will not be changed."
 msgid "If this field is left blank, the password will not be changed."
 msgstr ""
 "Se este campo for deixado em branco, a palavra-passe não irá ser alterada."
@@ -150,7 +144,6 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../mysql-server-5.5.templates:7001
-#| msgid "New password for the MySQL \"root\" user:"
 msgid "Repeat password for the MySQL \"root\" user:"
 msgstr "Repita a palavra-passe para o utilizador \"root\" de MySQL:"
 
@@ -177,8 +170,6 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:8001
-#| msgid ""
-#| "You should check the account's password after tha package installation."
 msgid "You should check the account's password after the package installation."
 msgstr ""
 "Você deve verificar a palavra-passe da conta após a instalação do pacote."
@@ -186,15 +177,12 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:8001
-#| msgid ""
-#| "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for "
-#| "more information."
 msgid ""
 "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for more "
 "information."
 msgstr ""
-"Para mais informações, por favor leia o ficheiro "
-"/usr/share/doc/mysql-server-5.5/README.Debian."
+"Para mais informações, por favor leia o ficheiro /usr/share/doc/mysql-"
+"server-5.5/README.Debian."
 
 #. Type: error
 #. Description
@@ -206,8 +194,9 @@ msgstr "Erro de entrada da palavra-passe"
 #. Description
 #: ../mysql-server-5.5.templates:9001
 msgid "The two passwords you entered were not the same. Please try again."
-msgstr "As duas palavras-passe que introduziu não são as mesmas. Por favor "
-"tente novamente."
+msgstr ""
+"As duas palavras-passe que introduziu não são as mesmas. Por favor tente "
+"novamente."
 
 #. Type: error
 #. Description
@@ -224,8 +213,8 @@ msgid ""
 "all config files below /etc/mysql/."
 msgstr ""
 "MySQL-5.5 já não disponibiliza suporte para NDB Cluster. Por favor migre "
-"para o novo pacote mysql-cluster-server e remova todas as linhas que "
-"comecem por \"ndb\" em todos os ficheiros de configuração em /etc/mysql/."
+"para o novo pacote mysql-cluster-server e remova todas as linhas que comecem "
+"por \"ndb\" em todos os ficheiros de configuração em /etc/mysql/."
 
 #~ msgid ""
 #~ "To use MySQL, the following entries for users and groups should be added "

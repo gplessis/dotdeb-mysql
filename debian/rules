@@ -161,6 +161,7 @@ auto_install-stamp:
 	# This seems to be the only safe place to fix permissions issues
         # not handled by dh_fixperms.
 	mkdir -p $(TMP)/etc/mysql/conf.d/
+	touch $(TMP)/etc/mysql/conf.d/.keepme
 	install -m 0755 debian/additions/echo_stderr $(TMP)/usr/share/mysql/
 	install -m 0755 debian/additions/debian-start $(TMP)/etc/mysql/
 	install -m 0755 debian/additions/debian-start.inc.sh $(TMP)/usr/share/mysql/
@@ -235,9 +236,8 @@ override_dh_installinit-arch:
 override_dh_installcron-arch:
 	dh_installcron --name mysql-server
 
-# This looks very dodgy to 'periapt'.
 override_dh_makeshlibs-arch:
-	dh_makeshlibs -plibmysqlclient18 -V'libmysqlclient18 (>= 5.5.13-1)'
+	dh_makeshlibs -plibmysqlclient18 -V'libmysqlclient18 (>= 5.5.25-1)'
 
 binary:	binary-indep binary-arch
 

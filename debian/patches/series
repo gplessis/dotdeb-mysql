@@ -12,3 +12,4 @@ hyphens-in-manpages.patch
 regex_plus.patch
 linked_list_mem_failure.patch
 kfreebsd_fails.patch
+versioned_symbols.patch

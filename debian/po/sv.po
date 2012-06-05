@@ -176,9 +176,6 @@ msgstr "Du bör kontrollera kontots lösenord efter installationen av paketet."
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:8001
-#| msgid ""
-#| "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for "
-#| "more information."
 msgid ""
 "Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for more "
 "information."
@@ -206,10 +203,6 @@ msgstr "NDB-kluster används inte"
 #. Type: error
 #. Description
 #: ../mysql-server-5.5.templates:10001
-#| msgid ""
-#| "MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the "
-#| "new mysql-cluster package and remove all lines starting with \"ndb\" from "
-#| "all config files below /etc/mysql/."
 msgid ""
 "MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the new "
 "mysql-cluster-server package and remove all lines starting with \"ndb\" from "
