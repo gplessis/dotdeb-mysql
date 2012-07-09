@@ -1,5 +1,3 @@
-usr/bin/mysql
-usr/bin/mysqlcheck
 usr/bin/innochecksum
 debian/additions/innotop/innotop usr/bin/
 usr/bin/myisam_ftdump

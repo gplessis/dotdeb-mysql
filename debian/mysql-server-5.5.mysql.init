@@ -106,7 +106,7 @@ case "${1:-''}" in
 	    test -e /var/run/mysqld || install -m 755 -o mysql -g root -d /var/run/mysqld
 
 	    # Start MySQL! 
-  	    /usr/bin/mysqld_safe > /dev/null 2>&1 &
+  	    su - mysql -s /bin/sh -c "/usr/bin/mysqld_safe > /dev/null 2>&1 &"
 
 	    # 6s was reported in #352070 to be too few when using ndbcluster
 	    for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14; do

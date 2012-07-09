@@ -5,6 +5,7 @@ Source: http://dev.mysql.com/downloads/mysql/5.5.html
 Comments:
  The file Docs/mysql.info is removed from the upstream source
  because it is incompatible with the Debian Free Software Guidelines.
+ See debian/README.source for how this repacking was done.
  .
  Originally produced by a modified version of licensecheck2dep5
  from CDBS by Clint Byrum <clint@ubuntu.com>. Hand modified to reduce 

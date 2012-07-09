@@ -1,3 +1,24 @@
+DFSG and repacking
+==================
+The upstream source tarball from dev.mysql.com contains one file,
+Docs/mysq.info, that is not DFSG-compliant. We are currently using
+the mechanism that appears to be the closest thing to a Debian-wide
+DFSG-repacking mechanism - i.e. the scripts used by the Debian Perl
+Group. See #677270 for a request to make this (or something based
+upon it) a standard within Debian.
+
+To use this to download the current tarball (as indicated by debian/changelog)
+run 'fakeroot debian/rules get-orig-source' from within the top-level
+directory. If you are trying to build directly from the repository you
+will also need to unpack the tarball into the same top-level directory.
+
+Bugs: Beware of having upstream tarballs (with or without the
+non-DFSG material) in .. befrore running get-orig-source. It first downloads
+the unaltered file and then repacks to the new one. The process
+will stop if either file is present.
+
+MySQL source package
+====================
 The question arises why we have the mysql-source-* packages and why
 they are arch:any wasting so much space. This conversation covered the
 issue although it should probably be looked at again.

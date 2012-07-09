@@ -1,15 +1,30 @@
-mysql-5.5 (5.5.25-1~dotdeb.0) stable; urgency=low
+mysql-5.5 (5.5.25a-1~dotdeb.0) stable; urgency=high
 
   * New upstream version
 
  -- Guillaume Plessis <gui@dotdeb.org>  Tue,  5 Jun 2012 11:57:42 +0200
 
+mysql-5.5 (5.5.25+dfsg-2) UNRELEASED; urgency=low
+
+  [ Nicholas Bamber ]
+  * Made DFSG repacking mechanism independent of local installs and improved
+    the documentation
+  * Setting the gcc/g++ version to 4.4 on i386 platforms (Closes: #674267)
+    but see #678252 for follow up from upstream
+  * Danish debconf translation (Closes: #599483)
+  * Spanish debconf translation (Closes: #679053)
+
+  [ Bjoern Boschman ]
+  * mysqld_safe is now running as User 'mysql' (Closes: 664639)
+  * logrotate now handles all /var/log/mysql/*log files
+
+ -- Nicholas Bamber <nicholas@periapt.co.uk>  Sat, 16 Jun 2012 13:47:30 +0100
+
 mysql-5.5 (5.5.24+dfsg-1) UNRELEASED; urgency=low
 
   * Fixing regular expression in tests to guard against build path containing
     the '+' symbol (Closes: #674210)
-  * Skipped certain SSL tests on i386 type architectures
-    pending investigation (cf. #674267)
+  * Setting the gcc/g++ version to 4.5 on i386 platforms (cf. #674267)
   * Removed main_openssl_1 patch
   * Set SYSTEM_TYPE according to GNU Build System
   * In an effort to get a better handle on test coverage, made test failures
@@ -37,6 +52,8 @@ mysql-5.5 (5.5.24+dfsg-1) UNRELEASED; urgency=low
   * Restored zlib1g-dev build dependency pending further investigation
   * Removed the numerical prefix from the patch files
   * Applied fix-mysqldump-test.patch from Ubuntu
+  * Applied mysql-testsuite and mysql-client-core-5.5 package definitions
+    from Ubuntu
   * Located and installed upstream changelog
   * Removed doxygen-latex, ghostscript as build dependency
     as these were needed only for the NDB docs
@@ -57,6 +74,8 @@ mysql-5.5 (5.5.24+dfsg-1) UNRELEASED; urgency=low
     and bumped dependency in shlibs (Closes: #660686)
   * Ensured that /etc/mysql/conf.d is installed as part of mysql-common
     so that client programs work without a co-located server (Closes: #672359)
+  * Added versioned dependency on initscripts and revert /var/run
+    to /run change (Closes: #676560)
 
  -- Nicholas Bamber <nicholas@periapt.co.uk>  Tue, 08 May 2012 09:04:25 +0100
 

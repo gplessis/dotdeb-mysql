@@ -4,8 +4,8 @@ Description: Works around non-deterministic --verbose behavior in new
 Bug: http://bugs.mysql.com/bug.php?id=64401
 
 === modified file 'mysql-test/r/mysqldump.result'
---- a/mysql-test/r/mysqldump.result	2012-03-06 21:09:56 +0000
-+++ b/mysql-test/r/mysqldump.result	2012-03-08 07:07:04 +0000
+--- a/mysql-test/r/mysqldump.result
++++ b/mysql-test/r/mysqldump.result
 @@ -5118,12 +5118,6 @@
  #        commit starting 5.5.
  
@@ -37,11 +37,9 @@ Bug: http://bugs.mysql.com/bug.php?id=64401
  /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
  
  /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-
-=== modified file 'mysql-test/t/mysqldump.test'
---- a/mysql-test/t/mysqldump.test	2012-03-06 21:09:56 +0000
-+++ b/mysql-test/t/mysqldump.test	2012-03-08 07:06:53 +0000
-@@ -2351,7 +2351,7 @@
+--- a/mysql-test/t/mysqldump.test
++++ b/mysql-test/t/mysqldump.test
+@@ -2352,7 +2352,7 @@
  --echo
  --echo #### Dump starts here ####
  --replace_regex /-- Server version.*// /-- MySQL dump .*// /-- Dump completed on .*/-- Dump completed/
@@ -50,4 +48,3 @@ Bug: http://bugs.mysql.com/bug.php?id=64401
  --echo
  --echo #### Dump ends here ####
  
-
