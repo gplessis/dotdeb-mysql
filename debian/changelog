@@ -1,3 +1,9 @@
+mysql-5.5 (5.5.27-1~dotdeb.0) stable; urgency=high
+
+  * New upstream version
+
+ -- Guillaume Plessis <gui@dotdeb.org>  Tue, 07 Aug 2012 11:59:42 +0200
+
 mysql-5.5 (5.5.25a-1~dotdeb.1) stable; urgency=high
 
   * Rollback : running mysqld_safe as mysql breaks open_file_limit
