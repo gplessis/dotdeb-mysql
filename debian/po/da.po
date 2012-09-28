@@ -7,31 +7,32 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mysql-5.1\n"
-"Report-Msgid-Bugs-To: mysql-5.5@packages.debian.org\n"
-"POT-Creation-Date: 2011-11-08 11:42-0800\n"
+"Report-Msgid-Bugs-To: mysql-5.1@packages.debian.org\n"
+"POT-Creation-Date: 2010-07-31 12:35+0200\n"
 "PO-Revision-Date: 2010-10-07 05:26+0100\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org> \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:2001
+#: ../mysql-server-5.1.templates:2001
 msgid "Really proceed with downgrade?"
 msgstr "Ønsker du virkelig at fortsætte nedgraderingen?"
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:2001
+#: ../mysql-server-5.1.templates:2001
 msgid "A file named /var/lib/mysql/debian-*.flag exists on this system."
-msgstr "Der er en fil med navnet /var/lib/mysql/debian-*.flag på dette system."
+msgstr ""
+"Der er en fil med navnet /var/lib/mysql/debian-*.flag på dette system."
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:2001
+#: ../mysql-server-5.1.templates:2001
 msgid ""
 "Such a file is an indication that a mysql-server package with a higher "
 "version has been installed previously."
@@ -41,7 +42,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:2001
+#: ../mysql-server-5.1.templates:2001
 msgid ""
 "There is no guarantee that the version you're currently installing will be "
 "able to use the current databases."
@@ -51,13 +52,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../mysql-server-5.5.templates:3001
+#: ../mysql-server-5.1.templates:3001
 msgid "Important note for NIS/YP users"
 msgstr "Vigtig oplysning til NIS/YP-brugere"
 
 #. Type: note
 #. Description
-#: ../mysql-server-5.5.templates:3001
+#: ../mysql-server-5.1.templates:3001
 msgid ""
 "Using MySQL under NIS/YP requires a mysql user account to be added on the "
 "local system with:"
@@ -67,7 +68,7 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../mysql-server-5.5.templates:3001
+#: ../mysql-server-5.1.templates:3001
 msgid ""
 "You should also check the permissions and ownership of the /var/lib/mysql "
 "directory:"
@@ -76,13 +77,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:4001
+#: ../mysql-server-5.1.templates:4001
 msgid "Remove all MySQL databases?"
 msgstr "Fjern alle MySQL-databaser?"
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:4001
+#: ../mysql-server-5.1.templates:4001
 msgid ""
 "The /var/lib/mysql directory which contains the MySQL databases is about to "
 "be removed."
@@ -92,7 +93,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:4001
+#: ../mysql-server-5.1.templates:4001
 msgid ""
 "If you're removing the MySQL package in order to later install a more recent "
 "version or if a different mysql-server package is already using it, the data "
@@ -104,13 +105,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:5001
+#: ../mysql-server-5.1.templates:5001
 msgid "Start the MySQL server on boot?"
 msgstr "Start MySQL-serveren under systemopstart?"
 
 #. Type: boolean
 #. Description
-#: ../mysql-server-5.5.templates:5001
+#: ../mysql-server-5.1.templates:5001
 msgid ""
 "The MySQL server can be launched automatically at boot time or manually with "
 "the '/etc/init.d/mysql start' command."
@@ -120,13 +121,13 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../mysql-server-5.5.templates:6001
+#: ../mysql-server-5.1.templates:6001
 msgid "New password for the MySQL \"root\" user:"
 msgstr "Ny adgangskode for MySQL's »rootbruger«:"
 
 #. Type: password
 #. Description
-#: ../mysql-server-5.5.templates:6001
+#: ../mysql-server-5.1.templates:6001
 msgid ""
 "While not mandatory, it is highly recommended that you set a password for "
 "the MySQL administrative \"root\" user."
@@ -136,25 +137,25 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../mysql-server-5.5.templates:6001
+#: ../mysql-server-5.1.templates:6001
 msgid "If this field is left blank, the password will not be changed."
 msgstr "Hvis du lader dette felt stå tomt, vil adgangskoden ikke blive ændret."
 
 #. Type: password
 #. Description
-#: ../mysql-server-5.5.templates:7001
+#: ../mysql-server-5.1.templates:7001
 msgid "Repeat password for the MySQL \"root\" user:"
 msgstr "Gentag adgangskode for MySQL's »root-bruger«:"
 
 #. Type: error
 #. Description
-#: ../mysql-server-5.5.templates:8001
+#: ../mysql-server-5.1.templates:8001
 msgid "Unable to set password for the MySQL \"root\" user"
 msgstr "Kunne ikke sætte adgangskoden for MySQL's »root-bruger«"
 
 #. Type: error
 #. Description
-#: ../mysql-server-5.5.templates:8001
+#: ../mysql-server-5.1.templates:8001
 msgid ""
 "An error occurred while setting the password for the MySQL administrative "
 "user. This may have happened because the account already has a password, or "
@@ -167,56 +168,48 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../mysql-server-5.5.templates:8001
+#: ../mysql-server-5.1.templates:8001
 msgid "You should check the account's password after the package installation."
 msgstr "Du bør tjekke kontoens adgangskode efter pakkeinstallationen."
 
 #. Type: error
 #. Description
-#: ../mysql-server-5.5.templates:8001
-#, fuzzy
-#| msgid ""
-#| "Please read the /usr/share/doc/mysql-server-5.1/README.Debian file for "
-#| "more information."
+#: ../mysql-server-5.1.templates:8001
 msgid ""
-"Please read the /usr/share/doc/mysql-server-5.5/README.Debian file for more "
+"Please read the /usr/share/doc/mysql-server-5.1/README.Debian file for more "
 "information."
 msgstr ""
-"Læs venligst filen /usr/share/doc/mysql-server-5.1/README.Debian for "
-"yderligere oplysninger."
+"Læs venligst filen /usr/share/doc/mysql-server-5.1/README.Debian for yderligere "
+"oplysninger."
 
 #. Type: error
 #. Description
-#: ../mysql-server-5.5.templates:9001
+#: ../mysql-server-5.1.templates:9001
 msgid "Password input error"
 msgstr "Inddatafejl for adgangskode"
 
 #. Type: error
 #. Description
-#: ../mysql-server-5.5.templates:9001
+#: ../mysql-server-5.1.templates:9001
 msgid "The two passwords you entered were not the same. Please try again."
-msgstr ""
-"De to adgangskoder du indtastede var ikke de samme. Forsøg venligst igen."
+msgstr "De to adgangskoder du indtastede var ikke de samme. Forsøg venligst igen."
 
 #. Type: error
 #. Description
-#: ../mysql-server-5.5.templates:10001
+#: ../mysql-server-5.1.templates:10001
 msgid "NDB Cluster seems to be in use"
 msgstr "NDB-cluster ser ud til at være i brug"
 
 #. Type: error
 #. Description
-#: ../mysql-server-5.5.templates:10001
-#, fuzzy
-#| msgid ""
-#| "MySQL-5.1 no longer provides NDB Cluster support. Please migrate to the "
-#| "new mysql-cluster package and remove all lines starting with \"ndb\" from "
-#| "all config files below /etc/mysql/."
+#: ../mysql-server-5.1.templates:10001
 msgid ""
-"MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the new "
-"mysql-cluster-server package and remove all lines starting with \"ndb\" from "
-"all config files below /etc/mysql/."
+"MySQL-5.1 no longer provides NDB Cluster support. Please migrate to the new "
+"mysql-cluster package and remove all lines starting with \"ndb\" from all "
+"config files below /etc/mysql/."
 msgstr ""
-"MySQL-5.1 tilbyder ikke længere NDB-clusterunderstøttelse. Migrer venligst "
-"til den nye pakke mysql-cluster og fjern alle linjer der starter med »ndb« "
-"fra alle konfigurationsfiler under /etc/mysql/."
+"MySQL-5.1 tilbyder ikke længere NDB-clusterunderstøttelse. Migrer venligst til "
+"den nye pakke mysql-cluster og fjern alle linjer der starter med »ndb« fra alle "
+"konfigurationsfiler under /etc/mysql/."
+
+

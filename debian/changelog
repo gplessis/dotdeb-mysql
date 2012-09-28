@@ -1,42 +1,15 @@
-mysql-5.5 (5.5.27-1~dotdeb.0) stable; urgency=high
+mysql-5.5 (5.5.28-1~dotdeb.0) stable; urgency=low
 
-  * New upstream version
+  * New upstream release
 
- -- Guillaume Plessis <gui@dotdeb.org>  Tue, 07 Aug 2012 11:59:42 +0200
+ -- Guillaume Plessis <gui@dotdeb.org>  Fri, 28 Sep 2012 23:35:42 +0200
 
-mysql-5.5 (5.5.25a-1~dotdeb.1) stable; urgency=high
-
-  * Rollback : running mysqld_safe as mysql breaks open_file_limit
-
- -- Guillaume Plessis <gui@dotdeb.org>  Tue, 10 Jul 2012 09:00:42 +0200
-
-mysql-5.5 (5.5.25a-1~dotdeb.0) stable; urgency=high
-
-  * New upstream version
-
- -- Guillaume Plessis <gui@dotdeb.org>  Tue, 10 Jul 2012 00:32:42 +0200
-
-mysql-5.5 (5.5.25+dfsg-2) UNRELEASED; urgency=low
-
-  [ Nicholas Bamber ]
-  * Made DFSG repacking mechanism independent of local installs and improved
-    the documentation
-  * Setting the gcc/g++ version to 4.4 on i386 platforms (Closes: #674267)
-    but see #678252 for follow up from upstream
-  * Danish debconf translation (Closes: #599483)
-  * Spanish debconf translation (Closes: #679053)
-
-  [ Bjoern Boschman ]
-  * mysqld_safe is now running as User 'mysql' (Closes: 664639)
-  * logrotate now handles all /var/log/mysql/*log files
-
- -- Nicholas Bamber <nicholas@periapt.co.uk>  Sat, 16 Jun 2012 13:47:30 +0100
-
-mysql-5.5 (5.5.24+dfsg-1) UNRELEASED; urgency=low
+mysql-5.5 (5.5.25+dfsg-1) UNRELEASED; urgency=low
 
   * Fixing regular expression in tests to guard against build path containing
     the '+' symbol (Closes: #674210)
-  * Setting the gcc/g++ version to 4.5 on i386 platforms (cf. #674267)
+  * Setting the gcc/g++ version to 4.4 on i386 platforms (Closes: #674267)
+    but see #678252 for follow up from upstream
   * Removed main_openssl_1 patch
   * Set SYSTEM_TYPE according to GNU Build System
   * In an effort to get a better handle on test coverage, made test failures
@@ -48,6 +21,8 @@ mysql-5.5 (5.5.24+dfsg-1) UNRELEASED; urgency=low
   * Updated Portuguese translation (Closes: #674953)
   * Updated Swedish translation (Closes: #675108)
   * Updated German translation (Closes: #675766)
+  * Danish debconf translation (Closes: #599483)
+  * Spanish debconf translation (Closes: #679053)
   * Migrated libmysqlclient-dev, mysql-client-5.5, mysql-server-core-5.5
     and mysql-server-5.5 off dh_movefiles
   * Removed dh_movefiles override

@@ -15,5 +15,5 @@ Index: mysql-5.5/mysql-test/lib/mtr_cases.pm
 +			     ["lib/mysql-testsuite/suite",
 +			      "share/mysql-test/suite",
  			      "mysql-test/suite",
- 			      "internal/mysql-test/suite",
  			      "mysql-test",
+ 			      # Look in storage engine specific suite dirs
