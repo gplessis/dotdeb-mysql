@@ -11,7 +11,7 @@ Vcs-Svn: svn://svn.debian.org/svn/pkg-mysql/mysql-5.5/
 Package: libmysqlclient18
 Section: libs
 Architecture: any
-Depends: mysql-common (>= ${source:Version}), ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Description: MySQL database client library
  MySQL is a fast, stable and true multi-user, multi-threaded SQL database
@@ -120,7 +120,7 @@ Package: mysql-server-5.5
 Architecture: any
 Recommends: libhtml-template-perl
 Suggests: tinyca, mailx
-Pre-Depends: mysql-common (>= ${source:Version}), adduser (>= 3.40), debconf
+Pre-Depends: adduser (>= 3.40), debconf
 Depends: mysql-client-5.5 (>= ${source:Version}), libdbi-perl, perl (>= 5.6), ${shlibs:Depends}, ${misc:Depends}, psmisc, passwd, lsb-base (>= 3.0-10), mysql-server-core-5.5 (= ${binary:Version}), initscripts (>= 2.88dsf-13.1)
 Breaks: mysql-server (<< ${source:Version}), mysql-server-5.1, libmysqlclient-dev ( << 5.5.17~), mysql-client-5.1
 Provides: virtual-mysql-server
