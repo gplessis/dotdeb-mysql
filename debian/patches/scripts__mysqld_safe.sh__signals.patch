@@ -16,9 +16,9 @@ Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
  
 -trap '' 1 2 3 15			# we shouldn't let anyone kill us
 -
- umask 007
- 
- defaults=
+ # MySQL-specific environment variable. First off, it's not really a umask,
+ # it's the desired mode. Second, it follows umask(2), not umask(3) in that
+ # octal needs to be explicit. Our shell might be a proper sh without printf,
 @@ -132,7 +130,7 @@
        # sed buffers output (only GNU sed supports a -u (unbuffered) option)
        # which means that messages may not get sent to syslog until the
