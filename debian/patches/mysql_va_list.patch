@@ -2,10 +2,11 @@ Bug: http://bugs.mysql.com/bug.php?id=62769
 Bug-Ubuntu: http://pad.lv/700982
 Description: make sure va_list usage is portable to fix FTBFS on ARM
 
-diff -Naur mysql-5.5.16.orig/sql-common/client_plugin.c mysql-5.5.16/sql-common/client_plugin.c
---- mysql-5.5.16.orig/sql-common/client_plugin.c	2011-09-09 11:56:39.000000000 -0400
-+++ mysql-5.5.16/sql-common/client_plugin.c	2011-10-16 23:00:00.708799138 -0400
-@@ -228,11 +228,13 @@
+Index: mysql-5.5.30/sql-common/client_plugin.c
+===================================================================
+--- mysql-5.5.30.orig/sql-common/client_plugin.c
++++ mysql-5.5.30/sql-common/client_plugin.c
+@@ -233,11 +233,13 @@ int mysql_client_plugin_init()
  {
    MYSQL mysql;
    struct st_mysql_client_plugin **builtin;
@@ -19,7 +20,7 @@ diff -Naur mysql-5.5.16.orig/sql-common/client_plugin.c mysql-5.5.16/sql-common/
  
    pthread_mutex_init(&LOCK_load_client_plugin, MY_MUTEX_INIT_SLOW);
    init_alloc_root(&mem_root, 128, 128);
-@@ -244,7 +246,7 @@
+@@ -249,7 +251,7 @@ int mysql_client_plugin_init()
    pthread_mutex_lock(&LOCK_load_client_plugin);
  
    for (builtin= mysql_client_builtins; *builtin; builtin++)
@@ -28,7 +29,7 @@ diff -Naur mysql-5.5.16.orig/sql-common/client_plugin.c mysql-5.5.16/sql-common/
  
    pthread_mutex_unlock(&LOCK_load_client_plugin);
  
-@@ -288,9 +290,13 @@
+@@ -293,9 +295,13 @@ struct st_mysql_client_plugin *
  mysql_client_register_plugin(MYSQL *mysql,
                               struct st_mysql_client_plugin *plugin)
  {
@@ -42,7 +43,7 @@ diff -Naur mysql-5.5.16.orig/sql-common/client_plugin.c mysql-5.5.16/sql-common/
    pthread_mutex_lock(&LOCK_load_client_plugin);
  
    /* make sure the plugin wasn't loaded meanwhile */
-@@ -302,7 +308,7 @@
+@@ -307,7 +313,7 @@ mysql_client_register_plugin(MYSQL *mysq
      plugin= NULL;
    }
    else

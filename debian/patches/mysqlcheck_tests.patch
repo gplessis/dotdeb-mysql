@@ -6,17 +6,21 @@ Subject: child process picking up external config files
  run inside a clean chroot, but are skipped where stray
  config files may upset the tests. These failed tests
  are usually indicated by mysqlcheck triggering a FATAL ERROR.
+Index: mysql-5.5.30/mysql-test/include/debian-fail-local_my_cnf.inc
+===================================================================
 --- /dev/null
-+++ b/mysql-test/include/debian-fail-local_my_cnf.inc
++++ mysql-5.5.30/mysql-test/include/debian-fail-local_my_cnf.inc
 @@ -0,0 +1,5 @@
 +if ($FOUND_LOCAL_MY_CNF)
 +{
 +  skip See Oracle Bug#65288 (Debian);
 +}
 +
---- a/mysql-test/mysql-test-run.pl
-+++ b/mysql-test/mysql-test-run.pl
-@@ -2462,6 +2462,17 @@
+Index: mysql-5.5.30/mysql-test/mysql-test-run.pl
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/mysql-test-run.pl
++++ mysql-5.5.30/mysql-test/mysql-test-run.pl
+@@ -2438,6 +2438,17 @@ sub environment_setup {
    }
  
    # ----------------------------------------------------
@@ -34,32 +38,40 @@ Subject: child process picking up external config files
    # perror
    # ----------------------------------------------------
    my $exe_perror= mtr_exe_exists(vs_config_dirs('extra', 'perror'),
---- a/mysql-test/t/mysqladmin.test
-+++ b/mysql-test/t/mysqladmin.test
+Index: mysql-5.5.30/mysql-test/t/mysqladmin.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/mysqladmin.test
++++ mysql-5.5.30/mysql-test/t/mysqladmin.test
 @@ -1,4 +1,5 @@
  # Embedded server doesn't support external clients
 +--source include/debian-fail-local_my_cnf.inc
  --source include/not_embedded.inc
  #
  # Test "mysqladmin ping"
---- a/mysql-test/t/log_tables_upgrade.test
-+++ b/mysql-test/t/log_tables_upgrade.test
+Index: mysql-5.5.30/mysql-test/t/log_tables_upgrade.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/log_tables_upgrade.test
++++ mysql-5.5.30/mysql-test/t/log_tables_upgrade.test
 @@ -1,3 +1,5 @@
 +
 +-- source include/debian-fail-local_my_cnf.inc
  --source include/not_embedded.inc
  --source include/have_csv.inc
  
---- a/mysql-test/t/mysql_upgrade.test
-+++ b/mysql-test/t/mysql_upgrade.test
+Index: mysql-5.5.30/mysql-test/t/mysql_upgrade.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/mysql_upgrade.test
++++ mysql-5.5.30/mysql-test/t/mysql_upgrade.test
 @@ -1,3 +1,5 @@
 +
 +-- source include/debian-fail-local_my_cnf.inc
  -- source include/mysql_upgrade_preparation.inc
  
  #
---- a/mysql-test/t/mysql_upgrade_ssl.test
-+++ b/mysql-test/t/mysql_upgrade_ssl.test
+Index: mysql-5.5.30/mysql-test/t/mysql_upgrade_ssl.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/mysql_upgrade_ssl.test
++++ mysql-5.5.30/mysql-test/t/mysql_upgrade_ssl.test
 @@ -1,5 +1,6 @@
  # mysql_upgrade tests requiring SSL support
  
@@ -67,16 +79,20 @@ Subject: child process picking up external config files
  -- source include/have_ssl_communication.inc
  -- source include/mysql_upgrade_preparation.inc
  
---- a/mysql-test/t/plugin_auth.test
-+++ b/mysql-test/t/plugin_auth.test
+Index: mysql-5.5.30/mysql-test/t/plugin_auth.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/plugin_auth.test
++++ mysql-5.5.30/mysql-test/t/plugin_auth.test
 @@ -1,3 +1,5 @@
 +
 +-- source include/debian-fail-local_my_cnf.inc
  --source include/have_plugin_auth.inc
  --source include/not_embedded.inc
  --source include/mysql_upgrade_preparation.inc
---- a/mysql-test/suite/perfschema/t/pfs_upgrade.test
-+++ b/mysql-test/suite/perfschema/t/pfs_upgrade.test
+Index: mysql-5.5.30/mysql-test/suite/perfschema/t/pfs_upgrade.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/suite/perfschema/t/pfs_upgrade.test
++++ mysql-5.5.30/mysql-test/suite/perfschema/t/pfs_upgrade.test
 @@ -3,6 +3,7 @@
  # database.
  # 
@@ -85,8 +101,10 @@ Subject: child process picking up external config files
  --source include/not_embedded.inc
  --source include/have_perfschema.inc
  --source include/have_lowercase0.inc
---- a/mysql-test/suite/rpl/t/rpl_mysql_upgrade.test
-+++ b/mysql-test/suite/rpl/t/rpl_mysql_upgrade.test
+Index: mysql-5.5.30/mysql-test/suite/rpl/t/rpl_mysql_upgrade.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/suite/rpl/t/rpl_mysql_upgrade.test
++++ mysql-5.5.30/mysql-test/suite/rpl/t/rpl_mysql_upgrade.test
 @@ -5,6 +5,7 @@
  # options are added into mysql_upgrade. These options control whether sql
  # statements are binlogged or not. 
@@ -95,24 +113,30 @@ Subject: child process picking up external config files
  --source include/master-slave.inc
  
  # Only run test if "mysql_upgrade" is found
---- a/mysql-test/t/myisam.test
-+++ b/mysql-test/t/myisam.test
+Index: mysql-5.5.30/mysql-test/t/myisam.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/myisam.test
++++ mysql-5.5.30/mysql-test/t/myisam.test
 @@ -1,3 +1,5 @@
 +
 +-- source include/debian-fail-local_my_cnf.inc
  #
  # Test bugs in the MyISAM code
  #
---- a/mysql-test/t/myisampack.test
-+++ b/mysql-test/t/myisampack.test
+Index: mysql-5.5.30/mysql-test/t/myisampack.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/myisampack.test
++++ mysql-5.5.30/mysql-test/t/myisampack.test
 @@ -1,3 +1,5 @@
 +
 +-- source include/debian-fail-local_my_cnf.inc
  -- disable_warnings
  DROP TABLE IF EXISTS t1,t2,t3;
  -- enable_warnings
---- a/mysql-test/t/mysqldump.test
-+++ b/mysql-test/t/mysqldump.test
+Index: mysql-5.5.30/mysql-test/t/mysqldump.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/mysqldump.test
++++ mysql-5.5.30/mysql-test/t/mysqldump.test
 @@ -1,4 +1,5 @@
  # Embedded server doesn't support external clients
 +-- source include/debian-fail-local_my_cnf.inc

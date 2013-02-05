@@ -3,9 +3,11 @@ Subject: minus/hyphen confusion
  Added to keep lintian happy
 Last-Update: 2012-05-17
 Forwarded: no
---- a/man/mysqlman.1
-+++ b/man/mysqlman.1
-@@ -5,7 +5,7 @@
+Index: mysql-5.5.30/man/mysqlman.1
+===================================================================
+--- mysql-5.5.30.orig/man/mysqlman.1
++++ mysql-5.5.30/man/mysqlman.1
+@@ -5,7 +5,7 @@ mysqlman \- default man page for mysql
  Certain executables distributed with the MySQL database management system do
  not have specific man pages.
  .SH "SEE ALSO"
@@ -14,9 +16,11 @@ Forwarded: no
  argument to display a brief summary of the executable's arguments and function.
  For more information about MySQL, please refer to the MySQL reference manual,
  which may already be installed locally and which is also available online at
---- a/man/mysql_tzinfo_to_sql.1
-+++ b/man/mysql_tzinfo_to_sql.1
-@@ -119,7 +119,7 @@
+Index: mysql-5.5.30/man/mysql_tzinfo_to_sql.1
+===================================================================
+--- mysql-5.5.30.orig/man/mysql_tzinfo_to_sql.1
++++ mysql-5.5.30/man/mysql_tzinfo_to_sql.1
+@@ -128,7 +128,7 @@ This documentation is free software; you
  .PP
  This documentation is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  .PP

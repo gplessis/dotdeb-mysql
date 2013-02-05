@@ -3,9 +3,11 @@ Subject: spelling errors
  Preceeding -> preceding
 Last-Update: 2012-05-19
 Forwarded: no
---- a/libmysql/errmsg.c
-+++ b/libmysql/errmsg.c
-@@ -81,7 +81,7 @@
+Index: mysql-5.5.30/libmysql/errmsg.c
+===================================================================
+--- mysql-5.5.30.orig/libmysql/errmsg.c
++++ mysql-5.5.30/libmysql/errmsg.c
+@@ -81,7 +81,7 @@ const char *client_errors[]=
    "Attempt to read a row while there is no result set associated with the statement",
    "This feature is not implemented yet",
    "Lost connection to MySQL server at '%s', system error: %d",
@@ -14,8 +16,10 @@ Forwarded: no
    "The number of columns in the result set differs from the number of bound buffers. You must reset the statement, rebind the result set columns, and execute the statement again",
    "This handle is already connected. Use a separate handle for each connection.",
    "Authentication plugin '%s' cannot be loaded: %s",
---- a/mysql-test/extra/rpl_tests/rpl_ddl.test
-+++ b/mysql-test/extra/rpl_tests/rpl_ddl.test
+Index: mysql-5.5.30/mysql-test/extra/rpl_tests/rpl_ddl.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/extra/rpl_tests/rpl_ddl.test
++++ mysql-5.5.30/mysql-test/extra/rpl_tests/rpl_ddl.test
 @@ -98,8 +98,8 @@
  #       --> less switching of AUTOCOMMIT mode on master side.
  #
@@ -27,9 +31,11 @@ Forwarded: no
  #       because the sql error code of the statement might be 0) bug
  #       and these rules are ignored, a following test sequence might earn ugly
  #       effects like failing 'sync_slave_with_master', crashes of the slave or
---- a/mysql-test/extra/rpl_tests/rpl_row_basic.test
-+++ b/mysql-test/extra/rpl_tests/rpl_row_basic.test
-@@ -221,7 +221,7 @@
+Index: mysql-5.5.30/mysql-test/extra/rpl_tests/rpl_row_basic.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/extra/rpl_tests/rpl_row_basic.test
++++ mysql-5.5.30/mysql-test/extra/rpl_tests/rpl_row_basic.test
+@@ -221,7 +221,7 @@ INSERT INTO t7 VALUES (1,3), (2,6), (3,9
  SELECT * FROM t7 ORDER BY C1;
  
  # since bug#31552/31609 idempotency is not default any longer. In order
@@ -38,7 +44,7 @@ Forwarded: no
  # temprorarily
  set @@global.slave_exec_mode= 'IDEMPOTENT';
  
-@@ -260,7 +260,7 @@
+@@ -260,7 +260,7 @@ INSERT INTO t8 VALUES (1,2,3), (2,4,6), 
  SELECT * FROM t8 ORDER BY a;
  
  # since bug#31552/31609 idempotency is not default any longer. In order
@@ -47,8 +53,10 @@ Forwarded: no
  # temprorarily
  set @@global.slave_exec_mode= 'IDEMPOTENT';
  
---- a/mysql-test/include/wait_until_count_sessions.inc
-+++ b/mysql-test/include/wait_until_count_sessions.inc
+Index: mysql-5.5.30/mysql-test/include/wait_until_count_sessions.inc
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/include/wait_until_count_sessions.inc
++++ mysql-5.5.30/mysql-test/include/wait_until_count_sessions.inc
 @@ -10,7 +10,7 @@
  #    1. We wait for $current_sessions <= $count_sessions because in the use case
  #       with count_sessions.inc before and wait_until_count_sessions.inc after
@@ -58,9 +66,11 @@ Forwarded: no
  #       sessions at test begin($count_sessions) =  m + n
  #       sessions of the previous test which will be soon disconnected = n (n >= 0)
  #       sessions at test end ($current sessions, assuming the test disconnects
---- a/mysql-test/suite/funcs_1/views/func_view.inc
-+++ b/mysql-test/suite/funcs_1/views/func_view.inc
-@@ -282,7 +282,7 @@
+Index: mysql-5.5.30/mysql-test/suite/funcs_1/views/func_view.inc
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/suite/funcs_1/views/func_view.inc
++++ mysql-5.5.30/mysql-test/suite/funcs_1/views/func_view.inc
+@@ -282,7 +282,7 @@ INSERT INTO t1_values SET
  #               other interesting value
  #     numbers   -> 0
  #     strings, blobs, binaries -> not full length of used data type, "exotic"
@@ -69,9 +79,11 @@ Forwarded: no
  #     FIXME enum, set ??
  INSERT INTO t1_values SET
         my_char_30 = ' ---äÖüß@µ*$-- ',
---- a/mysql-test/suite/funcs_1/views/views_master.inc
-+++ b/mysql-test/suite/funcs_1/views/views_master.inc
-@@ -545,7 +545,7 @@
+Index: mysql-5.5.30/mysql-test/suite/funcs_1/views/views_master.inc
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/suite/funcs_1/views/views_master.inc
++++ mysql-5.5.30/mysql-test/suite/funcs_1/views/views_master.inc
+@@ -545,7 +545,7 @@ let $message= Testcase 3.3.1.7 ;
  #                   view names are accepted, at creation time, alteration time,
  #                   and drop time.
  ###############################################################################
@@ -80,8 +92,10 @@ Forwarded: no
  #               database name
  --disable_warnings
  DROP VIEW  IF EXISTS v1 ;
---- a/mysql-test/suite/rpl/t/rpl_ddl.test
-+++ b/mysql-test/suite/rpl/t/rpl_ddl.test
+Index: mysql-5.5.30/mysql-test/suite/rpl/t/rpl_ddl.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/suite/rpl/t/rpl_ddl.test
++++ mysql-5.5.30/mysql-test/suite/rpl/t/rpl_ddl.test
 @@ -13,10 +13,10 @@
  #         sequences start.
  #
@@ -95,9 +109,11 @@ Forwarded: no
  #         because the sql error code of the statement might be 0) bug
  #         and these rules are ignored, a following test sequence might earn ugly
  #         effects like failing 'sync_slave_with_master', crashes of the slave or
---- a/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
-+++ b/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
-@@ -239,7 +239,7 @@
+Index: mysql-5.5.30/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
++++ mysql-5.5.30/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
+@@ -239,7 +239,7 @@ sync_slave_with_master;
  UPDATE t1 SET a = 5, b = 'slave' WHERE a = 1;
  SELECT * FROM t1 ORDER BY a;
  # since bug#31552/31609 idempotency is not default any longer. In
@@ -106,9 +122,11 @@ Forwarded: no
  # temprorarily
  set @@global.slave_exec_mode= 'IDEMPOTENT';
  --echo **** On Master ****
---- a/sql/log_event.cc
-+++ b/sql/log_event.cc
-@@ -3236,7 +3236,7 @@
+Index: mysql-5.5.30/sql/log_event.cc
+===================================================================
+--- mysql-5.5.30.orig/sql/log_event.cc
++++ mysql-5.5.30/sql/log_event.cc
+@@ -3306,7 +3306,7 @@ int Query_log_event::do_apply_event(Rela
      if ((error= rows_event_stmt_cleanup(const_cast<Relay_log_info*>(rli), thd)))
      {
        const_cast<Relay_log_info*>(rli)->report(ERROR_LEVEL, error,
@@ -117,9 +135,11 @@ Forwarded: no
                    "the group log file/position: %s %s",
                    const_cast<Relay_log_info*>(rli)->group_master_log_name,
                    llstr(const_cast<Relay_log_info*>(rli)->group_master_log_pos,
---- a/storage/myisam/mi_rnext.c
-+++ b/storage/myisam/mi_rnext.c
-@@ -64,7 +64,7 @@
+Index: mysql-5.5.30/storage/myisam/mi_rnext.c
+===================================================================
+--- mysql-5.5.30.orig/storage/myisam/mi_rnext.c
++++ mysql-5.5.30/storage/myisam/mi_rnext.c
+@@ -64,7 +64,7 @@ int mi_rnext(MI_INFO *info, uchar *buf, 
        Normally SQL layer would never request "search next" if
        "search first" failed. But HANDLER may do anything.
  
@@ -128,9 +148,11 @@ Forwarded: no
        equals to mi_rfirst(), we must restore original state
        as if failing mi_rfirst() was not called.
      */
---- a/storage/ndb/test/odbc/client/SQLColAttributeTest.cpp
-+++ b/storage/ndb/test/odbc/client/SQLColAttributeTest.cpp
-@@ -41,7 +41,7 @@
+Index: mysql-5.5.30/storage/ndb/test/odbc/client/SQLColAttributeTest.cpp
+===================================================================
+--- mysql-5.5.30.orig/storage/ndb/test/odbc/client/SQLColAttributeTest.cpp
++++ mysql-5.5.30/storage/ndb/test/odbc/client/SQLColAttributeTest.cpp
+@@ -41,7 +41,7 @@ void ColAtt_DisplayError(SQLSMALLINT Col
   * Test returning descriptor information
   *
   * Tests:
@@ -139,9 +161,11 @@ Forwarded: no
   * -# ???
   * 
   * @return Zero, if test succeeded
---- a/storage/ndb/test/odbc/client/SQLColAttributeTest2.cpp
-+++ b/storage/ndb/test/odbc/client/SQLColAttributeTest2.cpp
-@@ -41,7 +41,7 @@
+Index: mysql-5.5.30/storage/ndb/test/odbc/client/SQLColAttributeTest2.cpp
+===================================================================
+--- mysql-5.5.30.orig/storage/ndb/test/odbc/client/SQLColAttributeTest2.cpp
++++ mysql-5.5.30/storage/ndb/test/odbc/client/SQLColAttributeTest2.cpp
+@@ -41,7 +41,7 @@ void ColAtt_DisplayErrorTest2(SQLSMALLIN
   * Test returning descriptor information
   *
   * Test:

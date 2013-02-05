@@ -3,11 +3,11 @@ Description: makes mtr look in the standard location from the
  mysql-testsuite-5.5 package.
 Forwarded: not-needed
 
-Index: mysql-5.5/mysql-test/lib/mtr_cases.pm
+Index: mysql-5.5.30/mysql-test/lib/mtr_cases.pm
 ===================================================================
---- mysql-5.5.orig/mysql-test/lib/mtr_cases.pm	2011-11-14 15:35:04.238715000 -0800
-+++ mysql-5.5/mysql-test/lib/mtr_cases.pm	2011-11-25 14:41:00.433887578 -0800
-@@ -286,7 +286,8 @@
+--- mysql-5.5.30.orig/mysql-test/lib/mtr_cases.pm
++++ mysql-5.5.30/mysql-test/lib/mtr_cases.pm
+@@ -287,7 +287,8 @@ sub collect_one_suite($)
      else
      {
        $suitedir= my_find_dir($::basedir,

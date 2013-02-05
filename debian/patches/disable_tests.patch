@@ -3,9 +3,11 @@ Subject: Convenient place to disable tests that are currently failing
 Forwarded: not-needed
 Last-Update: 2012-03-07
 Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
---- a/mysql-test/t/disabled.def
-+++ b/mysql-test/t/disabled.def
-@@ -15,3 +15,6 @@
+Index: mysql-5.5.30/mysql-test/t/disabled.def
+===================================================================
+--- mysql-5.5.30.orig/mysql-test/t/disabled.def
++++ mysql-5.5.30/mysql-test/t/disabled.def
+@@ -15,3 +15,6 @@ sum_distinct-big         : Bug#11764126 
  archive-big              : Bug#11817185 2011-03-10 Anitha Disabled since this leads to timeout on Solaris Sparc
  log_tables-big           : Bug#11756699 2010-11-15 mattiasj report already exists
  mysql_embedded           : Bug#12561297 2011-05-14 Anitha Dependent on PB2 changes - eventum#41836
