@@ -8,10 +8,10 @@ Debian-Bug: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=527623
 Last-Update: 2012-03-07
 Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
 
-Index: mysql-5.5.30/scripts/mysqld_safe.sh
+Index: mysql-5.5.31/scripts/mysqld_safe.sh
 ===================================================================
---- mysql-5.5.30.orig/scripts/mysqld_safe.sh
-+++ mysql-5.5.30/scripts/mysqld_safe.sh
+--- mysql-5.5.31.orig/scripts/mysqld_safe.sh
++++ mysql-5.5.31/scripts/mysqld_safe.sh
 @@ -29,8 +29,6 @@ err_log=
  syslog_tag_mysqld=mysqld
  syslog_tag_mysqld_safe=mysqld_safe

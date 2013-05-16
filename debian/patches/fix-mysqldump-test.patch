@@ -3,10 +3,10 @@ Description: Works around non-deterministic --verbose behavior in new
  mysqldump test.
 Bug: http://bugs.mysql.com/bug.php?id=64401
 
-Index: mysql-5.5.30/mysql-test/t/mysqldump.test
+Index: mysql-5.5.31/mysql-test/t/mysqldump.test
 ===================================================================
---- mysql-5.5.30.orig/mysql-test/t/mysqldump.test
-+++ mysql-5.5.30/mysql-test/t/mysqldump.test
+--- mysql-5.5.31.orig/mysql-test/t/mysqldump.test
++++ mysql-5.5.31/mysql-test/t/mysqldump.test
 @@ -2355,7 +2355,7 @@ INSERT INTO b12809202_db.t2 VALUES (1), 
  --echo
  --echo #### Dump starts here ####

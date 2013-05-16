@@ -169,7 +169,7 @@ auto_install-stamp:
 	install -m 0755 debian/additions/echo_stderr $(TMP)/usr/share/mysql/
 	install -m 0755 debian/additions/debian-start $(TMP)/etc/mysql/
 	install -m 0755 debian/additions/debian-start.inc.sh $(TMP)/usr/share/mysql/
-	chmod 0755 $(TMP)/usr/share/mysql-test/lib/My/SafeProcess/safe_process.pl
+	chmod 0755 $(TMP)/usr/share/mysql-test/lib/My/SafeProcess/my_safe_process
 	chmod 0755 $(TMP)/usr/share/mysql-test/std_data/checkDBI_DBD-mysql.pl
 	chmod 0644 $(TMP)/usr/share/mysql/*.ini
 	chmod 0644 $(TMP)/usr/share/mysql-test/[rt]/*
@@ -195,6 +195,7 @@ auto_install-stamp:
 override_dh_install:
 	dh_install --fail-missing                       \
         -Xusr/share/man/                                \
+        -Xusr/share/info/                               \
         -Xlibmysqlclient_r.so                           \
         -Xusr/share/mysql/magic                         \
         -Xusr/lib/mysql/plugin/daemon_example.ini       \

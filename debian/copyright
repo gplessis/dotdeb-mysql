@@ -201,7 +201,7 @@ Files: BUILD/*
  mysql-test/lib/My/SafeProcess.pm
  mysql-test/lib/My/SafeProcess/safe_kill_win.cc
  mysql-test/lib/My/SafeProcess/safe_process.cc
- mysql-test/lib/My/SafeProcess/safe_process.pl
+ mysql-test/lib/My/SafeProcess/my_safe_process
  mysql-test/lib/My/SafeProcess/safe_process_win.cc
  mysql-test/lib/My/SysInfo.pm
  mysql-test/lib/My/Test.pm
