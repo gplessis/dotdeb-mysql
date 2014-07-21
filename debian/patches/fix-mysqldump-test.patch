@@ -3,16 +3,16 @@ Description: Works around non-deterministic --verbose behavior in new
  mysqldump test.
 Bug: http://bugs.mysql.com/bug.php?id=64401
 
-Index: mysql-5.5.31/mysql-test/t/mysqldump.test
+Index: mysql-5.5.38/mysql-test/t/mysqldump.test
 ===================================================================
---- mysql-5.5.31.orig/mysql-test/t/mysqldump.test
-+++ mysql-5.5.31/mysql-test/t/mysqldump.test
+--- mysql-5.5.38.orig/mysql-test/t/mysqldump.test
++++ mysql-5.5.38/mysql-test/t/mysqldump.test
 @@ -2355,7 +2355,7 @@ INSERT INTO b12809202_db.t2 VALUES (1), 
  --echo
  --echo #### Dump starts here ####
  --replace_regex /-- Server version.*// /-- MySQL dump .*// /-- Dump completed on .*/-- Dump completed/
----exec $MYSQL_DUMP --verbose --single-transaction --flush-log b12809202_db 2>$MYSQLTEST_VARDIR/tmp/b12809202_stderr.sql
-+--exec $MYSQL_DUMP --single-transaction --flush-log b12809202_db 2>$MYSQLTEST_VARDIR/tmp/b12809202_stderr.sql
+---exec $MYSQL_DUMP --verbose --single-transaction --flush-logs b12809202_db 2>$MYSQLTEST_VARDIR/tmp/b12809202_stderr.sql
++--exec $MYSQL_DUMP --single-transaction --flush-logs b12809202_db 2>$MYSQLTEST_VARDIR/tmp/b12809202_stderr.sql
  --echo
  --echo ## stderr ##
  --cat_file $MYSQLTEST_VARDIR/tmp/b12809202_stderr.sql

@@ -3,10 +3,10 @@ Subject: minus/hyphen confusion
  Added to keep lintian happy
 Last-Update: 2012-05-17
 Forwarded: no
-Index: mysql-5.5.31/man/mysqlman.1
+Index: mysql-5.5.38/man/mysqlman.1
 ===================================================================
---- mysql-5.5.31.orig/man/mysqlman.1
-+++ mysql-5.5.31/man/mysqlman.1
+--- mysql-5.5.38.orig/man/mysqlman.1
++++ mysql-5.5.38/man/mysqlman.1
 @@ -5,7 +5,7 @@ mysqlman \- default man page for mysql
  Certain executables distributed with the MySQL database management system do
  not have specific man pages.

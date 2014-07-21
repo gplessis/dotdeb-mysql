@@ -2,10 +2,10 @@ Bug: http://bugs.mysql.com/bug.php?id=62769
 Bug-Ubuntu: http://pad.lv/700982
 Description: make sure va_list usage is portable to fix FTBFS on ARM
 
-Index: mysql-5.5.31/sql-common/client_plugin.c
+Index: mysql-5.5.38/sql-common/client_plugin.c
 ===================================================================
---- mysql-5.5.31.orig/sql-common/client_plugin.c
-+++ mysql-5.5.31/sql-common/client_plugin.c
+--- mysql-5.5.38.orig/sql-common/client_plugin.c
++++ mysql-5.5.38/sql-common/client_plugin.c
 @@ -233,11 +233,13 @@ int mysql_client_plugin_init()
  {
    MYSQL mysql;

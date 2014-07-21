@@ -4,10 +4,10 @@ Bug: http://bugs.mysql.com/bug.php?id=64685
 Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=651002
 Last-Update: 2012-03-18
 Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
-Index: mysql-5.5.31/cmake/os/GNU.cmake
+Index: mysql-5.5.38/cmake/os/GNU.cmake
 ===================================================================
 --- /dev/null
-+++ mysql-5.5.31/cmake/os/GNU.cmake
++++ mysql-5.5.38/cmake/os/GNU.cmake
 @@ -0,0 +1,20 @@
 +# This file includes GNU/Hurd specific options and quirks, related to system checks
 +
@@ -29,10 +29,10 @@ Index: mysql-5.5.31/cmake/os/GNU.cmake
 +
 +# 64 bit file offset support flag
 +SET(_FILE_OFFSET_BITS 64)
-Index: mysql-5.5.31/mysql-test/lib/My/Platform.pm
+Index: mysql-5.5.38/mysql-test/lib/My/Platform.pm
 ===================================================================
---- mysql-5.5.31.orig/mysql-test/lib/My/Platform.pm
-+++ mysql-5.5.31/mysql-test/lib/My/Platform.pm
+--- mysql-5.5.38.orig/mysql-test/lib/My/Platform.pm
++++ mysql-5.5.38/mysql-test/lib/My/Platform.pm
 @@ -110,6 +110,9 @@ sub check_socket_path_length {
    # This may not be true, but we can't test for it on AIX due to Perl bug
    # See Bug #45771

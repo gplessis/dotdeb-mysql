@@ -3,10 +3,10 @@ Subject: FTBS when in build directory containing '+'
 Bug-Debian: http://bugs.debian.org/674210
 Bug: http://bugs.mysql.com/bug.php?id=65408
 Last-Update: 2012-05-24
-Index: mysql-5.5.31/mysql-test/include/mysqld--help.inc
+Index: mysql-5.5.38/mysql-test/include/mysqld--help.inc
 ===================================================================
---- mysql-5.5.31.orig/mysql-test/include/mysqld--help.inc
-+++ mysql-5.5.31/mysql-test/include/mysqld--help.inc
+--- mysql-5.5.38.orig/mysql-test/include/mysqld--help.inc
++++ mysql-5.5.38/mysql-test/include/mysqld--help.inc
 @@ -47,7 +47,11 @@ perl;
      s/\b4294967295\b/18446744073709551615/;
      s/\b2146435072\b/9223372036853727232/;
@@ -20,10 +20,10 @@ Index: mysql-5.5.31/mysql-test/include/mysqld--help.inc
      next if /use --skip-(use-)?symbolic-links to disable/; # for valgrind, again
      next if $skip;
      print;
-Index: mysql-5.5.31/mysql-test/suite/sys_vars/t/character_sets_dir_basic.test
+Index: mysql-5.5.38/mysql-test/suite/sys_vars/t/character_sets_dir_basic.test
 ===================================================================
---- mysql-5.5.31.orig/mysql-test/suite/sys_vars/t/character_sets_dir_basic.test
-+++ mysql-5.5.31/mysql-test/suite/sys_vars/t/character_sets_dir_basic.test
+--- mysql-5.5.38.orig/mysql-test/suite/sys_vars/t/character_sets_dir_basic.test
++++ mysql-5.5.38/mysql-test/suite/sys_vars/t/character_sets_dir_basic.test
 @@ -7,6 +7,7 @@
  # TODO: fix with a proper comparison in mysqltest
  let $rcd= `SELECT REPLACE('$MYSQL_CHARSETSDIR', '\\\\\', '.')`;

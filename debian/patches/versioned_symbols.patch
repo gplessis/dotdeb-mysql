@@ -3,10 +3,10 @@ Bug: http://bugs.mysql.com/bug.php?id=64386
 Debian-Bug: http://bugs.debian.org/660686
 Subject: versioned symbols got dropped from the build
 Last-Update: 2012-06-01
-Index: mysql-5.5.31/libmysql/CMakeLists.txt
+Index: mysql-5.5.38/libmysql/CMakeLists.txt
 ===================================================================
---- mysql-5.5.31.orig/libmysql/CMakeLists.txt
-+++ mysql-5.5.31/libmysql/CMakeLists.txt
+--- mysql-5.5.38.orig/libmysql/CMakeLists.txt
++++ mysql-5.5.38/libmysql/CMakeLists.txt
 @@ -136,6 +136,8 @@ CACHE INTERNAL "Functions exported by cl
  
  )
@@ -16,7 +16,7 @@ Index: mysql-5.5.31/libmysql/CMakeLists.txt
  SET(CLIENT_SOURCES
    get_password.c 
    libmysql.c
-@@ -209,7 +211,7 @@ IF(NOT DISABLE_SHARED)
+@@ -226,7 +228,7 @@ IF(NOT DISABLE_SHARED)
          SET(libmysql_link_flags)
        ENDIF()
        SET_TARGET_PROPERTIES(libmysql PROPERTIES LINK_FLAGS 

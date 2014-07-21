@@ -4,20 +4,20 @@ Forwarded: not needed
 Description: Skip on AMD64 builds
 Last-Update: 2012-05-29
 Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
-Index: mysql-5.5.31/mysql-test/include/debian-fail-lp894146.inc
+Index: mysql-5.5.38/mysql-test/include/debian-fail-lp894146.inc
 ===================================================================
 --- /dev/null
-+++ mysql-5.5.31/mysql-test/include/debian-fail-lp894146.inc
++++ mysql-5.5.38/mysql-test/include/debian-fail-lp894146.inc
 @@ -0,0 +1,5 @@
 +if (`select @@version_compile_machine in ('x86_64')`)
 +{
 +  skip Fails intermittently on AMD64 buildds http://pad.lv/894146;
 +}
 +
-Index: mysql-5.5.31/mysql-test/suite/rpl/t/rpl_heartbeat_basic.test
+Index: mysql-5.5.38/mysql-test/suite/rpl/t/rpl_heartbeat_basic.test
 ===================================================================
---- mysql-5.5.31.orig/mysql-test/suite/rpl/t/rpl_heartbeat_basic.test
-+++ mysql-5.5.31/mysql-test/suite/rpl/t/rpl_heartbeat_basic.test
+--- mysql-5.5.38.orig/mysql-test/suite/rpl/t/rpl_heartbeat_basic.test
++++ mysql-5.5.38/mysql-test/suite/rpl/t/rpl_heartbeat_basic.test
 @@ -9,6 +9,7 @@
  # * Various states of master and heartbeat
  # * Circular replication
