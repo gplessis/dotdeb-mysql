@@ -3,8 +3,10 @@ Subject: spelling errors
  Preceeding -> preceding
 Last-Update: 2012-05-19
 Forwarded: no
---- a/libevent/event.3
-+++ b/libevent/event.3
+Index: dotdeb-mysql/libevent/event.3
+===================================================================
+--- dotdeb-mysql.orig/libevent/event.3
++++ dotdeb-mysql/libevent/event.3
 @@ -253,7 +253,7 @@ the type of event which will be either
  or
  .Va EV_WRITE .
@@ -14,8 +16,10 @@ Forwarded: no
  .Fn event_set ,
  can provide its callback function with a bitwise-OR of more than one triggered
  event.
---- a/mysql-test/extra/rpl_tests/rpl_ddl.test
-+++ b/mysql-test/extra/rpl_tests/rpl_ddl.test
+Index: dotdeb-mysql/mysql-test/extra/rpl_tests/rpl_ddl.test
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/extra/rpl_tests/rpl_ddl.test
++++ dotdeb-mysql/mysql-test/extra/rpl_tests/rpl_ddl.test
 @@ -98,8 +98,8 @@
  #       --> less switching of AUTOCOMMIT mode on master side.
  #
@@ -27,8 +31,10 @@ Forwarded: no
  #       because the sql error code of the statement might be 0) bug
  #       and these rules are ignored, a following test sequence might earn ugly
  #       effects like failing 'sync_slave_with_master', crashes of the slave or
---- a/mysql-test/extra/rpl_tests/rpl_row_basic.test
-+++ b/mysql-test/extra/rpl_tests/rpl_row_basic.test
+Index: dotdeb-mysql/mysql-test/extra/rpl_tests/rpl_row_basic.test
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/extra/rpl_tests/rpl_row_basic.test
++++ dotdeb-mysql/mysql-test/extra/rpl_tests/rpl_row_basic.test
 @@ -221,7 +221,7 @@ INSERT INTO t7 VALUES (1,3), (2,6), (3,9
  SELECT * FROM t7 ORDER BY C1;
  
@@ -38,7 +44,7 @@ Forwarded: no
  # temprorarily
  set @@global.slave_exec_mode= 'IDEMPOTENT';
  
-@@ -260,7 +260,7 @@ INSERT INTO t8 VALUES (1,2,3), (2,4,6),
+@@ -260,7 +260,7 @@ INSERT INTO t8 VALUES (1,2,3), (2,4,6), 
  SELECT * FROM t8 ORDER BY a;
  
  # since bug#31552/31609 idempotency is not default any longer. In order
@@ -47,8 +53,10 @@ Forwarded: no
  # temprorarily
  set @@global.slave_exec_mode= 'IDEMPOTENT';
  
---- a/mysql-test/include/wait_until_count_sessions.inc
-+++ b/mysql-test/include/wait_until_count_sessions.inc
+Index: dotdeb-mysql/mysql-test/include/wait_until_count_sessions.inc
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/include/wait_until_count_sessions.inc
++++ dotdeb-mysql/mysql-test/include/wait_until_count_sessions.inc
 @@ -10,7 +10,7 @@
  #    1. We wait for $current_sessions <= $count_sessions because in the use case
  #       with count_sessions.inc before and wait_until_count_sessions.inc after
@@ -58,8 +66,10 @@ Forwarded: no
  #       sessions at test begin($count_sessions) =  m + n
  #       sessions of the previous test which will be soon disconnected = n (n >= 0)
  #       sessions at test end ($current sessions, assuming the test disconnects
---- a/mysql-test/suite/funcs_1/views/func_view.inc
-+++ b/mysql-test/suite/funcs_1/views/func_view.inc
+Index: dotdeb-mysql/mysql-test/suite/funcs_1/views/func_view.inc
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/suite/funcs_1/views/func_view.inc
++++ dotdeb-mysql/mysql-test/suite/funcs_1/views/func_view.inc
 @@ -285,7 +285,7 @@ INSERT INTO t1_values SET
  #               other interesting value
  #     numbers   -> 0
@@ -69,8 +79,10 @@ Forwarded: no
  #     FIXME enum, set ??
  INSERT INTO t1_values SET
         my_char_30 = ' ---äÖüß@µ*$-- ',
---- a/mysql-test/suite/funcs_1/views/views_master.inc
-+++ b/mysql-test/suite/funcs_1/views/views_master.inc
+Index: dotdeb-mysql/mysql-test/suite/funcs_1/views/views_master.inc
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/suite/funcs_1/views/views_master.inc
++++ dotdeb-mysql/mysql-test/suite/funcs_1/views/views_master.inc
 @@ -545,7 +545,7 @@ let $message= Testcase 3.3.1.7 ;
  #                   view names are accepted, at creation time, alteration time,
  #                   and drop time.
@@ -80,8 +92,10 @@ Forwarded: no
  #               database name
  --disable_warnings
  DROP VIEW  IF EXISTS v1 ;
---- a/mysql-test/suite/rpl/t/rpl_ddl.test
-+++ b/mysql-test/suite/rpl/t/rpl_ddl.test
+Index: dotdeb-mysql/mysql-test/suite/rpl/t/rpl_ddl.test
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/suite/rpl/t/rpl_ddl.test
++++ dotdeb-mysql/mysql-test/suite/rpl/t/rpl_ddl.test
 @@ -13,10 +13,10 @@
  #         sequences start.
  #
@@ -95,8 +109,10 @@ Forwarded: no
  #         because the sql error code of the statement might be 0) bug
  #         and these rules are ignored, a following test sequence might earn ugly
  #         effects like failing 'sync_slave_with_master', crashes of the slave or
---- a/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
-+++ b/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
+Index: dotdeb-mysql/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
++++ dotdeb-mysql/mysql-test/suite/rpl/t/rpl_row_basic_11bugs.test
 @@ -239,7 +239,7 @@ INSERT INTO t1 VALUES (1,'master,slave')
  UPDATE t1 SET a = 5, b = 'slave' WHERE a = 1;
  SELECT * FROM t1 ORDER BY a;
@@ -106,8 +122,10 @@ Forwarded: no
  # temprorarily
  set @@global.slave_exec_mode= 'IDEMPOTENT';
  --echo **** On Master ****
---- a/mysql-test/suite/rpl_ndb/t/rpl_ndb_ddl.test
-+++ b/mysql-test/suite/rpl_ndb/t/rpl_ndb_ddl.test
+Index: dotdeb-mysql/mysql-test/suite/rpl_ndb/t/rpl_ndb_ddl.test
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/suite/rpl_ndb/t/rpl_ndb_ddl.test
++++ dotdeb-mysql/mysql-test/suite/rpl_ndb/t/rpl_ndb_ddl.test
 @@ -13,10 +13,10 @@
  #         sequences start.
  #
@@ -121,8 +139,10 @@ Forwarded: no
  #         because the sql error code of the statement might be 0) bug
  #         and these rules are ignored, a following test sequence might earn ugly
  #         effects like failing 'sync_slave_with_master', crashes of the slave or
---- a/sql/abstract_query_plan.cc
-+++ b/sql/abstract_query_plan.cc
+Index: dotdeb-mysql/sql/abstract_query_plan.cc
+===================================================================
+--- dotdeb-mysql.orig/sql/abstract_query_plan.cc
++++ dotdeb-mysql/sql/abstract_query_plan.cc
 @@ -336,7 +336,7 @@ namespace AQP
        {
          /*
@@ -132,9 +152,11 @@ Forwarded: no
            This operation is therefor not pushable.
          */
          DBUG_PRINT("info",
---- a/sql/ha_ndbcluster_push.cc
-+++ b/sql/ha_ndbcluster_push.cc
-@@ -1271,7 +1271,7 @@ ndb_pushed_builder_ctx::build_key(const
+Index: dotdeb-mysql/sql/ha_ndbcluster_push.cc
+===================================================================
+--- dotdeb-mysql.orig/sql/ha_ndbcluster_push.cc
++++ dotdeb-mysql/sql/ha_ndbcluster_push.cc
+@@ -1271,7 +1271,7 @@ ndb_pushed_builder_ctx::build_key(const 
          if (m_join_scope.contain(referred_table_no))
          {
            // Locate the parent operation for this 'join_items[]'.
@@ -143,9 +165,11 @@ Forwarded: no
            const NdbQueryOperationDef* const parent_op= m_tables[referred_table_no].m_op;
            DBUG_ASSERT(parent_op != NULL);
  
---- a/sql/log_event.cc
-+++ b/sql/log_event.cc
-@@ -4625,7 +4625,7 @@ int Query_log_event::do_apply_event(Rela
+Index: dotdeb-mysql/sql/log_event.cc
+===================================================================
+--- dotdeb-mysql.orig/sql/log_event.cc
++++ dotdeb-mysql/sql/log_event.cc
+@@ -4658,7 +4658,7 @@ int Query_log_event::do_apply_event(Rela
      if ((error= rows_event_stmt_cleanup(const_cast<Relay_log_info*>(rli), thd)))
      {
        const_cast<Relay_log_info*>(rli)->report(ERROR_LEVEL, error,
@@ -154,9 +178,11 @@ Forwarded: no
                    "the group log file/position: %s %s",
                    const_cast<Relay_log_info*>(rli)->get_group_master_log_name(),
                    llstr(const_cast<Relay_log_info*>(rli)->get_group_master_log_pos(),
---- a/sql/rpl_utility.cc
-+++ b/sql/rpl_utility.cc
-@@ -1564,7 +1564,7 @@ bool Deferred_log_events::execute(Relay_
+Index: dotdeb-mysql/sql/rpl_utility.cc
+===================================================================
+--- dotdeb-mysql.orig/sql/rpl_utility.cc
++++ dotdeb-mysql/sql/rpl_utility.cc
+@@ -1619,7 +1619,7 @@ bool Deferred_log_events::execute(Relay_
  void Deferred_log_events::rewind()
  {
    /*
@@ -165,8 +191,10 @@ Forwarded: no
      deferred because of slave side filtering.
    */
    if (!is_empty())
---- a/sql/sql_optimizer.cc
-+++ b/sql/sql_optimizer.cc
+Index: dotdeb-mysql/sql/sql_optimizer.cc
+===================================================================
+--- dotdeb-mysql.orig/sql/sql_optimizer.cc
++++ dotdeb-mysql/sql/sql_optimizer.cc
 @@ -971,7 +971,7 @@ JOIN::optimize()
          }
        }
@@ -176,8 +204,10 @@ Forwarded: no
               (simple_order || skip_sort_order)) // which is possibly skippable
      {
        if (test_if_skip_sort_order(tab, order, m_select_limit, false, 
---- a/sql/sql_rewrite.cc
-+++ b/sql/sql_rewrite.cc
+Index: dotdeb-mysql/sql/sql_rewrite.cc
+===================================================================
+--- dotdeb-mysql.orig/sql/sql_rewrite.cc
++++ dotdeb-mysql/sql/sql_rewrite.cc
 @@ -40,7 +40,7 @@
  
  
@@ -196,9 +226,11 @@ Forwarded: no
  
    @param           str                  The string to append to
    @param           comma                Prepend a comma?
---- a/sql/sql_yacc.cc
-+++ b/sql/sql_yacc.cc
-@@ -35151,7 +35151,7 @@ yyreduce:
+Index: dotdeb-mysql/sql/sql_yacc.cc
+===================================================================
+--- dotdeb-mysql.orig/sql/sql_yacc.cc
++++ dotdeb-mysql/sql/sql_yacc.cc
+@@ -39081,7 +39081,7 @@ yyreduce:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -207,9 +239,11 @@ Forwarded: no
                */
                my_parse_error(ER(ER_SYNTAX_ERROR));
                MYSQL_YYABORT;
---- a/sql/sql_yacc.yy
-+++ b/sql/sql_yacc.yy
-@@ -14573,7 +14573,7 @@ opt_var_ident_type:
+Index: dotdeb-mysql/sql/sql_yacc.yy
+===================================================================
+--- dotdeb-mysql.orig/sql/sql_yacc.yy
++++ dotdeb-mysql/sql/sql_yacc.yy
+@@ -14572,7 +14572,7 @@ opt_var_ident_type:
          | SESSION_SYM '.' { $$=OPT_SESSION; }
          ;
  
@@ -218,7 +252,7 @@ Forwarded: no
  option_value_following_option_type:
            internal_variable_name equal set_expr_or_default
            {
-@@ -14590,7 +14590,7 @@ option_value_following_option_type:
+@@ -14589,7 +14589,7 @@ option_value_following_option_type:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -227,7 +261,7 @@ Forwarded: no
                */
                my_parse_error(ER(ER_SYNTAX_ERROR));
                MYSQL_YYABORT;
-@@ -14598,7 +14598,7 @@ option_value_following_option_type:
+@@ -14597,7 +14597,7 @@ option_value_following_option_type:
            }
          ;
  
@@ -236,9 +270,11 @@ Forwarded: no
  option_value_no_option_type:
            internal_variable_name equal
            {
---- a/storage/myisam/mi_rnext.c
-+++ b/storage/myisam/mi_rnext.c
-@@ -65,7 +65,7 @@ int mi_rnext(MI_INFO *info, uchar *buf,
+Index: dotdeb-mysql/storage/myisam/mi_rnext.c
+===================================================================
+--- dotdeb-mysql.orig/storage/myisam/mi_rnext.c
++++ dotdeb-mysql/storage/myisam/mi_rnext.c
+@@ -65,7 +65,7 @@ int mi_rnext(MI_INFO *info, uchar *buf, 
        Normally SQL layer would never request "search next" if
        "search first" failed. But HANDLER may do anything.
  

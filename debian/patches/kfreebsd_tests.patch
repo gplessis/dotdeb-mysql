@@ -5,8 +5,10 @@ Subject: tests not getting started on kFreeBSD
  file name truncation was barfing even for the shortened form.
 Forwarded: no
 Last-Update: 2012-04-28
---- a/mysql-test/lib/My/Platform.pm
-+++ b/mysql-test/lib/My/Platform.pm
+Index: dotdeb-mysql/mysql-test/lib/My/Platform.pm
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/lib/My/Platform.pm
++++ dotdeb-mysql/mysql-test/lib/My/Platform.pm
 @@ -113,6 +113,8 @@ sub check_socket_path_length {
    # Similarly the path length is hidden.
    # See Debian bug #651002

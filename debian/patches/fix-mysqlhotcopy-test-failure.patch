@@ -5,8 +5,10 @@ Description: Include return code 255 in list of valid error codes
 Author: James Page <james.page@ubuntu.com>
 Forwarded: no
 
---- a/mysql-test/include/mysqlhotcopy.inc
-+++ b/mysql-test/include/mysqlhotcopy.inc
+Index: dotdeb-mysql/mysql-test/include/mysqlhotcopy.inc
+===================================================================
+--- dotdeb-mysql.orig/mysql-test/include/mysqlhotcopy.inc
++++ dotdeb-mysql/mysql-test/include/mysqlhotcopy.inc
 @@ -107,7 +107,7 @@ DROP DATABASE hotcopy_save;
  --replace_result $MYSQLD_DATADIR MYSQLD_DATADIR
  --list_files $MYSQLD_DATADIR/hotcopy_save
