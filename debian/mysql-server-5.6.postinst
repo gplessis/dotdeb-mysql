@@ -65,7 +65,7 @@ set +e; invoke stop; set -e
 case "$1" in
   configure)
     mysql_datadir=/usr/share/mysql
-    mysql_statedir=/var/lib/mysql
+    mysql_statedir=`/usr/sbin/mysqld --verbose --help 2>/dev/null | awk '/^datadir\s/ { print $2 }'`
     mysql_rundir=/var/run/mysqld
     mysql_logdir=/var/log/mysql
     mysql_cfgdir=/etc/mysql
