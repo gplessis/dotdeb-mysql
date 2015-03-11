@@ -1,3 +1,9 @@
+mysql-5.6 (5.6.23-1~dotdeb.2) stable; urgency=low
+
+  * Fixes mysql-server-5.6 install if datadir is not /var/lib/mysql/
+
+ -- Guillaume Plessis <gui@dotdeb.org>  Wed, 11 Mar 2015 14:32:42 -0700
+
 mysql-5.6 (5.6.23-1~dotdeb.1) stable; urgency=low
 
   * New upstream release
