@@ -1,3 +1,9 @@
+mysql-5.6 (5.6.23-1~dotdeb.3) stable; urgency=low
+
+  * mawk doesn't support ^
+
+ -- Guillaume Plessis <gui@dotdeb.org>  Thu, 12 Mar 2015 10:13:42 -0700
+
 mysql-5.6 (5.6.23-1~dotdeb.2) stable; urgency=low
 
   * Fixes mysql-server-5.6 install if datadir is not /var/lib/mysql/
