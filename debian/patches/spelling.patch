@@ -169,7 +169,7 @@ Index: dotdeb-mysql/sql/log_event.cc
 ===================================================================
 --- dotdeb-mysql.orig/sql/log_event.cc
 +++ dotdeb-mysql/sql/log_event.cc
-@@ -4658,7 +4658,7 @@ int Query_log_event::do_apply_event(Rela
+@@ -4661,7 +4661,7 @@ int Query_log_event::do_apply_event(Rela
      if ((error= rows_event_stmt_cleanup(const_cast<Relay_log_info*>(rli), thd)))
      {
        const_cast<Relay_log_info*>(rli)->report(ERROR_LEVEL, error,
@@ -230,7 +230,7 @@ Index: dotdeb-mysql/sql/sql_yacc.cc
 ===================================================================
 --- dotdeb-mysql.orig/sql/sql_yacc.cc
 +++ dotdeb-mysql/sql/sql_yacc.cc
-@@ -39081,7 +39081,7 @@ yyreduce:
+@@ -39090,7 +39090,7 @@ yyreduce:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -243,7 +243,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
 ===================================================================
 --- dotdeb-mysql.orig/sql/sql_yacc.yy
 +++ dotdeb-mysql/sql/sql_yacc.yy
-@@ -14572,7 +14572,7 @@ opt_var_ident_type:
+@@ -14581,7 +14581,7 @@ opt_var_ident_type:
          | SESSION_SYM '.' { $$=OPT_SESSION; }
          ;
  
@@ -252,7 +252,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
  option_value_following_option_type:
            internal_variable_name equal set_expr_or_default
            {
-@@ -14589,7 +14589,7 @@ option_value_following_option_type:
+@@ -14598,7 +14598,7 @@ option_value_following_option_type:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -261,7 +261,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
                */
                my_parse_error(ER(ER_SYNTAX_ERROR));
                MYSQL_YYABORT;
-@@ -14597,7 +14597,7 @@ option_value_following_option_type:
+@@ -14606,7 +14606,7 @@ option_value_following_option_type:
            }
          ;
  
