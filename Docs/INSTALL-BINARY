@@ -1,10 +1,10 @@
 2.2 Installing MySQL on Unix/Linux Using Generic Binaries
 
    Oracle provides a set of binary distributions of MySQL. These
-   include binary distributions in the form of compressed tar
-   files (files with a .tar.gz extension) for a number of
-   platforms, as well as binaries in platform-specific package
-   formats for selected platforms.
+   include generic binary distributions in the form of
+   compressed tar files (files with a .tar.gz extension) for a
+   number of platforms, and binaries in platform-specific
+   package formats for selected platforms.
 
    This section covers the installation of MySQL from a
    compressed tar file binary distribution. For other
@@ -13,39 +13,29 @@
    distributions, see Section 2.3, "Installing MySQL on
    Microsoft Windows."
 
-   To obtain MySQL, see Section 2.1.3, "How to Get MySQL."
+   To obtain MySQL, see Section 2.1.2, "How to Get MySQL."
 
    MySQL compressed tar file binary distributions have names of
    the form mysql-VERSION-OS.tar.gz, where VERSION is a number
-   (for example, 5.6.23), and OS indicates the type of operating
+   (for example, 5.6.25), and OS indicates the type of operating
    system for which the distribution is intended (for example,
    pc-linux-i686 or winx64).
-
-   To install MySQL from a compressed tar file binary
-   distribution, your system must have GNU gunzip to uncompress
-   the distribution and a reasonable tar to unpack it. If your
-   tar program supports the z option, it can both uncompress and
-   unpack the file.
-
-   GNU tar is known to work. The standard tar provided with some
-   operating systems is not able to unpack the long file names
-   in the MySQL distribution. You should download and install
-   GNU tar, or if available, use a preinstalled version of GNU
-   tar. Usually this is available as gnutar, gtar, or as tar
-   within a GNU or Free Software directory, such as /usr/sfw/bin
-   or /usr/local/bin. GNU tar is available from
-   http://www.gnu.org/software/tar/.
    Warning
 
    If you have previously installed MySQL using your operating
    system native package management system, such as yum or
    apt-get, you may experience problems installing using a
-   native binary. Make sure your previous MySQL previous
-   installation has been removed entirely (using your package
-   management system), and that any additional files, such as
-   old versions of your data files, have also been removed. You
-   should also check the existence of configuration files such
-   as /etc/my.cnf or the /etc/mysql directory have been deleted.
+   native binary. Make sure your previous MySQL installation has
+   been removed entirely (using your package management system),
+   and that any additional files, such as old versions of your
+   data files, have also been removed. You should also check for
+   configuration files such as /etc/my.cnf or the /etc/mysql
+   directory and delete them.
+
+   For information about replacing third-party packages with
+   official MySQL packages, see the related Apt guide
+   (http://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/) or
+   Yum guide.
    Warning
 
    MySQL has a dependency on the libaio library. The
@@ -72,13 +62,12 @@ shell> apt-get install libaio1 # install library
    Table 2.3 MySQL Installation Layout for Generic Unix/Linux
    Binary Package
    Directory Contents of Directory
-   bin Client programs and the mysqld server
+   bin, scripts mysqld server, client and utility programs
    data Log files, databases
-   docs Manual in Info format
+   docs MySQL manual in Info format
    man Unix manual pages
    include Include (header) files
    lib Libraries
-   scripts mysql_install_db
    share Miscellaneous support files, including error messages,
    sample configuration files, SQL for database installation
    sql-bench Benchmarks
@@ -86,12 +75,11 @@ shell> apt-get install libaio1 # install library
    Debug versions of the mysqld binary are available as
    mysqld-debug. To compile your own debug version of MySQL from
    a source distribution, use the appropriate configuration
-   options to enable debugging support. For more information on
-   compiling from source, see Section 2.9, "Installing MySQL
-   from Source."
+   options to enable debugging support. See Section 2.9,
+   "Installing MySQL from Source."
 
-   To install and use a MySQL binary distribution, the basic
-   command sequence looks like this:
+   To install and use a MySQL binary distribution, the command
+   sequence looks like this:
 shell> groupadd mysql
 shell> useradd -r -g mysql mysql
 shell> cd /usr/local
@@ -107,29 +95,32 @@ shell> bin/mysqld_safe --user=mysql &
 # Next command is optional
 shell> cp support-files/mysql.server /etc/init.d/mysql.server
 
-   mysql_install_db creates a default option file named my.cnf
-   in the base installation directory. This file is created from
-   a template included in the distribution package named
-   my-default.cnf. For more information, see Section 5.1.2.2,
-   "Using a Sample Default Server Configuration File."
-
-   A more detailed version of the preceding description for
-   installing a binary distribution follows.
    Note
 
    This procedure assumes that you have root (administrator)
    access to your system. Alternatively, you can prefix each
    command using the sudo (Linux) or pfexec (OpenSolaris)
    command.
+   Note
 
-   The procedure does not set up any passwords for MySQL
-   accounts. After following the procedure, proceed to Section
-   2.10.2, "Securing the Initial MySQL Accounts."
+   The procedure does not assign passwords to MySQL accounts. To
+   do so, use the instructions in Section 2.10.4, "Securing the
+   Initial MySQL Accounts."
+
+   As of MySQL 5.6.8, mysql_install_db creates a default option
+   file named my.cnf in the base installation directory. This
+   file is created from a template included in the distribution
+   package named my-default.cnf. For more information, see
+   Section 5.1.2.2, "Using a Sample Default Server Configuration
+   File."
+
+   A more detailed version of the preceding description for
+   installing a binary distribution follows.
 
 Create a mysql User and Group
 
-   If your system does not already have a user and group for
-   mysqld to run as, you may need to create one. The following
+   If your system does not already have a user and group to use
+   for running mysqld, you may need to create one. The following
    commands add the mysql group and the mysql user. You might
    want to call the user and group something else instead of
    mysql. If so, substitute the appropriate name in the
@@ -144,8 +135,8 @@ shell> useradd -r -g mysql mysql
    Because the user is required only for ownership purposes, not
    login purposes, the useradd command uses the -r option to
    create a user that does not have login permissions to your
-   server host. Omit this option to permit logins for the user
-   (or if your useradd does not support the option).
+   server host. Omit this option to permit logins for the user,
+   or if your useradd does not support the option.
 
 Obtain and Unpack the Distribution
 
@@ -158,7 +149,7 @@ Obtain and Unpack the Distribution
 shell> cd /usr/local
 
    Obtain a distribution file using the instructions in Section
-   2.1.3, "How to Get MySQL." For a given release, binary
+   2.1.2, "How to Get MySQL." For a given release, binary
    distributions for all platforms are built from the same MySQL
    source distribution.
 
@@ -174,6 +165,21 @@ shell> ln -s full-path-to-mysql-VERSION-OS mysql
    enables you to refer more easily to the installation
    directory as /usr/local/mysql.
 
+   To install MySQL from a compressed tar file binary
+   distribution, your system must have GNU gunzip to uncompress
+   the distribution and a reasonable tar to unpack it. If your
+   tar program supports the z option, it can both uncompress and
+   unpack the file.
+
+   GNU tar is known to work. The standard tar provided with some
+   operating systems is not able to unpack the long file names
+   in the MySQL distribution. You should download and install
+   GNU tar, or if available, use a preinstalled version of GNU
+   tar. Usually this is available as gnutar, gtar, or as tar
+   within a GNU or Free Software directory, such as /usr/sfw/bin
+   or /usr/local/bin. GNU tar is available from
+   http://www.gnu.org/software/tar/.
+
    If your tar does not have z option support, use gunzip to
    unpack the distribution and tar to unpack it. Replace the
    preceding tar command with the following alternative command
@@ -182,16 +188,11 @@ shell> gunzip < /path/to/mysql-VERSION-OS.tar.gz | tar xvf -
 
 Perform Postinstallation Setup
 
-   The remainder of the installation process involves setting up
-   the configuration file, creating the core databases, and
-   starting the MySQL server. For next steps, see Section 2.10,
+   The remainder of the installation process involves setting
+   distribution ownership and access permissions, initializing
+   the data directory, starting the MySQL server, and setting up
+   the configuration file. For instructions, see Section 2.10,
    "Postinstallation Setup and Testing."
-   Note
-
-   The accounts that are listed in the MySQL grant tables
-   initially have no passwords. After starting the server, you
-   should set up passwords for them using the instructions in
-   Section 2.10.2, "Securing the Initial MySQL Accounts."
 2.3 Installing MySQL on Microsoft Windows
 
    There are several different methods to install MySQL on
@@ -290,13 +291,13 @@ Additional Installation Information
        for you.
 
    MySQL distributions for Windows can be downloaded from
-   http://dev.mysql.com/downloads/. See Section 2.1.3, "How to
+   http://dev.mysql.com/downloads/. See Section 2.1.2, "How to
    Get MySQL."
 
    MySQL for Windows is available in several distribution
-   formats, detailed below. Generally speaking, you should use
+   formats, detailed here. Generally speaking, you should use
    MySQL Installer. It contains more features and MySQL products
-   than the older MSI, is simpler to use than the ZIP file, and
+   than the older MSI, is simpler to use than the Zip file, and
    you need no additional tools to get MySQL up and running.
    MySQL Installer automatically installs MySQL Server and
    additional MySQL products, creates an options file, starts
@@ -374,7 +375,7 @@ Additional Installation Information
    Table 2.4 Default MySQL Installation Layout for Microsoft
    Windows
    Directory Contents of Directory Notes
-   bin Client programs and the mysqld server
+   bin, scripts mysqld server, client and utility programs
    %ALLUSERSPROFILE%\MySQL\MySQL Server 5.6\ Log files,
    databases (Windows XP, Windows Server 2003) The Windows
    system variable %ALLUSERSPROFILE% defaults to C:\Documents
@@ -386,7 +387,6 @@ Additional Installation Information
    examples Example programs and scripts
    include Include (header) files
    lib Libraries
-   scripts Utility scripts
    share Miscellaneous support files, including error messages,
    character set files, sample configuration files, SQL for
    database installation
@@ -406,8 +406,8 @@ Additional Installation Information
    choose from when installing MySQL on Windows:
 
      * MySQL Installer: This package has a file name similar to
-       mysql-installer-community-5.6.23.0.msi or
-       mysql-installer-commercial-5.6.23.0.msi, and utilizes
+       mysql-installer-community-5.6.25.0.msi or
+       mysql-installer-commercial-5.6.25.0.msi, and utilizes
        MSIs to automatically install MySQL server and other
        products. It will download and apply updates to itself,
        and for each of the installed products. It also
@@ -431,8 +431,8 @@ Additional Installation Information
        Microsoft Windows Using MySQL Installer."
 
      * The Noinstall Archive: This package has a file name
-       similar to mysql-5.6.23-win32.zip or
-       mysql-5.6.23-winx64.zip, and contains all the files found
+       similar to mysql-5.6.25-win32.zip or
+       mysql-5.6.25-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
        the GUI. This package does not include an automated
        installer, and must be manually installed and configured.
@@ -883,34 +883,42 @@ Adding MySQL Products
 
 2.3.3.1.3 Alter MySQL Products
 
-   MySQL Installer offers several options to alter your MySQL
-   product installations.
+   Use MySQL Installer to modify, configure, or upgrade your
+   MySQL product installations.
 
 Upgrade
 
-   MySQL products with an available upgrade are highlighted on
-   the main dashboard. Products with available upgrades will
-   have an upgrade icon next to their version number.
+   Upgradable MySQL products are listed on the main dashboard
+   with an arrow icon ( [wb-icon-upgrade-arrow.png] ) next to
+   their version number.
 
    Figure 2.25 MySQL Installer - Upgrade a MySQL Product
    MySQL Installer - Upgrade a MySQL Product
    Note
 
-   Available upgrades are determined by having a current
-   catalog. For information about keeping your MySQL product
-   catalog current, see Section 2.3.3.1.1, "MySQL Product
-   Catalog."
+   The "upgrade" functionality requires a current product
+   catalog. This catalog is updated either manually or
+   automatically (daily) by enabling the Automatic Catalog
+   Update feature. For additional information, see Section
+   2.3.3.1.1, "MySQL Product Catalog."
 
-   Click Upgrade to view a list upgradable products. Our example
-   indicates that MySQL server 5.6.19 can be upgraded to version
-   5.6.20.
+   Click Upgrade to upgrade the available products. Our example
+   indicates that MySQL Workbench 6.2.4 can be upgraded version
+   6.3.1 or 6.2.5, and MySQL server from 5.5.41 to 5.5.42.
 
    Figure 2.26 MySQL Installer - Select Products To Upgrade
    MySQL Installer - Select Products To Upgrade
 
-   Select (check) the products to upgrade, and optionally click
-   the changes link to view the product's release notes in your
-   browser. Click Next to begin the upgrade process.
+   If multiple upgrade versions are available (such as our MySQL
+   Workbench example above), select the desired version for the
+   upgrade in the Available Upgrades area.
+   Note
+
+   Optionally, click the Changes link to view the version's
+   release notes.
+
+   After selecting (checking) the products and versions to
+   upgrade, click Next to begin the upgrade process.
 
    Figure 2.27 MySQL Installer - Apply Updates
    MySQL Installer - Apply Updates
@@ -1613,7 +1621,7 @@ Archive
    To install MySQL manually, do the following:
 
     1. If you are upgrading from a previous version please refer
-       to Section 2.3.7, "Upgrading MySQL on Windows," before
+       to Section 2.3.8, "Upgrading MySQL on Windows," before
        beginning the upgrade process.
 
     2. Make sure that you are logged in as a user with
@@ -1821,7 +1829,7 @@ InnoDB: foreign key constraint system tables created
    something like this, which indicates that the server is ready
    to service client connections:
 mysqld: ready for connections
-Version: '5.6.23'  socket: ''  port: 3306
+Version: '5.6.25'  socket: ''  port: 3306
 
    The server continues to write to the console any further
    diagnostic output it produces. You can open a new console
@@ -1837,7 +1845,7 @@ Version: '5.6.23'  socket: ''  port: 3306
    The accounts that are listed in the MySQL grant tables
    initially have no passwords. After starting the server, you
    should set up passwords for them using the instructions in
-   Section 2.10.2, "Securing the Initial MySQL Accounts."
+   Section 2.10.4, "Securing the Initial MySQL Accounts."
 
 2.3.5.5 Starting MySQL from the Windows Command Line
 
@@ -2160,7 +2168,9 @@ C:\> "C:\Program Files\MySQL\MySQL Server 5.6\bin\mysql" test
    client programs, there is probably a problem with your DNS.
    In this case, start mysqld with the --skip-name-resolve
    option and use only localhost and IP addresses in the Host
-   column of the MySQL grant tables.
+   column of the MySQL grant tables. (Be sure that an account
+   exists that specifies an IP address or you may not be able to
+   connect.)
 
    You can force a MySQL client to use a named-pipe connection
    rather than TCP/IP by specifying the --pipe or
@@ -2292,7 +2302,146 @@ C:\> sc delete mysql
        http://www.microsoft.com/windows2000/techinfo/reskit/tool
        s/existing/delsrv-o.asp and use the delsrv mysql syntax.
 
-2.3.7 Upgrading MySQL on Windows
+2.3.7 Windows Postinstallation Procedures
+
+   GUI tools exist that perform most of the tasks described in
+   this section, including:
+
+     * MySQL Installer: Used to install and upgrade MySQL
+       products.
+
+     * MySQL Workbench: Manages the MySQL server and edits SQL
+       statements.
+
+     * MySQL Notifier: Starts, stops, or restarts the MySQL
+       server, and monitors its status.
+
+     * MySQL for Excel
+       (http://dev.mysql.com/doc/mysql-for-excel/en/index.html):
+       Edits MySQL data with Microsoft Excel.
+
+   On Windows, you need not create the data directory and the
+   grant tables. MySQL Windows distributions include the grant
+   tables with a set of preinitialized accounts in the mysql
+   database under the data directory.
+
+   Regarding passwords, if you installed MySQL using the MySQL
+   Installer, you may have already assigned passwords to the
+   accounts. (See Section 2.3.3, "Installing MySQL on Microsoft
+   Windows Using MySQL Installer.") Otherwise, use the
+   password-assignment procedure given in Section 2.10.4,
+   "Securing the Initial MySQL Accounts."
+
+   Before assigning passwords, you might want to try running
+   some client programs to make sure that you can connect to the
+   server and that it is operating properly. Make sure that the
+   server is running (see Section 2.3.5.4, "Starting the Server
+   for the First Time"). You can also set up a MySQL service
+   that runs automatically when Windows starts (see Section
+   2.3.5.7, "Starting MySQL as a Windows Service").
+
+   These instructions assume that your current location is the
+   MySQL installation directory and that it has a bin
+   subdirectory containing the MySQL programs used here. If that
+   is not true, adjust the command path names accordingly.
+
+   If you installed MySQL using MySQL Installer (see Section
+   2.3.3, "Installing MySQL on Microsoft Windows Using MySQL
+   Installer"), the default installation directory is C:\Program
+   Files\MySQL\MySQL Server 5.6:
+C:\> cd "C:\Program Files\MySQL\MySQL Server 5.6"
+
+   A common installation location for installation from a Zip
+   package is C:\mysql:
+C:\> cd C:\mysql
+
+   Alternatively, add the bin directory to your PATH environment
+   variable setting. That enables your command interpreter to
+   find MySQL programs properly, so that you can run a program
+   by typing only its name, not its path name. See Section
+   2.3.5.6, "Customizing the PATH for MySQL Tools."
+
+   With the server running, issue the following commands to
+   verify that you can retrieve information from the server. The
+   output should be similar to that shown here.
+
+   Use mysqlshow to see what databases exist:
+C:\> bin\mysqlshow
++--------------------+
+|     Databases      |
++--------------------+
+| information_schema |
+| mysql              |
+| test               |
++--------------------+
+
+   The list of installed databases may vary, but will always
+   include the minimum of mysql and information_schema.
+
+   The preceding command (and commands for other MySQL programs
+   such as mysql) may not work if the correct MySQL account does
+   not exist. For example, the program may fail with an error,
+   or you may not be able to view all databases. If you
+   installed MySQL using MySQL Installer, the root user will
+   have been created automatically with the password you
+   supplied. In this case, you should use the -u root and -p
+   options. (You must use those options if you have already
+   secured the initial MySQL accounts.) With -p, the client
+   program prompts for the root password. For example:
+C:\> bin\mysqlshow -u root -p
+Enter password: (enter root password here)
++--------------------+
+|     Databases      |
++--------------------+
+| information_schema |
+| mysql              |
+| test               |
++--------------------+
+
+   If you specify a database name, mysqlshow displays a list of
+   the tables within the database:
+C:\> bin\mysqlshow mysql
+Database: mysql
++---------------------------+
+|          Tables           |
++---------------------------+
+| columns_priv              |
+| db                        |
+| event                     |
+| func                      |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| plugin                    |
+| proc                      |
+| procs_priv                |
+| proxies_priv              |
+| servers                   |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+
+   Use the mysql program to select information from a table in
+   the mysql database:
+C:\> bin\mysql -e "SELECT User, Host FROM mysql.user" mysql
++------+-----------+
+| User | Host      |
++------+-----------+
+| root | localhost |
++------+-----------+
+
+   For more information about mysqlshow and mysql, see Section
+   4.5.6, "mysqlshow --- Display Database, Table, and Column
+   Information," and Section 4.5.1, "mysql --- The MySQL
+   Command-Line Tool."
+
+2.3.8 Upgrading MySQL on Windows
 
    To upgrade MySQL on Windows, follow these steps:
 
@@ -2383,131 +2532,3 @@ C:\> C:\mysql\bin\mysqld --remove
    11. If you encounter errors, see Section 2.3.6,
        "Troubleshooting a Microsoft Windows MySQL Server
        Installation."
-
-2.3.8 Windows Postinstallation Procedures
-
-   GUI tools exist that perform most of the tasks described
-   below, including:
-
-     * MySQL Installer: Used to install and upgrade MySQL
-       products.
-
-     * MySQL Workbench: Manages the MySQL server and edits SQL
-       queries.
-
-     * MySQL Notifier: Starts, stops, or restarts the MySQL
-       server, and monitors its status.
-
-     * MySQL for Excel
-       (http://dev.mysql.com/doc/mysql-for-excel/en/index.html):
-       Edits MySQL data with Microsoft Excel.
-
-   On Windows, you need not create the data directory and the
-   grant tables. MySQL Windows distributions include the grant
-   tables with a set of preinitialized accounts in the mysql
-   database under the data directory. Regarding passwords, if
-   you installed MySQL using the MySQL Installer, you may have
-   already assigned passwords to the accounts. (See Section
-   2.3.3, "Installing MySQL on Microsoft Windows Using MySQL
-   Installer.") Otherwise, use the password-assignment procedure
-   given in Section 2.10.2, "Securing the Initial MySQL
-   Accounts."
-
-   Before setting up passwords, you might want to try running
-   some client programs to make sure that you can connect to the
-   server and that it is operating properly. Make sure that the
-   server is running (see Section 2.3.5.4, "Starting the Server
-   for the First Time"), and then issue the following commands
-   to verify that you can retrieve information from the server.
-   You may need to specify directory different from C:\mysql\bin
-   on the command line. If you installed MySQL using MySQL
-   Installer, the default directory is C:\Program
-   Files\MySQL\MySQL Server 5.6, and the mysql and mysqlshow
-   client programs are in C:\Program Files\MySQL\MySQL Server
-   5.6\bin. See Section 2.3.3, "Installing MySQL on Microsoft
-   Windows Using MySQL Installer," for more information.
-
-   Use mysqlshow to see what databases exist:
-C:\> C:\mysql\bin\mysqlshow
-+--------------------+
-|     Databases      |
-+--------------------+
-| information_schema |
-| mysql              |
-| test               |
-+--------------------+
-
-   The list of installed databases may vary, but will always
-   include the minimum of mysql and information_schema. In most
-   cases, the test database will also be installed
-   automatically.
-
-   The preceding command (and commands for other MySQL programs
-   such as mysql) may not work if the correct MySQL account does
-   not exist. For example, the program may fail with an error,
-   or you may not be able to view all databases. If you
-   installed MySQL using MySQL Installer, then the root user
-   will have been created automatically with the password you
-   supplied. In this case, you should use the -u root and -p
-   options. (You will also need to use the -u root and -p
-   options if you have already secured the initial MySQL
-   accounts.) With -p, you will be prompted for the root
-   password. For example:
-C:\> C:\mysql\bin\mysqlshow -u root -p
-Enter password: (enter root password here)
-+--------------------+
-|     Databases      |
-+--------------------+
-| information_schema |
-| mysql              |
-| test               |
-+--------------------+
-
-   If you specify a database name, mysqlshow displays a list of
-   the tables within the database:
-C:\> C:\mysql\bin\mysqlshow mysql
-Database: mysql
-+---------------------------+
-|          Tables           |
-+---------------------------+
-| columns_priv              |
-| db                        |
-| event                     |
-| func                      |
-| help_category             |
-| help_keyword              |
-| help_relation             |
-| help_topic                |
-| host                      |
-| plugin                    |
-| proc                      |
-| procs_priv                |
-| servers                   |
-| tables_priv               |
-| time_zone                 |
-| time_zone_leap_second     |
-| time_zone_name            |
-| time_zone_transition      |
-| time_zone_transition_type |
-| user                      |
-+---------------------------+
-
-   Use the mysql program to select information from a table in
-   the mysql database:
-C:\> C:\mysql\bin\mysql -e "SELECT Host,Db,User FROM mysql.db"
-+------+--------+------+
-| host | db     | user |
-+------+--------+------+
-| %    | test   |      |
-| %    | test_% |      |
-+------+--------+------+
-
-   For more information about mysqlshow and mysql, see Section
-   4.5.6, "mysqlshow --- Display Database, Table, and Column
-   Information," and Section 4.5.1, "mysql --- The MySQL
-   Command-Line Tool."
-
-   If you are running a version of Windows that supports
-   services, you can set up the MySQL server to run
-   automatically when Windows starts. See Section 2.3.5.7,
-   "Starting MySQL as a Windows Service."

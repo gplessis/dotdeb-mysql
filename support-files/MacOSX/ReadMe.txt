@@ -138,7 +138,7 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
 
    Table 2.5 MySQL Installation Layout on OS X
    Directory Contents of Directory
-   bin Client programs and the mysqld server
+   bin, scripts mysqld server, client and utility programs
    data Log files, databases
    docs Helper documents, like the Release Notes and build
    information
@@ -146,7 +146,6 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
    lib Libraries
    man Unix manual pages
    mysql-test MySQL test suite
-   scripts mysql_install_db
    share Miscellaneous support files, including error messages,
    sample configuration files, SQL for database installation
    sql-bench Benchmarks
@@ -167,8 +166,8 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
     2. Double-click the MySQL installer package. It will be
        named according to the version of MySQL you have
        downloaded. For example, if you have downloaded MySQL
-       server 5.6.23, double-click
-       mysql-5.6.23-osx-10.8-x86_64.pkg.
+       server 5.6.25, double-click
+       mysql-5.6.25-osx-10.8-x86_64.pkg.
 
     3. You will be presented with the opening installer dialog.
        Click Continue to begin installation.
