@@ -1,8 +1,14 @@
+mysql-5.6 (5.6.25-1~dotdeb+7.1) oldstable; urgency=medium
+
+  * Imported Upstream version 5.6.25
+  * Patches refresh for 5.6.25
+
+ -- Guillaume Plessis <gui@dotdeb.org>  Sun, 31 May 2015 16:13:17 -0700
+
 mysql-5.6 (5.6.24-1~dotdeb+7.1) oldstable; urgency=medium
 
   * Imported Upstream version 5.6.24
   * Patches refreshed for 5.6.24
-  * Patch to remove sql_yacc.{h,cc} from sources (Thanks Ondřej Surý)
 
  -- Guillaume Plessis <gui@dotdeb.org>  Sat, 23 May 2015 14:38:19 -0700
 
