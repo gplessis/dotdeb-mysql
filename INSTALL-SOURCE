@@ -756,8 +756,8 @@ shell> rpm --import doc/refman/5.6/en/checking-gpg-signature.html
    Yum guide.
    Warning
 
-   MySQL has a dependency on the libaio library. The
-   mysql_install_db and subsequent mysqld_safe steps will fail
+   MySQL has a dependency on the libaio library. Data directory
+   initialization and subsequent server startup steps will fail
    if this library is not installed locally. If necessary,
    install it using the appropriate package manager. For
    example, on Yum-based systems:
@@ -1121,8 +1121,14 @@ Additional Installation Information
 
 2.3.2 Choosing An Installation Package
 
-   For MySQL 5.6, there are installation package formats to
-   choose from when installing MySQL on Windows:
+   For MySQL 5.6, there are multiple installation package
+   formats to choose from when installing MySQL on Windows.
+   Note
+
+   Program Database (PDB) files (with file name extension pdb)
+   provide information for debugging your MySQL installation in
+   the event of a problem. These files are included in ZIP
+   Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
        mysql-installer-community-5.6.25.0.msi or
@@ -1153,8 +1159,9 @@ Additional Installation Information
        similar to mysql-5.6.25-win32.zip or
        mysql-5.6.25-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
-       the GUI. This package does not include an automated
-       installer, and must be manually installed and configured.
+       the GUI. It also contains PDB files. This package does
+       not include an automated installer, and must be manually
+       installed and configured.
 
    MySQL Installer is recommended for most users.
 
@@ -1210,7 +1217,7 @@ Installer package types
 
 
      * Full: Bundles all of the MySQL products (including the
-       MySQL server). The file' size is over 200MB, and its name
+       MySQL server). The file size is over 300MB, and its name
        has the form mysql-installer-community-VERSION.N.msi
        where VERSION is the MySQL Server version number such as
        5.6 and N is the package number, which begins at 0.
@@ -1258,7 +1265,7 @@ Installer editions
    A single host can not have both community and commercial
    editions of MySQL Server installed. For example, if you want
    both MySQL Server 5.5 and 5.6 installed on a single host,
-   then both must be the same edition.
+   both must be the same edition.
 
    MySQL Installer handles the initial configuration and set up
    of the applications. For example:
@@ -2094,11 +2101,15 @@ Computer running MySQL Notifier (Computer A)
             double-click the selection from the previous step.
          g. Check the Enabled radio button, and then click OK.
        Using the NETSH command:
+       Note
+       The "netsh firewall" command is deprecated as of
+       Microsoft Server 2008 and Vista, and replaced with "netsh
+       advfirewall firewall".
          a. Open a command prompt window with Administrative
             rights (you can right-click the Command Prompt icon
             and click Run as Administrator).
          b. Execute the following command:
-NETSH firewall set service RemoteAdmin enable
+NETSH advfirewall firewall set service RemoteAdmin enable
 
 
     2. Open the DCOM port TCP 135:
@@ -2106,7 +2117,8 @@ NETSH firewall set service RemoteAdmin enable
             rights (you can right-click the Command Prompt icon
             and click Run as Administrator) .
          b. Execute the following command:
-NETSH firewall add portopening protocol=tcp port=135 name=DCOM_TCP135
+NETSH advfirewall firewall add portopening protocol=tcp port=135 name=
+DCOM_TCP135
 
 
     3. Add the client application which contains the sink for
@@ -2139,8 +2151,8 @@ NETSH firewall add portopening protocol=tcp port=135 name=DCOM_TCP135
             and click Run as Administrator).
          b. Execute the following command, where you change
             "[YOUR_INSTALL_DIRECTORY]":
-NETSH firewall add allowedprogram program=[YOUR_INSTALL_DIRECTORY]\MyS
-qlNotifier.exe name=MySqlNotifier
+NETSH advfirewall firewall add allowedprogram program=[YOUR_INSTALL_DI
+RECTORY]\MySqlNotifier.exe name=MySqlNotifier
 
 
     4. If Computer B is either a member of WORKGROUP or is in a
@@ -2249,7 +2261,7 @@ Monitored Remote Computer (Computer B)
             rights (you can right-click the Command Prompt icon
             and click Run as Administrator).
          b. Execute the following command:
-NETSH firewall set service RemoteAdmin enable
+NETSH advfirewall firewall set service RemoteAdmin enable
 
 
     4. Now, be sure the user you are logging in with uses the
@@ -3091,6 +3103,7 @@ C:\> bin\mysqlshow
 +--------------------+
 | information_schema |
 | mysql              |
+| performance_schema |
 | test               |
 +--------------------+
 
@@ -3114,6 +3127,7 @@ Enter password: (enter root password here)
 +--------------------+
 | information_schema |
 | mysql              |
+| performance_schema |
 | test               |
 +--------------------+
 
@@ -3128,15 +3142,23 @@ Database: mysql
 | db                        |
 | event                     |
 | func                      |
+| general_log               |
 | help_category             |
 | help_keyword              |
 | help_relation             |
 | help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| ndb_binlog_index          |
 | plugin                    |
 | proc                      |
 | procs_priv                |
 | proxies_priv              |
 | servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
 | tables_priv               |
 | time_zone                 |
 | time_zone_leap_second     |
@@ -3148,17 +3170,17 @@ Database: mysql
 
    Use the mysql program to select information from a table in
    the mysql database:
-C:\> bin\mysql -e "SELECT User, Host FROM mysql.user" mysql
-+------+-----------+
-| User | Host      |
-+------+-----------+
-| root | localhost |
-+------+-----------+
+C:\> bin\mysql -e "SELECT User, Host, plugin FROM mysql.user" mysql
++------+-----------+-----------------------+
+| User | Host      | plugin                |
++------+-----------+-----------------------+
+| root | localhost | mysql_native_password |
++------+-----------+-----------------------+
 
-   For more information about mysqlshow and mysql, see Section
+   For more information about mysql and mysqlshow, see Section
+   4.5.1, "mysql --- The MySQL Command-Line Tool," and Section
    4.5.6, "mysqlshow --- Display Database, Table, and Column
-   Information," and Section 4.5.1, "mysql --- The MySQL
-   Command-Line Tool."
+   Information."
 
 2.3.8 Upgrading MySQL on Windows
 
@@ -4140,12 +4162,6 @@ shell> sudo yum remove Percona-Server-client-55 Percona-Server-server-
    Instructions for using the MySQL APT Repository are available
    in A Quick Guide to Using the MySQL APT Repository
    (http://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/).
-   Note
-
-   The MySQL APT Repository is now in development release. We
-   encourage you to try it and provide us with feedback. Please
-   report any bugs or inconsistencies you observe to our Bugs
-   Database (http://bugs.mysql.com).
 
 2.5.4 Installing MySQL on Linux Using the MySQL SLES Repository
 
@@ -7115,9 +7131,9 @@ shell> bin/mysqld_safe --user=mysql &
        user so that you can issue the necessary statements. (See
        Section 13.7.1, "Account Management Statements.")
        To install MySQL on several machines with the same
-       privileges, put the GRANT and REVOKE statements in a file
-       and execute the file as a script using mysql after
-       running mysql_install_db. For example:
+       privileges, put the CREATE USER, GRANT, and REVOKE
+       statements in a file and execute the file as a script
+       using mysql after running mysql_install_db. For example:
 shell> scripts/mysql_install_db --user=mysql
 shell> bin/mysql -u root < your_script_file
 
@@ -7126,10 +7142,10 @@ shell> bin/mysql -u root < your_script_file
 
      * It is possible to re-create the grant tables completely
        after they have previously been created. You might want
-       to do this if you are just learning how to use GRANT and
-       REVOKE and have made so many modifications after running
-       mysql_install_db that you want to wipe out the tables and
-       start over.
+       to do this if you are just learning how to use CREATE
+       USER, GRANT, and REVOKE and have made so many
+       modifications after running mysql_install_db that you
+       want to wipe out the tables and start over.
        To re-create the grant tables, stop the server if it is
        running and remove the mysql database directory. Then run
        mysql_install_db again.
@@ -7204,7 +7220,7 @@ shell> tail host_name.log
        transactional tables (InnoDB, NDB), be sure that you have
        them configured the way you want before starting the
        server. If you are using InnoDB tables, see Section 14.3,
-       "InnoDB Configuration" for guidelines and Section 14.12,
+       "InnoDB Configuration" for guidelines and Section 14.11,
        "InnoDB Startup Options and System Variables" for option
        syntax.
        Although storage engines use default values for options
@@ -7394,6 +7410,7 @@ shell> bin/mysqlshow
 +--------------------+
 | information_schema |
 | mysql              |
+| performance_schema |
 | test               |
 +--------------------+
 
@@ -7411,15 +7428,23 @@ Database: mysql
 | db                        |
 | event                     |
 | func                      |
+| general_log               |
 | help_category             |
 | help_keyword              |
 | help_relation             |
 | help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| ndb_binlog_index          |
 | plugin                    |
 | proc                      |
 | procs_priv                |
 | proxies_priv              |
 | servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
 | tables_priv               |
 | time_zone                 |
 | time_zone_leap_second     |
@@ -7431,17 +7456,23 @@ Database: mysql
 
    Use the mysql program to select information from a table in
    the mysql database:
-shell> bin/mysql -e "SELECT User, Host FROM mysql.user" mysql
-+------+-----------+
-| User | Host      |
-+------+-----------+
-| root | localhost |
-+------+-----------+
+shell> bin/mysql -e "SELECT User, Host, plugin FROM mysql.user" mysql
++------+-----------+-----------------------+
+| User | Host      | plugin                |
++------+-----------+-----------------------+
+| root | localhost | mysql_native_password |
++------+-----------+-----------------------+
 
    At this point, your server is running and you can access it.
    To tighten security if you have not yet assigned passwords to
    the initial account or accounts, follow the instructions in
    Section 2.10.4, "Securing the Initial MySQL Accounts."
+
+   For more information about mysql, mysqladmin, and mysqlshow,
+   see Section 4.5.1, "mysql --- The MySQL Command-Line Tool,"
+   Section 4.5.2, "mysqladmin --- Client for Administering a
+   MySQL Server," and Section 4.5.6, "mysqlshow --- Display
+   Database, Table, and Column Information."
 
 2.10.4 Securing the Initial MySQL Accounts
 
@@ -7494,6 +7525,14 @@ shell> bin/mysql -e "SELECT User, Host FROM mysql.user" mysql
             specifying a host name of localhost for one of the
             accounts, or the actual host name or IP address for
             the other.
+
+          + The 'root'@'localhost' account also has a row in the
+            mysql.proxies_priv table that enables granting the
+            PROXY privilege for ''@'', that is, for all users
+            and all hosts. This enables root to set up proxy
+            users, as well as to delegate to other accounts the
+            authority to set up proxy users. See Section 6.3.9,
+            "Proxy Users."
 
    To display which accounts exist in the mysql.user table and
    check whether their passwords are empty, use the following
@@ -8412,11 +8451,12 @@ ALTER TABLE tbl_name FORCE;
 
      * Due to the temporal type changes described in the
        previous incompatible change item above, importing
-       pre-MySQL 5.6.4 tables that contain DATETIME and
-       TIMESTAMP types into MySQL 5.6.4 (or later) fails.
-       Importing a MySQL 5.5 table with these temporal types
-       into MySQL 5.6.4 (or later) is the mostly likely scenario
-       for this problem to occur.
+       pre-MySQL 5.6.4 tables (using ALTER TABLE ... IMPORT
+       TABLESPACE) that contain DATETIME and TIMESTAMP types
+       into MySQL 5.6.4 (or later) fails. Importing a MySQL 5.5
+       table with these temporal types into MySQL 5.6.4 (or
+       later) is the mostly likely scenario for this problem to
+       occur.
        The following procedures describe workarounds that use
        the original pre-MySQL 5.6.4 .frm file to recreate a
        table with a row structure that is compatible with 5.6.4
@@ -8730,6 +8770,16 @@ Data Types
        downgrade to a version older than 5.6.4, dump affected
        tables with mysqldump before downgrading, and reload the
        tables after downgrading.
+       The following query identifies tables and columns that
+       may be affected by this problem. Some of them are system
+       tables in the mysql database (such ascolumns_priv and
+       proxies_priv). This means that mysql is one of the
+       databases you must dump and reload, or server startup may
+       fail after downgrading.
+SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE DATA_TYPE IN ('TIME','DATETIME','TIMESTAMP')
+ORDER BY TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME;
 
 InnoDB
 
@@ -8815,7 +8865,7 @@ Index Incompatibilities
    In MySQL 5.6.3, the length limit for index prefix keys is
    increased from 767 bytes to 3072 bytes, for InnoDB tables
    using ROW_FORMAT=DYNAMIC or ROW_FORMAT=COMPRESSED. See
-   Section 14.6.7, "Limits on InnoDB Tables" for details. This
+   Section 14.5.7, "Limits on InnoDB Tables" for details. This
    change is also backported to MySQL 5.5.14. If you downgrade
    from one of these releases or higher, to an earlier release
    with a lower length limit, the index prefix keys could be
@@ -9144,7 +9194,7 @@ shell> mysqlimport db_name DUMPDIR/*.txt   # load data into tables
    Note that using this is insecure. See Section 6.1.2.1,
    "End-User Guidelines for Password Security."
    MYSQL_TCP_PORT The default TCP/IP port number.
-   MYSQL_TEST_LOGIN_FILE The name of the .mylogin.cnf login
+   MYSQL_TEST_LOGIN_FILE The name of the .mylogin.cnf login path
    file.
    MYSQL_UNIX_PORT The default Unix socket file name; used for
    connections to localhost.
@@ -9162,11 +9212,12 @@ shell> mysqlimport db_name DUMPDIR/*.txt   # load data into tables
    For information about the mysql history file, see Section
    4.5.1.3, "mysql Logging."
 
-   MYSQL_TEST_LOGIN_FILE is the path name of the login file (the
-   file created by mysql_config_editor). If not set, the default
-   value is %APPDATA%\MySQL\.mylogin.cnf directory on Windows
-   and $HOME/.mylogin.cnf on non-Windows systems. See Section
-   4.6.6, "mysql_config_editor --- MySQL Configuration Utility."
+   MYSQL_TEST_LOGIN_FILE is the path name of the login path file
+   (the file created by mysql_config_editor). If not set, the
+   default value is %APPDATA%\MySQL\.mylogin.cnf directory on
+   Windows and $HOME/.mylogin.cnf on non-Windows systems. See
+   Section 4.6.6, "mysql_config_editor --- MySQL Configuration
+   Utility."
 
    The UMASK and UMASK_DIR variables, despite their names, are
    used as modes, not masks:

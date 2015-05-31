@@ -38,8 +38,8 @@
    Yum guide.
    Warning
 
-   MySQL has a dependency on the libaio library. The
-   mysql_install_db and subsequent mysqld_safe steps will fail
+   MySQL has a dependency on the libaio library. Data directory
+   initialization and subsequent server startup steps will fail
    if this library is not installed locally. If necessary,
    install it using the appropriate package manager. For
    example, on Yum-based systems:
@@ -402,8 +402,14 @@ Additional Installation Information
 
 2.3.2 Choosing An Installation Package
 
-   For MySQL 5.6, there are installation package formats to
-   choose from when installing MySQL on Windows:
+   For MySQL 5.6, there are multiple installation package
+   formats to choose from when installing MySQL on Windows.
+   Note
+
+   Program Database (PDB) files (with file name extension pdb)
+   provide information for debugging your MySQL installation in
+   the event of a problem. These files are included in ZIP
+   Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
        mysql-installer-community-5.6.25.0.msi or
@@ -434,8 +440,9 @@ Additional Installation Information
        similar to mysql-5.6.25-win32.zip or
        mysql-5.6.25-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
-       the GUI. This package does not include an automated
-       installer, and must be manually installed and configured.
+       the GUI. It also contains PDB files. This package does
+       not include an automated installer, and must be manually
+       installed and configured.
 
    MySQL Installer is recommended for most users.
 
@@ -491,7 +498,7 @@ Installer package types
 
 
      * Full: Bundles all of the MySQL products (including the
-       MySQL server). The file' size is over 200MB, and its name
+       MySQL server). The file size is over 300MB, and its name
        has the form mysql-installer-community-VERSION.N.msi
        where VERSION is the MySQL Server version number such as
        5.6 and N is the package number, which begins at 0.
@@ -539,7 +546,7 @@ Installer editions
    A single host can not have both community and commercial
    editions of MySQL Server installed. For example, if you want
    both MySQL Server 5.5 and 5.6 installed on a single host,
-   then both must be the same edition.
+   both must be the same edition.
 
    MySQL Installer handles the initial configuration and set up
    of the applications. For example:
@@ -1375,11 +1382,15 @@ Computer running MySQL Notifier (Computer A)
             double-click the selection from the previous step.
          g. Check the Enabled radio button, and then click OK.
        Using the NETSH command:
+       Note
+       The "netsh firewall" command is deprecated as of
+       Microsoft Server 2008 and Vista, and replaced with "netsh
+       advfirewall firewall".
          a. Open a command prompt window with Administrative
             rights (you can right-click the Command Prompt icon
             and click Run as Administrator).
          b. Execute the following command:
-NETSH firewall set service RemoteAdmin enable
+NETSH advfirewall firewall set service RemoteAdmin enable
 
 
     2. Open the DCOM port TCP 135:
@@ -1387,7 +1398,8 @@ NETSH firewall set service RemoteAdmin enable
             rights (you can right-click the Command Prompt icon
             and click Run as Administrator) .
          b. Execute the following command:
-NETSH firewall add portopening protocol=tcp port=135 name=DCOM_TCP135
+NETSH advfirewall firewall add portopening protocol=tcp port=135 name=
+DCOM_TCP135
 
 
     3. Add the client application which contains the sink for
@@ -1420,8 +1432,8 @@ NETSH firewall add portopening protocol=tcp port=135 name=DCOM_TCP135
             and click Run as Administrator).
          b. Execute the following command, where you change
             "[YOUR_INSTALL_DIRECTORY]":
-NETSH firewall add allowedprogram program=[YOUR_INSTALL_DIRECTORY]\MyS
-qlNotifier.exe name=MySqlNotifier
+NETSH advfirewall firewall add allowedprogram program=[YOUR_INSTALL_DI
+RECTORY]\MySqlNotifier.exe name=MySqlNotifier
 
 
     4. If Computer B is either a member of WORKGROUP or is in a
@@ -1530,7 +1542,7 @@ Monitored Remote Computer (Computer B)
             rights (you can right-click the Command Prompt icon
             and click Run as Administrator).
          b. Execute the following command:
-NETSH firewall set service RemoteAdmin enable
+NETSH advfirewall firewall set service RemoteAdmin enable
 
 
     4. Now, be sure the user you are logging in with uses the
@@ -2372,6 +2384,7 @@ C:\> bin\mysqlshow
 +--------------------+
 | information_schema |
 | mysql              |
+| performance_schema |
 | test               |
 +--------------------+
 
@@ -2395,6 +2408,7 @@ Enter password: (enter root password here)
 +--------------------+
 | information_schema |
 | mysql              |
+| performance_schema |
 | test               |
 +--------------------+
 
@@ -2409,15 +2423,23 @@ Database: mysql
 | db                        |
 | event                     |
 | func                      |
+| general_log               |
 | help_category             |
 | help_keyword              |
 | help_relation             |
 | help_topic                |
+| innodb_index_stats        |
+| innodb_table_stats        |
+| ndb_binlog_index          |
 | plugin                    |
 | proc                      |
 | procs_priv                |
 | proxies_priv              |
 | servers                   |
+| slave_master_info         |
+| slave_relay_log_info      |
+| slave_worker_info         |
+| slow_log                  |
 | tables_priv               |
 | time_zone                 |
 | time_zone_leap_second     |
@@ -2429,17 +2451,17 @@ Database: mysql
 
    Use the mysql program to select information from a table in
    the mysql database:
-C:\> bin\mysql -e "SELECT User, Host FROM mysql.user" mysql
-+------+-----------+
-| User | Host      |
-+------+-----------+
-| root | localhost |
-+------+-----------+
+C:\> bin\mysql -e "SELECT User, Host, plugin FROM mysql.user" mysql
++------+-----------+-----------------------+
+| User | Host      | plugin                |
++------+-----------+-----------------------+
+| root | localhost | mysql_native_password |
++------+-----------+-----------------------+
 
-   For more information about mysqlshow and mysql, see Section
+   For more information about mysql and mysqlshow, see Section
+   4.5.1, "mysql --- The MySQL Command-Line Tool," and Section
    4.5.6, "mysqlshow --- Display Database, Table, and Column
-   Information," and Section 4.5.1, "mysql --- The MySQL
-   Command-Line Tool."
+   Information."
 
 2.3.8 Upgrading MySQL on Windows
 
