@@ -126,6 +126,7 @@ build-stamp:
 
 build-pic-stamp:
 	@echo "RULES.$@"
+	cd $(builddir) && $(MAKE) -C sql
 	cd $(builddir) && $(MAKE) -C scripts
 	cd $(builddir) && $(MAKE) -C libmysqld
 	touch $@
