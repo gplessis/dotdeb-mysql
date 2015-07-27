@@ -160,18 +160,18 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
        provided on a disk image (.dmg) that includes the main
        MySQL installation package file. Double-click the disk
        image to open it.
-       Figure 2.40 MySQL Package Installer: DMG Contents
+       Figure 2.41 MySQL Package Installer: DMG Contents
        MySQL Package Installer: DMG Contents
 
     2. Double-click the MySQL installer package. It will be
        named according to the version of MySQL you have
        downloaded. For example, if you have downloaded MySQL
-       server 5.6.25, double-click
-       mysql-5.6.25-osx-10.8-x86_64.pkg.
+       server 5.6.27, double-click
+       mysql-5.6.27-osx-10.8-x86_64.pkg.
 
     3. You will be presented with the opening installer dialog.
        Click Continue to begin installation.
-       Figure 2.41 MySQL Package Installer: Introduction
+       Figure 2.42 MySQL Package Installer: Introduction
        MySQL Package Installer: Introduction
 
     4. If you have downloaded the community version of MySQL,
@@ -187,13 +187,18 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
        Location to change the type of installation for either
        all users, only the user executing the Installer, or
        define a custom location.
-       Figure 2.42 MySQL Package Installer: Installation Type
+       Note
+       OS X 10.4 deprecated startup items in favor of launchd
+       daemons, and as of OS X 10.10 (Yosemite), startup items
+       do not function. For these reasons, launchd daemons are
+       preferred over startup items.
+       Figure 2.43 MySQL Package Installer: Installation Type
        MySQL Package Installer: Installation Type
-       Figure 2.43 MySQL Package Installer: Destination Select
+       Figure 2.44 MySQL Package Installer: Destination Select
        (Change Installation Location)
        MySQL Package Installer: Destination Select (Change
        Installation Location)
-       Figure 2.44 MySQL Package Installer: Customize
+       Figure 2.45 MySQL Package Installer: Customize
        MySQL Package Installer: Customize
 
     6. Click Install to begin the installation process.
@@ -202,7 +207,7 @@ alias mysqladmin /usr/local/mysql/bin/mysqladmin
        you will be shown an Install Succeeded message with a
        short summary. Now, Close the wizard and begin using the
        MySQL server.
-       Figure 2.45 MySQL Package Installer: Summary
+       Figure 2.46 MySQL Package Installer: Summary
        MySQL Package Installer: Summary
 
    For convenience, you may also want to install a launch daemon
@@ -261,8 +266,29 @@ shell> sudo chmod 644 /Library/LaunchDaemons/com.mysql.mysql.plist
 shell> sudo launchctl load -w /Library/LaunchDaemons/com.mysql.mysql.p
 list
 
-   The MySQL daemon is now running, and automatically starts
-   when your system is rebooted.
+   The MySQL daemon will automatically start because we used the
+   KeepAlive option, and it will automatically start when the
+   host is rebooted because we loaded the launch daemon.
+
+   Additional launchd related commands include:
+// Stop and uninstall (unload) the MySQL launch daemon
+shell> sudo launchctl unload -w /Library/LaunchDaemons/com.mysql.mysql
+.plist
+
+// Stop the service but keep it installed (MySQL will start after rebo
+ot)
+shell> sudo launchctl stop com.mysql.mysql
+
+// Start the service but don't install the launch daemon
+shell> sudo launchctl start com.mysql.mysql
+
+   Note
+
+   The "load" and "unload" commands either install or uninstall
+   the daemon, whereas the "start" and "stop" commands only
+   start or stop the daemon. Loading will also start the daemon
+   if the launchd file is configured with KeepAlive or RunAtLoad
+   enabled, and unloading also stops the daemon.
 
 2.4.4 Installing the MySQL Startup Item
 
@@ -283,7 +309,7 @@ list
        Previously, the OS X packages included separate
        MySQLStartupItem.pkg and MySQL.prefPane files. They have
        since been merged into the main package file.
-       Figure 2.46 MySQL Package Installer: DMG Contents
+       Figure 2.47 MySQL Package Installer: DMG Contents
        MySQL Package Installer: DMG Contents
 
     2. Go through the process of installing the MySQL server as
@@ -293,7 +319,7 @@ list
     3. Click Customize at the Installation Type step. The
        "Startup Item" option is listed there and enabled by
        default.
-       Figure 2.47 MySQL Installer on OS X: Customize
+       Figure 2.48 MySQL Installer on OS X: Customize
        MySQL Installer on OS X: Customize
 
     4. Complete the MySQL server installation process.
@@ -337,7 +363,7 @@ shell> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
        Previously, the OS X packages included separate
        MySQLStartupItem.pkg and MySQL.prefPane files. They have
        since been merged into the main package file.
-       Figure 2.48 MySQL Package Installer: DMG Contents
+       Figure 2.49 MySQL Package Installer: DMG Contents
        MySQL Package Installer: DMG Contents
 
     2. Go through the process of installing the MySQL server, as
@@ -347,7 +373,7 @@ shell> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
     3. Click Customize at the Installation Type step. The
        "Preference Pane" option is listed there and enabled by
        default.
-       Figure 2.49 MySQL Installer on OS X: Customize
+       Figure 2.50 MySQL Installer on OS X: Customize
        MySQL Installer on OS X: Customize
 
     4. Complete the MySQL server installation process.
@@ -365,7 +391,7 @@ shell> sudo /Library/StartupItems/MySQLCOM/MySQLCOM stop
    clicking the MySQL logo within the bottom section of the
    preference panes list.
 
-   Figure 2.50 MySQL Preference Pane: Location
+   Figure 2.51 MySQL Preference Pane: Location
    MySQL Preference Pane: Location
 
    The MySQL Preference Pane shows the current status of the
