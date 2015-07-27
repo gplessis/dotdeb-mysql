@@ -17,7 +17,7 @@
 
    MySQL compressed tar file binary distributions have names of
    the form mysql-VERSION-OS.tar.gz, where VERSION is a number
-   (for example, 5.6.25), and OS indicates the type of operating
+   (for example, 5.6.27), and OS indicates the type of operating
    system for which the distribution is intended (for example,
    pc-linux-i686 or winx64).
    Warning
@@ -51,7 +51,7 @@ shell> apt-cache search libaio # search for info
 shell> apt-get install libaio1 # install library
 
    If you run into problems and need to file a bug report,
-   please use the instructions in Section 1.7, "How to Report
+   please use the instructions in Section 1.6, "How to Report
    Bugs or Problems."
 
    On Unix, to install a compressed tar file binary
@@ -412,8 +412,8 @@ Additional Installation Information
    Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
-       mysql-installer-community-5.6.25.0.msi or
-       mysql-installer-commercial-5.6.25.0.msi, and utilizes
+       mysql-installer-community-5.6.27.0.msi or
+       mysql-installer-commercial-5.6.27.0.msi, and utilizes
        MSIs to automatically install MySQL server and other
        products. It will download and apply updates to itself,
        and for each of the installed products. It also
@@ -437,8 +437,8 @@ Additional Installation Information
        Microsoft Windows Using MySQL Installer."
 
      * The Noinstall Archive: This package has a file name
-       similar to mysql-5.6.25-win32.zip or
-       mysql-5.6.25-winx64.zip, and contains all the files found
+       similar to mysql-5.6.27-win32.zip or
+       mysql-5.6.27-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
        the GUI. It also contains PDB files. This package does
        not include an automated installer, and must be manually
@@ -455,19 +455,17 @@ Additional Installation Information
 
 2.3.3 Installing MySQL on Microsoft Windows Using MySQL Installer
 
-   MySQL Installer simplifies the installation and updating
-   process for your MySQL products on Microsoft Windows. From
-   this central application, you can view, remove, update, and
-   reconfigure the existing MySQL products on your system. MySQL
-   Installer can also install plugins, documentation, tutorials,
-   and example databases. The MySQL Installer is only available
-   for Microsoft Windows, and includes both GUI and command-line
+   MySQL Installer is an application that manages MySQL products
+   on Microsoft Windows. It installs, updates, removes, and
+   configures MySQL products, and remains on the system as its
+   own application. MySQL Installer is only available for
+   Microsoft Windows, and includes both GUI and command-line
    interfaces.
 
-   The supported products include:
+   The supported MySQL products include:
 
      * MySQL server (http://dev.mysql.com/doc/) (one or multiple
-       versions)
+       versions on the same system)
 
      * MySQL Workbench
 
@@ -494,6 +492,10 @@ Additional Installation Information
      * MySQL Installer is also installed and remains on the
        system as its own application
 
+     * The Enterprise edition installs the Enterprise versions
+       of the above products, and also includes MySQL Enterprise
+       Backup and MySQL Enterprise Firewall
+
 Installer package types
 
 
@@ -504,12 +506,16 @@ Installer package types
        5.6 and N is the package number, which begins at 0.
 
      * Web: Only contains the Installer and configuration files,
-       and it only downloads the MySQL products you choose to
+       and it downloads the MySQL products you choose to
        install. The size of this file is about 2MB; the name of
        the file has the form
        mysql-installer-community-web-VERSION.N.msi where VERSION
        is the MySQL Server version number such as 5.6 and N is
        the package number, which begins at 0.
+
+     * Updates: MySQL Installer can upgrade itself, so an
+       additional download is not requires to update MySQL
+       Installer.
 
 Installer editions
 
@@ -521,7 +527,8 @@ Installer editions
      * Commercial edition: Downloadable at either My Oracle
        Support (https://support.oracle.com/) (MOS) or
        https://edelivery.oracle.com/. It installs the commercial
-       version of all MySQL products, including Workbench SE/EE.
+       version of all MySQL products, including Workbench SE/EE,
+       MySQL Enterprise Backup, and MySQL Enterprise Firewall.
        It also integrates with your MOS account.
        Note
        Entering your MOS credentials is optional when installing
@@ -536,30 +543,34 @@ Installer editions
    MySQL Installer is compatible with pre-existing
    installations, and adds them to its list of installed
    components. While the standard MySQL Installer is bundled
-   with a specific version of MySQL Server, a single MySQL
+   with a specific version of MySQL server, a single MySQL
    Installer instance can install and manage multiple MySQL
-   Server versions. For example, a single MySQL Installer
+   server versions. For example, a single MySQL Installer
    instance can install (and update) versions 5.5, 5.6, and 5.7
-   on the host.
+   on the same host.
    Note
 
    A single host can not have both community and commercial
-   editions of MySQL Server installed. For example, if you want
-   both MySQL Server 5.5 and 5.6 installed on a single host,
+   editions of MySQL server installed. For example, if you want
+   both MySQL Server 5.6 and 5.7 installed on a single host,
    both must be the same edition.
 
    MySQL Installer handles the initial configuration and set up
    of the applications. For example:
 
-    1. It creates initial MySQL Server connections in MySQL
-       Workbench.
-
-    2. It creates the configuration file (my.ini) that is used
+    1. It creates the configuration file (my.ini) that is used
        to configure the MySQL Server. The values written to this
        file are influenced by choices you make during the
        installation process.
+       Note
+       Some definitions are host dependent. For example,
+       query_cache is enabled if the host has fewer than three
+       cores.
 
-    3. It can optionally import example databases.
+    2. It can optionally import example databases.
+
+    3. By default, a Windows service for the MySQL server is
+       added.
 
     4. It can optionally create MySQL Server user accounts with
        configurable permissions based on general roles, such as
@@ -570,11 +581,11 @@ Installer editions
        User accounts may also be added and configured in MySQL
        Workbench.
 
-    5. If the "Advanced Configuration" option is checked, then
-       the Logging Options are also configured. This includes
-       defining file paths for the error log, general log, slow
-       query log (including the configuration of seconds it
-       requires to execute a query), and the binary log.
+    5. Checking Show Advanced Options allows additional Logging
+       Options to be set. This includes defining custom file
+       paths for the error log, general log, slow query log
+       (including the configuration of seconds it requires to
+       execute a query), and the binary log.
 
    MySQL Installer can optionally check for updated components
    and download them for you.
@@ -586,37 +597,39 @@ Installer editions
    Installer to reload the MySQL Installer GUI.
    Note
 
-   Files that are generated by MySQL Installer grant full
-   permissions to the user that executes MySQL Installer,
-   including my.ini. This does not apply to files and
-   directories for specific products such as the MySQL Server
-   data directory in %ProgramData% that is owned by SYSTEM.
+   Full permissions are granted to the user executing MySQL
+   Installer to all generated files, such as my.ini. This does
+   not apply to files and directories for specific products,
+   such as the MySQL server data directory in %ProgramData% that
+   is owned by SYSTEM.
 
-   The initial execution of MySQL Installer requires you to
-   accept the license agreement before installing MySQL
-   products.
+   MySQL Installer requires you to accept the license agreement
+   before it will install MySQL products.
 
    Figure 2.7 MySQL Installer - License Agreement
    MySQL Installer - License Agreement
 
 Installing New Packages
 
-   Choose the appropriate Setup Type for your system. The
-   selected type determines which MySQL products are installed
-   on your system, or select Custom to manually choose
-   individual products.
+   Choose the appropriate Setup Type for your system. This type
+   determines which MySQL products are initially installed on
+   your system, or select Custom to manually choose the
+   products.
 
      * Developer: Install all products needed to develop
        applications with MySQL. This is the default option.
 
      * Server only: Only install the MySQL server.
 
-     * Client only: Only install the MySQL client products,
-       which does not include the MySQL server.
+     * Client only: Only install the MySQL client products, such
+       as MySQL Workbench. This does not include the MySQL
+       server.
 
-     * Full: Install all MySQL products.
+     * Full: Install all available MySQL products.
 
-     * Custom: Manually select the MySQL products to install.
+     * Custom: Manually select the MySQL products to install,
+       and optionally configure custom MySQL data and
+       installation paths.
        Note
        After the initial installation, you may use MySQL
        Installer to manually select MySQL products to install or
@@ -626,17 +639,23 @@ Installing New Packages
    Figure 2.8 MySQL Installer - Choosing a Setup Type
    MySQL Installer - Choosing a Setup Type
 
-   After you select a setup type, the MySQL Installer will check
-   your system for the necessary external requirements for each
-   of the selected MySQL products. MySQL Installer will either
-   download and install the missing components onto your system,
-   or point you to the download location and set Status to
-   "Manual".
+   MySQL Installer checks your system for the external
+   requirements (pre-requisites) required to install the
+   selected MySQL products. MySQL Installer can download and
+   install some prerequisites, but others require manual
+   intervention. Download and install all prerequisites that
+   have Status set to "Manual". Click Check to recheck if a
+   manual prerequisite was installed. After manually installing
+   those requirements, click Execute to download and install the
+   other prerequisites. Once finished, click Next to continue.
+
+   Figure 2.9 MySQL Installer - Check Requirements
+   MySQL Installer - Check Requirements
 
    The next window lists the MySQL products that are scheduled
-   to be installed:
+   for installation:
 
-   Figure 2.9 MySQL Installer - Installation Progress
+   Figure 2.10 MySQL Installer - Installation Progress
    MySQL Installer - Installation Progress
 
    As components are installed, their Status changes from a
@@ -653,14 +672,14 @@ Configuring MySQL Server
    Configuring the MySQL server begins with defining several
    Type and Networking options.
 
-   Figure 2.10 MySQL Installer - Configuration Overview
+   Figure 2.11 MySQL Installer - Configuration Overview
    MySQL Installer - Configuration Overview
 
    Server Configuration Type
 
    Choose the MySQL server configuration type that describes
    your setup. This setting defines the amount of system
-   resources that will be assigned to your MySQL server
+   resources (memory) that will be assigned to your MySQL server
    instance.
 
      * Developer: A machine that will host many other
@@ -673,14 +692,14 @@ Configuring MySQL Server
        configures MySQL to use a medium amount of memory.
 
      * Dedicated: A machine that is dedicated to running the
-       MySQL server. Because no other major applications are
-       running on the server, such as web servers, this option
-       configures MySQL to use all available memory.
+       MySQL server. Because no other major applications will
+       run on this server, such as a web server, this option
+       configures MySQL to use the majority of available memory.
 
    Connectivity
 
-   Connectivity options control how you will connect to MySQL.
-   Options include:
+   Connectivity options control how the connection to MySQL is
+   made. Options include:
 
      * TCP/IP: You may enable TCP/IP Networking here as
        otherwise only localhost connections are allowed. Also
@@ -695,13 +714,13 @@ Configuring MySQL Server
 
    Advanced Configuration
 
-   Checking the "Advanced Configuration" option provides
-   additional Logging Options to configure. This includes
-   defining file paths for the error log, general log, slow
-   query log (including the configuration of seconds it requires
-   to execute a query), and the binary log.
+   Check Show Advanced Options to set additional Logging
+   Options. This includes defining custom file paths for the
+   error log, general log, slow query log (including the
+   configuration of seconds it requires to execute a query), and
+   the binary log.
 
-   Figure 2.11 MySQL Installer - MySQL Server Configuration:
+   Figure 2.12 MySQL Installer - MySQL Server Configuration:
    Type and Networking
    MySQL Installer- MySQL Server Configuration: Type and
    Networking
@@ -722,12 +741,12 @@ Accounts and Roles
    If the MySQL Server is already installed, then you must also
    enter the Current Root Password.
 
-   Figure 2.12 MySQL Installer - MySQL Server Configuration:
+   Figure 2.13 MySQL Installer - MySQL Server Configuration:
    User Accounts and Roles
    MySQL Installer - MySQL Server Configuration: User Accounts
    and Roles
 
-   Figure 2.13 MySQL Installer - MySQL Server Configuration:
+   Figure 2.14 MySQL Installer - MySQL Server Configuration:
    User Accounts and Roles: Adding a User
    MySQL Installer - MySQL Server Configuration: User Accounts
    and Roles: Adding a User
@@ -735,20 +754,20 @@ Accounts and Roles
 Windows Service
 
    Next, configure the Windows Service details. This includes
-   the service name, whether the MySQL Server should be loaded
-   at startup, and how the Windows Service for MySQL Server is
+   the service name, whether the MySQL server should be loaded
+   at startup, and how the MySQL server Windows service is
    executed.
 
-   Figure 2.14 MySQL Installer - MySQL Server Configuration:
+   Figure 2.15 MySQL Installer - MySQL Server Configuration:
    Windows Service
    MySQL Installer - MySQL Server Configuration: Windows Service
    Note
 
    When configuring Run Windows Services as ... using a Custom
    User, the custom user must have privileges to log on to
-   Microsoft Windows as a service. And the Next button will be
-   disabled until this user is configured with these user
-   rights.
+   Microsoft Windows as a service. The Next button will be
+   disabled until this user is configured with the required
+   privileges.
 
    On Microsoft Windows 7, this is configured by loading the
    Start Menu, Control Panel, Administrative Tools, Local
@@ -762,7 +781,7 @@ Advanced Options
    Configuration option was checked. This section includes
    options that are related to the MySQL log files:
 
-   Figure 2.15 MySQL Installer - MySQL Server Configuration:
+   Figure 2.16 MySQL Installer - MySQL Server Configuration:
    Logging Options
    MySQL Installer - MySQL Server Configuration: Logging Options
 
@@ -771,7 +790,7 @@ Advanced Options
    Configuration page details the configuration steps that will
    be performed.
 
-   Figure 2.16 MySQL Installer - MySQL Server Configuration:
+   Figure 2.17 MySQL Installer - MySQL Server Configuration:
    Apply Server Configuration
    MySQL Installer - MySQL Server Configuration: Apply Server
    Configuration
@@ -789,7 +808,7 @@ Advanced Options
    dashboard where installed MySQL products are listed, and
    other MySQL Installer actions are available:
 
-   Figure 2.17 MySQL Installer - Main Dashboard
+   Figure 2.18 MySQL Installer - Main Dashboard
    MySQL Installer - Main Dashboard
 
 Adding MySQL Products
@@ -797,7 +816,7 @@ Adding MySQL Products
    Click Add to add new products. This loads the Select Products
    and Features page:
 
-   Figure 2.18 MySQL Installer - Select Products and Features
+   Figure 2.19 MySQL Installer - Select Products and Features
    MySQL Installer - Select Products and Features
 
    From here, choose the MySQL products you want to install from
@@ -807,37 +826,37 @@ Adding MySQL Products
    Optionally, click Edit to open the product and features
    search filter:
 
-   Figure 2.19 MySQL Installer - Select Products and Features
+   Figure 2.20 MySQL Installer - Select Products and Features
    Filter
    MySQL Installer - Select Products and Features Filter
 
    For example, you might choose to include Pre-Release products
    in your selections, such as a Beta product that has not yet
-   reached GA status.
-   Note
-
-   The ability to install Pre-Release versions of MySQL products
-   was added in MySQL Installer 1.4.0.
+   reached General Availability (GA) status.
 
    Select all of the MySQL products you want to install, then
-   click Next to continue, and then Execute to execute the
-   installation process to install all of the selected products.
+   click Next to continue using the defaults, or highlight a
+   selected product and click Advanced Options to optionally
+   alter options such as the MySQL server data and installation
+   paths. Click Execute to execute the installation process to
+   install all of the selected products.
 
 2.3.3.1.1 MySQL Product Catalog
 
    MySQL Installer stores a MySQL product catalog. The catalog
    can be updated either manually or automatically, and the
    catalog change history is also available.
-   Note
-
-   The MySQL product catalog was added in MySQL Installer 1.4.0.
 
    Manual updates
 
    You can update the MySQL product catalog at any time by
    clicking Catalog on the Installer dashboard.
+   Note
 
-   Figure 2.20 MySQL Installer - Open the MySQL Product Catalog
+   This also checks for a newer MySQL Installer version, and
+   prompts for an update if one is present.
+
+   Figure 2.21 MySQL Installer - Open the MySQL Product Catalog
    MySQL Installer - Open the MySQL Product Catalog
 
    From there, click Execute to update the product catalog.
@@ -852,7 +871,7 @@ Adding MySQL Products
    The next window configures the Automatic Catalog Update.
    Enable or disable this feature, and also set the hour.
 
-   Figure 2.21 MySQL Installer - Configure the Catalog Scheduler
+   Figure 2.22 MySQL Installer - Configure the Catalog Scheduler
    MySQL Installer - Configure the Catalog Scheduler
 
    This option uses the Windows Task Scheduler to schedule a
@@ -866,7 +885,7 @@ Adding MySQL Products
    checkbox), click Next/Execute, and then view the change
    history.
 
-   Figure 2.22 MySQL Installer - Catalog Change History
+   Figure 2.23 MySQL Installer - Catalog Change History
    MySQL Installer - Catalog Change History
 
 2.3.3.1.2 Remove MySQL Products
@@ -882,10 +901,10 @@ Adding MySQL Products
    To select all MySQL products, click the [ ] checkbox to the
    left of the Product label.
 
-   Figure 2.23 MySQL Installer - Removing Products: Select
+   Figure 2.24 MySQL Installer - Removing Products: Select
    MySQL Installer - Removing Products: Select
 
-   Figure 2.24 MySQL Installer - Removing Products: Executed
+   Figure 2.25 MySQL Installer - Removing Products: Executed
    MySQL Installer - Removing Products: Executed
 
 2.3.3.1.3 Alter MySQL Products
@@ -899,7 +918,7 @@ Upgrade
    with an arrow icon ( [wb-icon-upgrade-arrow.png] ) next to
    their version number.
 
-   Figure 2.25 MySQL Installer - Upgrade a MySQL Product
+   Figure 2.26 MySQL Installer - Upgrade a MySQL Product
    MySQL Installer - Upgrade a MySQL Product
    Note
 
@@ -913,7 +932,7 @@ Upgrade
    indicates that MySQL Workbench 6.2.4 can be upgraded version
    6.3.1 or 6.2.5, and MySQL server from 5.5.41 to 5.5.42.
 
-   Figure 2.26 MySQL Installer - Select Products To Upgrade
+   Figure 2.27 MySQL Installer - Select Products To Upgrade
    MySQL Installer - Select Products To Upgrade
 
    If multiple upgrade versions are available (such as our MySQL
@@ -927,14 +946,14 @@ Upgrade
    After selecting (checking) the products and versions to
    upgrade, click Next to begin the upgrade process.
 
-   Figure 2.27 MySQL Installer - Apply Updates
+   Figure 2.28 MySQL Installer - Apply Updates
    MySQL Installer - Apply Updates
 
    A MySQL server upgrade will also check and upgrade the
    server's database. Although optional, this step is
    recommended.
 
-   Figure 2.28 MySQL Installer - Check and Upgrade Database
+   Figure 2.29 MySQL Installer - Check and Upgrade Database
    MySQL Installer - Check and Upgrade Database
 
    Upon completion, your upgraded products will be upgraded and
@@ -952,13 +971,13 @@ Reconfigure
    column on the main dashboard for the MySQL product that you
    want to reconfigure.
 
-   Figure 2.29 MySQL Installer - Reconfigure a MySQL Product
+   Figure 2.30 MySQL Installer - Reconfigure a MySQL Product
    MySQL Installer - Reconfigure a MySQL Product
 
    In the case of the MySQL server, this opens the familiar
    configuration wizard.
 
-   Figure 2.30 MySQL Installer - Reconfiguration Wizard
+   Figure 2.31 MySQL Installer - Reconfiguration Wizard
    MySQL Installer - Reconfiguration Wizard
 
 Modify
@@ -970,7 +989,7 @@ Modify
    The modify the features of a product, click Modify on the
    main dashboard.
 
-   Figure 2.31 MySQL Installer - Modify Product Features
+   Figure 2.32 MySQL Installer - Modify Product Features
    MySQL Installer - Modify Product Features
 
    Click Execute to execute the modification request.
@@ -990,7 +1009,7 @@ Modify
    on Command Prompt and choose Run as administrator. And from
    the command-line, optionally change the directory to where
    MySQLInstallerConsole is located:
-C:\> cd "C:\Program Files (x86)\MySQL\MySQL Installer"
+C:\> cd "C:\Program Files (x86)\MySQL\MySQL Installer for Windows"
 C:\> MySQLInstallerConsole.exe help
 
 C:\Program Files (x86)\MySQL\MySQL Installer for Windows>MySQLInstalle
@@ -1016,6 +1035,8 @@ Upgrade   - Upgrades one or more of your installed programs.
      * configure [product1]:[setting]=[value];
        [product2]:[setting]=[value]; [...]
        Configure one or more MySQL products on your system.
+       Multiple setting=value pairs can be configured for each
+       product.
        Switches include:
 
           + -showsettings : Displays the available options for
@@ -1233,7 +1254,7 @@ C:\> MySQLInstallerConsole update
    The Service Instance menu is the main MySQL Notifier window,
    and enables you to Stop, Start, and Restart the MySQL Server.
 
-   Figure 2.32 MySQL Notifier Service Instance menu
+   Figure 2.33 MySQL Notifier Service Instance menu
    MySQL Notifier Service Instance menu
 
    The Actions menu includes several links to external
@@ -1250,7 +1271,7 @@ C:\> MySQLInstallerConsole update
    The Refresh Status feature is available since MySQL Notifier
    1.1.0.
 
-   Figure 2.33 MySQL Notifier Actions menu
+   Figure 2.34 MySQL Notifier Actions menu
    MySQL Notifier Actions menu
 
    The Actions, Options menu configures MySQL Notifier and
@@ -1285,19 +1306,19 @@ C:\> MySQLInstallerConsole update
        balloon notification from the taskbar when a monitored
        service changes its status.
 
-   Figure 2.34 MySQL Notifier Options menu
+   Figure 2.35 MySQL Notifier Options menu
    MySQL Notifier Options menu
 
    The Actions, Manage Monitored Items menu enables you to
    configure the monitored services and MySQL instances. First,
    with the Services tab open:
 
-   Figure 2.35 MySQL Notifier Manage Services menu
+   Figure 2.36 MySQL Notifier Manage Services menu
    MySQL Notifier Manage Services menu
 
    The Instances tab is similar:
 
-   Figure 2.36 MySQL Notifier Manage Instances menu
+   Figure 2.37 MySQL Notifier Manage Instances menu
    MySQL Notifier Manage Instances menu
 
    Adding a service or instance (after clicking Add in the
@@ -1307,12 +1328,12 @@ C:\> MySQLInstallerConsole update
    instance by clicking service name from the list, then OK to
    accept. Multiple services and instances may be selected.
 
-   Figure 2.37 MySQL Notifier Adding new services
+   Figure 2.38 MySQL Notifier Adding new services
    MySQL Notifier Adding new services
 
    And instances:
 
-   Figure 2.38 MySQL Notifier Adding new instances
+   Figure 2.39 MySQL Notifier Adding new instances
    MySQL Notifier Adding new instances
    Note
 
@@ -1346,7 +1367,7 @@ C:\> MySQLInstallerConsole update
    settings must be properly configured for the communication to
    function properly.
 
-   Figure 2.39 MySQL Notifier Distributed Component Object Model
+   Figure 2.40 MySQL Notifier Distributed Component Object Model
    (DCOM)
    MySQL Notifier Distributed Component Object Model (DCOM)
 
@@ -1841,7 +1862,7 @@ InnoDB: foreign key constraint system tables created
    something like this, which indicates that the server is ready
    to service client connections:
 mysqld: ready for connections
-Version: '5.6.25'  socket: ''  port: 3306
+Version: '5.6.27'  socket: ''  port: 3306
 
    The server continues to write to the console any further
    diagnostic output it produces. You can open a new console
