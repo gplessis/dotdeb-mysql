@@ -7958,7 +7958,7 @@ alter_list_item:
             lex->create_info.default_table_charset= $5;
             lex->create_info.used_fields|= (HA_CREATE_USED_CHARSET |
               HA_CREATE_USED_DEFAULT_CHARSET);
-            lex->alter_info.flags|= Alter_info::ALTER_CONVERT;
+            lex->alter_info.flags|= Alter_info::ALTER_OPTIONS;
           }
         | create_table_options_space_separated
           {
@@ -13454,7 +13454,9 @@ literal:
                                     str ? str->length() : 0,
                                     $1);
             if (!item_str ||
-                !item_str->check_well_formed_result(&item_str->str_value, TRUE))
+                !item_str->check_well_formed_result(&item_str->str_value,
+                                                    true, //send error
+                                                    true))  //truncate
             {
               MYSQL_YYABORT;
             }
@@ -13483,7 +13485,9 @@ literal:
                                     str ? str->length() : 0,
                                     $1);
             if (!item_str ||
-                !item_str->check_well_formed_result(&item_str->str_value, TRUE))
+                !item_str->check_well_formed_result(&item_str->str_value,
+                                                    true, //send error
+                                                    true)) //truncate
             {
               MYSQL_YYABORT;
             }

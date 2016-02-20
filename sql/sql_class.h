@@ -3001,6 +3001,7 @@ public:
   {
     CE_NONE= 0,
     CE_FLUSH_ERROR,
+    CE_SYNC_ERROR,
     CE_COMMIT_ERROR,
     CE_ERROR_COUNT
   } commit_error;
@@ -4938,7 +4939,7 @@ class user_var_entry
     @retval        false on success
     @retval        true on memory allocation error
   */
-  bool store(void *from, uint length, Item_result type);
+  bool store(const void *from, uint length, Item_result type);
 
 public:
   user_var_entry() {}                         /* Remove gcc warning */
@@ -4961,7 +4962,7 @@ public:
     @retval        false on success
     @retval        true on memory allocation error
   */
-  bool store(void *from, uint length, Item_result type,
+  bool store(const void *from, uint length, Item_result type,
              const CHARSET_INFO *cs, Derivation dv, bool unsigned_arg);
   /**
     Set type of to the given value.
@@ -5363,5 +5364,21 @@ inline bool add_group_to_list(THD *thd, Item *item, bool asc)
 }
 
 #endif /* MYSQL_SERVER */
+
+/**
+  Create a temporary file.
+
+  @details
+  The temporary file is created in a location specified by the parameter
+  path. if path is null, then it will be created on the location given
+  by the mysql server configuration (--tmpdir option).  The caller
+  does not need to delete the file, it will be deleted automatically.
+
+  @param path	location for creating temporary file
+  @param prefix	prefix for temporary file name
+  @retval -1	error
+  @retval >= 0	a file handle that can be passed to dup or my_close
+*/
+int mysql_tmpfile_path(const char* path, const char* prefix);
 
 #endif /* SQL_CLASS_INCLUDED */
