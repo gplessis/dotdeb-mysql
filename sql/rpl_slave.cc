@@ -201,6 +201,7 @@ static int process_io_create_file(Master_info* mi, Create_file_log_event* cev);
 static bool wait_for_relay_log_space(Relay_log_info* rli);
 static inline bool io_slave_killed(THD* thd,Master_info* mi);
 static inline bool sql_slave_killed(THD* thd,Relay_log_info* rli);
+static inline bool is_autocommit_off_and_infotables(THD* thd);
 static int init_slave_thread(THD* thd, SLAVE_THD_TYPE thd_type);
 static void print_slave_skip_errors(void);
 static int safe_connect(THD* thd, MYSQL* mysql, Master_info* mi);
@@ -697,8 +698,11 @@ int init_recovery(Master_info* mi, const char** errmsg)
                                                rli->get_group_master_log_pos()));
     mi->set_master_log_name(rli->get_group_master_log_name());
 
-    sql_print_warning("Recovery from master pos %ld and file %s.",
-                      (ulong) mi->get_master_log_pos(), mi->get_master_log_name());
+    sql_print_warning("Recovery from master pos %ld and file %s. "
+                      "Previous relay log pos and relay log file had "
+                      "been set to %lld, %s respectively.",
+                      (ulong) mi->get_master_log_pos(), mi->get_master_log_name(),
+                      rli->get_group_relay_log_pos(), rli->get_group_relay_log_name());
 
     rli->set_group_relay_log_name(rli->relay_log.get_log_fname());
     rli->set_event_relay_log_name(rli->relay_log.get_log_fname());
@@ -736,14 +740,14 @@ int global_init_info(Master_info* mi, bool ignore_if_no_info, int thread_mask)
     transaction start to avoid table access deadlocks when START SLAVE
     is executed after RESET SLAVE.
   */
-  if (thd && thd->in_multi_stmt_transaction_mode() &&
-      (opt_mi_repository_id == INFO_REPOSITORY_TABLE ||
-       opt_rli_repository_id == INFO_REPOSITORY_TABLE))
+  if (is_autocommit_off_and_infotables(thd))
+  {
     if (trans_begin(thd))
     {
       init_error= 1;
       goto end;
     }
+  }
 
   /*
     This takes care of the startup dependency between the master_info
@@ -772,15 +776,15 @@ int global_init_info(Master_info* mi, bool ignore_if_no_info, int thread_mask)
       init_error= 1;
   }
 
+  DBUG_EXECUTE_IF("enable_mts_worker_failure_init",
+                  {DBUG_SET("+d,mts_worker_thread_init_fails");});
 end:
   /*
     When info tables are used and autocommit= 0 we force transaction
     commit to avoid table access deadlocks when START SLAVE is executed
     after RESET SLAVE.
   */
-  if (thd && thd->in_multi_stmt_transaction_mode() &&
-      (opt_mi_repository_id == INFO_REPOSITORY_TABLE ||
-       opt_rli_repository_id == INFO_REPOSITORY_TABLE))
+  if (is_autocommit_off_and_infotables(thd))
     if (trans_commit(thd))
       init_error= 1;
 
@@ -1492,6 +1496,24 @@ void close_active_mi()
     active_mi= 0;
   }
   mysql_mutex_unlock(&LOCK_active_mi);
+}
+
+/**
+   Check if multi-statement transaction mode and master and slave info
+   repositories are set to table.
+
+   @param THD    THD object
+
+   @retval true  Success
+   @retval false Failure
+*/
+static bool is_autocommit_off_and_infotables(THD* thd)
+{
+  DBUG_ENTER("is_autocommit_off_and_infotables");
+  DBUG_RETURN((thd && thd->in_multi_stmt_transaction_mode() &&
+               (opt_mi_repository_id == INFO_REPOSITORY_TABLE ||
+                opt_rli_repository_id == INFO_REPOSITORY_TABLE))?
+              true : false);
 }
 
 static bool io_slave_killed(THD* thd, Master_info* mi)
@@ -3214,9 +3236,7 @@ void set_slave_thread_options(THD* thd)
     info tables updates which do not commit, like Rotate, Stop and
     skipped events handling.
   */
-  if ((thd->variables.option_bits & OPTION_NOT_AUTOCOMMIT) &&
-      (opt_mi_repository_id == INFO_REPOSITORY_TABLE ||
-       opt_rli_repository_id == INFO_REPOSITORY_TABLE))
+  if (is_autocommit_off_and_infotables(thd))
   {
     thd->variables.option_bits|= OPTION_AUTOCOMMIT;
     thd->variables.option_bits&= ~OPTION_NOT_AUTOCOMMIT;
@@ -4351,6 +4371,12 @@ static int exec_relay_log_event(THD* thd, Relay_log_info* rli)
         if (rli->trans_retries < slave_trans_retries)
         {
           /*
+            The transactions has to be rolled back before global_init_info is
+            called. Because global_init_info will starts a new transaction if
+            master_info_repository is TABLE.
+          */
+          rli->cleanup_context(thd, 1);
+          /*
              We need to figure out if there is a test case that covers
              this part. \Alfranio.
           */
@@ -4365,7 +4391,6 @@ static int exec_relay_log_event(THD* thd, Relay_log_info* rli)
           else
           {
             exec_res= SLAVE_APPLY_EVENT_AND_UPDATE_POS_OK;
-            rli->cleanup_context(thd, 1);
             /* chance for concurrent connection to get more locks */
             slave_sleep(thd, min<ulong>(rli->trans_retries, MAX_SLAVE_RETRY_PAUSE),
                         sql_slave_killed, rli);
@@ -4468,6 +4493,10 @@ static int try_to_reconnect(THD *thd, MYSQL *mysql, Master_info *mi,
   thd->clear_active_vio();
 #endif
   end_server(mysql);
+  DBUG_EXECUTE_IF("simulate_no_master_reconnect",
+                   {
+                     return 1;
+                   });
   if ((*retry_count)++)
   {
     if (*retry_count > mi->retry_count)
@@ -5179,6 +5208,7 @@ int mts_recovery_groups(Relay_log_info *rli)
   LOG_INFO linfo;
   my_off_t offset= 0;
   MY_BITMAP *groups= &rli->recovery_groups;
+  THD *thd= current_thd;
 
   DBUG_ENTER("mts_recovery_groups");
 
@@ -5214,6 +5244,20 @@ int mts_recovery_groups(Relay_log_info *rli)
                         rli->recovery_parallel_workers,
                         rli->recovery_parallel_workers);
 
+  /*
+    When info tables are used and autocommit= 0 we force a new
+    transaction start to avoid table access deadlocks when START SLAVE
+    is executed after STOP SLAVE with MTS enabled.
+  */
+  if (is_autocommit_off_and_infotables(thd))
+  {
+    if (trans_begin(thd))
+    {
+      error= TRUE;
+      goto err;
+    }
+  }
+
   for (uint id= 0; id < rli->recovery_parallel_workers; id++)
   {
     Slave_worker *worker=
@@ -5221,6 +5265,8 @@ int mts_recovery_groups(Relay_log_info *rli)
 
     if (!worker)
     {
+      if (is_autocommit_off_and_infotables(thd))
+        trans_rollback(thd);
       error= TRUE;
       goto err;
     }
@@ -5247,6 +5293,20 @@ int mts_recovery_groups(Relay_log_info *rli)
         checkpoint.
       */
       delete worker;
+    }
+  }
+
+  /*
+    When info tables are used and autocommit= 0 we force transaction
+    commit to avoid table access deadlocks when START SLAVE is executed
+    after STOP SLAVE with MTS enabled.
+  */
+  if (is_autocommit_off_and_infotables(thd))
+  {
+    if (trans_commit(thd))
+    {
+      error= TRUE;
+      goto err;
     }
   }
 
@@ -6682,6 +6742,7 @@ static int queue_event(Master_info* mi,const char* buf, ulong event_len)
   char *save_buf= NULL; // needed for checksumming the fake Rotate event
   char rot_buf[LOG_EVENT_HEADER_LEN + ROTATE_HEADER_LEN + FN_REFLEN];
   Gtid gtid= { 0, 0 };
+  Gtid old_retrieved_gtid= { 0, 0 };
   Log_event_type event_type= (Log_event_type)buf[EVENT_TYPE_OFFSET];
 
   DBUG_ASSERT(checksum_alg == BINLOG_CHECKSUM_ALG_OFF || 
@@ -7109,29 +7170,58 @@ static int queue_event(Master_info* mi,const char* buf, ulong event_len)
   }
   else
   {
+    DBUG_EXECUTE_IF("flush_after_reading_gtid_event",
+                    if (event_type == GTID_LOG_EVENT && gtid.gno == 4)
+                      DBUG_SET("+d,set_max_size_zero");
+                   );
+    DBUG_EXECUTE_IF("set_append_buffer_error",
+                    if (event_type == GTID_LOG_EVENT && gtid.gno == 4)
+                      DBUG_SET("+d,simulate_append_buffer_error");
+                   );
+    /*
+      Add the GTID to the retrieved set before actually appending it to relay
+      log. This will ensure that if a rotation happens at this point of time the
+      new GTID will be reflected as part of Previous_Gtid set and
+      Retrieved_Gtid_Set will not have any gaps.
+    */
+    if (event_type == GTID_LOG_EVENT)
+    {
+      global_sid_lock->rdlock();
+      old_retrieved_gtid= *(mi->rli->get_last_retrieved_gtid());
+      int ret= rli->add_logged_gtid(gtid.sidno, gtid.gno);
+      if (!ret)
+        rli->set_last_retrieved_gtid(gtid);
+      global_sid_lock->unlock();
+      if (ret != 0)
+      {
+        mysql_mutex_unlock(log_lock);
+        goto err;
+      }
+    }
     /* write the event to the relay log */
-    if (likely(rli->relay_log.append_buffer(buf, event_len, mi) == 0))
+    if (!DBUG_EVALUATE_IF("simulate_append_buffer_error", 1, 0) &&
+       likely(rli->relay_log.append_buffer(buf, event_len, mi) == 0))
     {
       mi->set_master_log_pos(mi->get_master_log_pos() + inc_pos);
       DBUG_PRINT("info", ("master_log_pos: %lu", (ulong) mi->get_master_log_pos()));
       rli->relay_log.harvest_bytes_written(&rli->log_space_total);
-
-      if (event_type == GTID_LOG_EVENT)
-      {
-        global_sid_lock->rdlock();
-        int ret= rli->add_logged_gtid(gtid.sidno, gtid.gno);
-        if (!ret)
-          rli->set_last_retrieved_gtid(gtid);
-        global_sid_lock->unlock();
-        if (ret != 0)
-        {
-          mysql_mutex_unlock(log_lock);
-          goto err;
-        }
-      }
     }
     else
     {
+      if (event_type == GTID_LOG_EVENT)
+      {
+        global_sid_lock->rdlock();
+        Gtid_set * retrieved_set= (const_cast<Gtid_set *>(mi->rli->get_gtid_set()));
+        if (retrieved_set->_remove_gtid(gtid) != RETURN_STATUS_OK)
+        {
+          global_sid_lock->unlock();
+          mysql_mutex_unlock(log_lock);
+          goto err;
+        }
+        if (!old_retrieved_gtid.empty())
+          rli->set_last_retrieved_gtid(old_retrieved_gtid);
+        global_sid_lock->unlock();
+      }
       error= ER_SLAVE_RELAY_LOG_WRITE_FAILURE;
     }
     rli->ign_master_log_name_end[0]= 0; // last event is not ignored

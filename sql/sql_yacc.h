@@ -1,10 +1,8 @@
+/* A Bison parser, made by GNU Bison 2.7.  */
 
-/* A Bison parser, made by GNU Bison 2.4.1.  */
-
-/* Skeleton interface for Bison's Yacc-like parsers in C
+/* Bison interface for Yacc-like parsers in C
    
-      Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+      Copyright (C) 1984, 1989-1990, 2000-2012 Free Software Foundation, Inc.
    
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -32,6 +30,15 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+#ifndef YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_17604023_1452826313_79_DIST_GPL_SQL_SQL_YACC_H_INCLUDED
+# define YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_17604023_1452826313_79_DIST_GPL_SQL_SQL_YACC_H_INCLUDED
+/* Enabling traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int MYSQLdebug;
+#endif
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -1281,13 +1288,11 @@
 
 
 
-
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
 {
-
-/* Line 1676 of yacc.c  */
-#line 968 "/export/home/pb2/build/sb_0-15908920-1436909309.31/mysql-5.6.26-release-export-8213452_gpl/sql/sql_yacc.yy"
+/* Line 2058 of yacc.c  */
+#line 968 "/export/home/pb2/build/sb_0-17604023-1452826313.79/mysql-5.6.29-release-export-8918798_gpl/sql/sql_yacc.yy"
 
   int  num;
   ulong ulong_num;
@@ -1346,9 +1351,8 @@ typedef union YYSTYPE
   bool is_not_empty;
 
 
-
-/* Line 1676 of yacc.c  */
-#line 1352 "/export/home/pb2/build/sb_0-15908920-1436909309.31/dist_GPL/sql/sql_yacc.h"
+/* Line 2058 of yacc.c  */
+#line 1356 "/export/home/pb2/build/sb_0-17604023-1452826313.79/dist_GPL/sql/sql_yacc.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -1356,5 +1360,18 @@ typedef union YYSTYPE
 #endif
 
 
+#ifdef YYPARSE_PARAM
+#if defined __STDC__ || defined __cplusplus
+int MYSQLparse (void *YYPARSE_PARAM);
+#else
+int MYSQLparse ();
+#endif
+#else /* ! YYPARSE_PARAM */
+#if defined __STDC__ || defined __cplusplus
+int MYSQLparse (class THD *YYTHD);
+#else
+int MYSQLparse ();
+#endif
+#endif /* ! YYPARSE_PARAM */
 
-
+#endif /* !YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_17604023_1452826313_79_DIST_GPL_SQL_SQL_YACC_H_INCLUDED  */

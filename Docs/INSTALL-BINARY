@@ -17,7 +17,7 @@
 
    MySQL compressed tar file binary distributions have names of
    the form mysql-VERSION-OS.tar.gz, where VERSION is a number
-   (for example, 5.6.27), and OS indicates the type of operating
+   (for example, 5.6.30), and OS indicates the type of operating
    system for which the distribution is intended (for example,
    pc-linux-i686 or winx64).
    Warning
@@ -81,7 +81,7 @@ shell> apt-get install libaio1 # install library
    To install and use a MySQL binary distribution, the command
    sequence looks like this:
 shell> groupadd mysql
-shell> useradd -r -g mysql mysql
+shell> useradd -r -g mysql -s /bin/false mysql
 shell> cd /usr/local
 shell> tar zxvf /path/to/mysql-VERSION-OS.tar.gz
 shell> ln -s full-path-to-mysql-VERSION-OS mysql
@@ -128,15 +128,15 @@ Create a mysql User and Group
    may differ slightly on different versions of Unix, or they
    may have different names such as adduser and addgroup.
 shell> groupadd mysql
-shell> useradd -r -g mysql mysql
+shell> useradd -r -g mysql -s /bin/false mysql
 
    Note
 
    Because the user is required only for ownership purposes, not
-   login purposes, the useradd command uses the -r option to
-   create a user that does not have login permissions to your
-   server host. Omit this option to permit logins for the user,
-   or if your useradd does not support the option.
+   login purposes, the useradd command uses the -r and -s
+   /bin/false options to create a user that does not have login
+   permissions to your server host. Omit these options if your
+   useradd does not support them.
 
 Obtain and Unpack the Distribution
 
@@ -265,7 +265,7 @@ Additional Installation Information
    executed using a user with Administrator privileges.
 
    For a list of limitations on the use of MySQL on the Windows
-   platform, see Section D.10.6, "Windows Platform Limitations."
+   platform, see Section C.10.6, "Windows Platform Limitations."
 
    In addition to the MySQL Server package, you may need or want
    additional components to use MySQL with your application or
@@ -412,8 +412,8 @@ Additional Installation Information
    Archive distributions (but not MSI distributions) of MySQL.
 
      * MySQL Installer: This package has a file name similar to
-       mysql-installer-community-5.6.27.0.msi or
-       mysql-installer-commercial-5.6.27.0.msi, and utilizes
+       mysql-installer-community-5.6.30.0.msi or
+       mysql-installer-commercial-5.6.30.0.msi, and utilizes
        MSIs to automatically install MySQL server and other
        products. It will download and apply updates to itself,
        and for each of the installed products. It also
@@ -437,8 +437,8 @@ Additional Installation Information
        Microsoft Windows Using MySQL Installer."
 
      * The Noinstall Archive: This package has a file name
-       similar to mysql-5.6.27-win32.zip or
-       mysql-5.6.27-winx64.zip, and contains all the files found
+       similar to mysql-5.6.30-win32.zip or
+       mysql-5.6.30-winx64.zip, and contains all the files found
        in the Complete install package, with the exception of
        the GUI. It also contains PDB files. This package does
        not include an automated installer, and must be manually
@@ -464,7 +464,7 @@ Additional Installation Information
 
    The supported MySQL products include:
 
-     * MySQL server (http://dev.mysql.com/doc/) (one or multiple
+     * MySQL Server (http://dev.mysql.com/doc/) (one or multiple
        versions on the same system)
 
      * MySQL Workbench
@@ -490,7 +490,9 @@ Additional Installation Information
      * MySQL Documentation
 
      * MySQL Installer is also installed and remains on the
-       system as its own application
+       system as its own application, that is used to install
+       additional MySQL products, and also to update and
+       configure existing MySQL products
 
      * The Enterprise edition installs the Enterprise versions
        of the above products, and also includes MySQL Enterprise
@@ -503,14 +505,14 @@ Installer package types
        MySQL server). The file size is over 300MB, and its name
        has the form mysql-installer-community-VERSION.N.msi
        where VERSION is the MySQL Server version number such as
-       5.6 and N is the package number, which begins at 0.
+       5.7 and N is the package number, which begins at 0.
 
      * Web: Only contains the Installer and configuration files,
        and it downloads the MySQL products you choose to
        install. The size of this file is about 2MB; the name of
        the file has the form
        mysql-installer-community-web-VERSION.N.msi where VERSION
-       is the MySQL Server version number such as 5.6 and N is
+       is the MySQL Server version number such as 5.7 and N is
        the package number, which begins at 0.
 
      * Updates: MySQL Installer can upgrade itself, so an
@@ -845,16 +847,17 @@ Adding MySQL Products
 
    MySQL Installer stores a MySQL product catalog. The catalog
    can be updated either manually or automatically, and the
-   catalog change history is also available.
+   catalog change history is also available. The automatic
+   update is enabled by default.
+   Note
+
+   The product catalog update also checks for a newer version of
+   MySQL Installer, and prompts for an update if one is present.
 
    Manual updates
 
    You can update the MySQL product catalog at any time by
    clicking Catalog on the Installer dashboard.
-   Note
-
-   This also checks for a newer MySQL Installer version, and
-   prompts for an update if one is present.
 
    Figure 2.21 MySQL Installer - Open the MySQL Product Catalog
    MySQL Installer - Open the MySQL Product Catalog
@@ -863,10 +866,10 @@ Adding MySQL Products
 
    Automatic updates
 
-   You can configure MySQL Installer to automatically update the
-   MySQL product catalog once per day. To enable this feature
-   and set the update time, click the wrench icon on the
-   Installer dashboard.
+   MySQL Installer can automatically update the MySQL product
+   catalog. By default, this feature is enabled to execute each
+   day at 12:00 AM. To configure this feature, click the wrench
+   icon on the Installer dashboard.
 
    The next window configures the Automatic Catalog Update.
    Enable or disable this feature, and also set the hour.
@@ -974,11 +977,10 @@ Reconfigure
    Figure 2.30 MySQL Installer - Reconfigure a MySQL Product
    MySQL Installer - Reconfigure a MySQL Product
 
-   In the case of the MySQL server, this opens the familiar
-   configuration wizard.
-
-   Figure 2.31 MySQL Installer - Reconfiguration Wizard
-   MySQL Installer - Reconfiguration Wizard
+   In the case of the MySQL server, this opens a configuration
+   wizard that relates to the selected product. For example, for
+   MySQL Server this includes setting the type, ports, log
+   paths, and so on.
 
 Modify
 
@@ -989,7 +991,7 @@ Modify
    The modify the features of a product, click Modify on the
    main dashboard.
 
-   Figure 2.32 MySQL Installer - Modify Product Features
+   Figure 2.31 MySQL Installer - Modify Product Features
    MySQL Installer - Modify Product Features
 
    Click Execute to execute the modification request.
@@ -1031,6 +1033,11 @@ Upgrade   - Upgrades one or more of your installed programs.
 
    MySQLInstallerConsole supports the following options, which
    are specified on the command line:
+   Note
+
+   Configuration block values that contain a colon (":") must be
+   wrapped in double quotes. For example,
+   installdir="C:\MySQL\MySQL Server 5.6".
 
      * configure [product1]:[setting]=[value];
        [product2]:[setting]=[value]; [...]
@@ -1087,6 +1094,9 @@ C:\> MySQLInstallerConsole help install
             can include either a "config" or "user" type key,
             where "config" is the default type if one is not
             defined.
+            Configuration block values that contain a colon
+            (":") must be wrapped in double quotes. For example,
+            installdir="C:\MySQL\MySQL Server 5.6".
             Only one "config" type block can be defined per
             product. A "user" block should be defined for each
             user that should be created during the product's
@@ -1098,9 +1108,18 @@ C:\> MySQLInstallerConsole help install
           + [feature]: The feature block is a semicolon
             separated list of features, or '*' to select all
             features.
-C:\> MySQLInstallerConsole install server;5.6.22:*:port=3307;serverid=
+C:\> MySQLInstallerConsole install server;5.6.25:*:port=3307;serverid=
 2:type=user;username=foo;password=bar;role=DBManager
-C:\> MySQLInstallerConsole install server;5.6.22;x64 -silent
+C:\> MySQLInstallerConsole install server;5.6.25;x64 -silent
+
+       An example that passes in additional configuration
+       blocks, broken up by ^ to fit this screen:
+C:\> MySQLInstallerConsole install server;5.6.25;x64:*:type=config;ope
+nfirewall=true; ^
+          generallog=true;binlog=true;serverid=3306;enable_tcpip=true;
+port=3306;rootpasswd=pass; ^
+          installdir="C:\MySQL\MySQL Server 5.6":type=user;datadir="C:
+\MySQL\data";username=foo;password=bar;role=DBManager
 
 
      * list
@@ -1155,9 +1174,9 @@ C:\> MySQLInstallerConsole status
 
           + -silent : Disable confirmation prompts.
 C:\> MySQLInstallerConsole upgrade *
-C:\> MySQLInstallerConsole upgrade workbench:6.2.2
+C:\> MySQLInstallerConsole upgrade workbench:6.3.5
 C:\> MySQLInstallerConsole upgrade workbench:!
-C:\> MySQLInstallerConsole upgrade workbench:6.2.2 excel:1.3.2
+C:\> MySQLInstallerConsole upgrade workbench:6.3.5 excel:1.3.2
 
 
      * update
@@ -1254,7 +1273,7 @@ C:\> MySQLInstallerConsole update
    The Service Instance menu is the main MySQL Notifier window,
    and enables you to Stop, Start, and Restart the MySQL Server.
 
-   Figure 2.33 MySQL Notifier Service Instance menu
+   Figure 2.32 MySQL Notifier Service Instance menu
    MySQL Notifier Service Instance menu
 
    The Actions menu includes several links to external
@@ -1271,7 +1290,7 @@ C:\> MySQLInstallerConsole update
    The Refresh Status feature is available since MySQL Notifier
    1.1.0.
 
-   Figure 2.34 MySQL Notifier Actions menu
+   Figure 2.33 MySQL Notifier Actions menu
    MySQL Notifier Actions menu
 
    The Actions, Options menu configures MySQL Notifier and
@@ -1306,19 +1325,19 @@ C:\> MySQLInstallerConsole update
        balloon notification from the taskbar when a monitored
        service changes its status.
 
-   Figure 2.35 MySQL Notifier Options menu
+   Figure 2.34 MySQL Notifier Options menu
    MySQL Notifier Options menu
 
    The Actions, Manage Monitored Items menu enables you to
    configure the monitored services and MySQL instances. First,
    with the Services tab open:
 
-   Figure 2.36 MySQL Notifier Manage Services menu
+   Figure 2.35 MySQL Notifier Manage Services menu
    MySQL Notifier Manage Services menu
 
    The Instances tab is similar:
 
-   Figure 2.37 MySQL Notifier Manage Instances menu
+   Figure 2.36 MySQL Notifier Manage Instances menu
    MySQL Notifier Manage Instances menu
 
    Adding a service or instance (after clicking Add in the
@@ -1328,12 +1347,12 @@ C:\> MySQLInstallerConsole update
    instance by clicking service name from the list, then OK to
    accept. Multiple services and instances may be selected.
 
-   Figure 2.38 MySQL Notifier Adding new services
+   Figure 2.37 MySQL Notifier Adding new services
    MySQL Notifier Adding new services
 
    And instances:
 
-   Figure 2.39 MySQL Notifier Adding new instances
+   Figure 2.38 MySQL Notifier Adding new instances
    MySQL Notifier Adding new instances
    Note
 
@@ -1367,7 +1386,7 @@ C:\> MySQLInstallerConsole update
    settings must be properly configured for the communication to
    function properly.
 
-   Figure 2.40 MySQL Notifier Distributed Component Object Model
+   Figure 2.39 MySQL Notifier Distributed Component Object Model
    (DCOM)
    MySQL Notifier Distributed Component Object Model (DCOM)
 
@@ -1862,7 +1881,7 @@ InnoDB: foreign key constraint system tables created
    something like this, which indicates that the server is ready
    to service client connections:
 mysqld: ready for connections
-Version: '5.6.27'  socket: ''  port: 3306
+Version: '5.6.30'  socket: ''  port: 3306
 
    The server continues to write to the console any further
    diagnostic output it produces. You can open a new console
@@ -1929,7 +1948,7 @@ shutdown
    The last option is to start mysqld with the --standalone and
    --debug options. In this case, mysqld writes a log file
    C:\mysqld.trace that should contain the reason why mysqld
-   doesn't start. See Section 24.4.3, "The DBUG Package."
+   doesn't start. See Section 24.5.3, "The DBUG Package."
 
    Use mysqld --verbose --help to display all the options that
    mysqld supports.

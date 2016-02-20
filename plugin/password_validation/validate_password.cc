@@ -17,6 +17,7 @@
 #include <string>
 #include <mysql/plugin_validate_password.h>
 #include <set>
+#include <ios>       // std::streamoff
 #include <iostream>
 #include <fstream>
 #include <algorithm> // std::swap
@@ -227,7 +228,7 @@ static int validate_dictionary_check(mysql_string_handle password)
   mysql_string_free(lower_string_handle);
   int substr_pos= 0;
   int substr_length= length;
-  string_type password_str= (const char *)buffer;
+  string_type password_str= string_type((const char *)buffer, length);
   string_type password_substr;
   set_type::iterator itr;
   /*  

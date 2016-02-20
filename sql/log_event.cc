@@ -3761,7 +3761,8 @@ Query_log_event::Query_log_event(THD* thd_arg, const char* query_arg,
         cmd_can_generate_row_events= cmd_must_go_to_trx_cache= TRUE;
         break;
       default:
-        cmd_can_generate_row_events= sqlcom_can_generate_row_events(thd);
+        cmd_can_generate_row_events=
+          sqlcom_can_generate_row_events(thd->lex->sql_command);
         break;
     }
   }
@@ -3942,7 +3943,7 @@ Query_log_event::Query_log_event(const char* buf, uint event_len,
   
   slave_proxy_id= thread_id = uint4korr(buf + Q_THREAD_ID_OFFSET);
   exec_time = uint4korr(buf + Q_EXEC_TIME_OFFSET);
-  db_len = (uint)buf[Q_DB_LEN_OFFSET]; // TODO: add a check of all *_len vars
+  db_len = (uchar)buf[Q_DB_LEN_OFFSET]; // TODO: add a check of all *_len vars
   error_code = uint2korr(buf + Q_ERR_CODE_OFFSET);
 
   /*
@@ -4913,7 +4914,13 @@ compare_errors:
     DBUG_PRINT("info",("expected_error: %d  sql_errno: %d",
                        expected_error, actual_error));
 
-    if ((expected_error && expected_error != actual_error &&
+    /*
+      If a statement with expected error is received on slave and if the
+      statement is not filtered on the slave, only then compare the expected
+      error with the actual error that happened on slave.
+    */
+    if ((expected_error && rpl_filter->db_ok(thd->db) &&
+         expected_error != actual_error &&
          !concurrency_error_code(expected_error)) &&
         !ignored_error_code(actual_error) &&
         !ignored_error_code(expected_error))
