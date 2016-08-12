@@ -1,4 +1,4 @@
-/* Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights
+/* Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights
    reserved.
 
    This program is free software; you can redistribute it and/or modify
@@ -2342,6 +2342,9 @@ public:
                 current_stmt_binlog_format == BINLOG_FORMAT_ROW);
     return current_stmt_binlog_format == BINLOG_FORMAT_ROW;
   }
+
+  bool is_current_stmt_binlog_disabled() const;
+
   /** Tells whether the given optimizer_switch flag is on */
   inline bool optimizer_switch_flag(ulonglong flag) const
   {
@@ -4145,11 +4148,12 @@ private:
 public:
   /**
     This is only used by master dump threads.
-    When the master receives a new connection from a slave with a UUID that
-    is already connected, it will set this flag TRUE before killing the old
-    slave connection.
+    When the master receives a new connection from a slave with a
+    UUID (for slave versions >= 5.6)/server_id(for slave versions < 5.6)
+    that is already connected, it will set this flag TRUE
+    before killing the old slave connection.
   */
-  bool duplicate_slave_uuid;
+  bool duplicate_slave_id;
 };
 
 

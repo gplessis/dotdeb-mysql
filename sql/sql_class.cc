@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+   Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -83,7 +83,7 @@ const char * const THD::DEFAULT_WHERE= "field list";
 ****************************************************************************/
 
 extern "C" uchar *get_var_key(user_var_entry *entry, size_t *length,
-                              my_bool not_used __attribute__((unused)))
+                              my_bool not_used MY_ATTRIBUTE((unused)))
 {
   *length= entry->entry_name.length();
   return (uchar*) entry->entry_name.ptr();
@@ -928,7 +928,7 @@ THD::THD(bool enable_plugins)
    owned_gtid_set(global_sid_map),
    main_da(0, false),
    m_stmt_da(&main_da),
-   duplicate_slave_uuid(false)
+   duplicate_slave_id(false)
 {
   ulong tmp;
 
@@ -3053,7 +3053,7 @@ err:
 
 
 int
-select_dump::prepare(List<Item> &list __attribute__((unused)),
+select_dump::prepare(List<Item> &list MY_ATTRIBUTE((unused)),
 		     SELECT_LEX_UNIT *u)
 {
   unit= u;
@@ -3465,7 +3465,7 @@ C_MODE_START
 
 static uchar *
 get_statement_id_as_hash_key(const uchar *record, size_t *key_length,
-                             my_bool not_used __attribute__((unused)))
+                             my_bool not_used MY_ATTRIBUTE((unused)))
 {
   const Statement *statement= (const Statement *) record; 
   *key_length= sizeof(statement->id);
@@ -3478,7 +3478,7 @@ static void delete_statement_as_hash_key(void *key)
 }
 
 static uchar *get_stmt_name_hash_key(Statement *entry, size_t *length,
-                                    my_bool not_used __attribute__((unused)))
+                                    my_bool not_used MY_ATTRIBUTE((unused)))
 {
   *length= entry->name.length;
   return (uchar*) entry->name.str;
@@ -4779,7 +4779,7 @@ extern "C" uchar *xid_get_hash_key(const uchar *, size_t *, my_bool);
 extern "C" void xid_free_hash(void *);
 
 uchar *xid_get_hash_key(const uchar *ptr, size_t *length,
-                                  my_bool not_used __attribute__((unused)))
+                                  my_bool not_used MY_ATTRIBUTE((unused)))
 {
   *length=((XID_STATE*)ptr)->xid.key_length();
   return ((XID_STATE*)ptr)->xid.key();
@@ -4994,4 +4994,16 @@ void THD::time_out_user_resource_limits()
   }
 
   DBUG_VOID_RETURN;
+}
+/**
+  Determine if binlogging is disabled for this session
+  @retval 0 if the current statement binlogging is disabled
+  (could be because of binlog closed/binlog option
+  is set to false).
+  @retval 1 if the current statement will be binlogged
+*/
+bool THD::is_current_stmt_binlog_disabled() const
+{
+  return (!(variables.option_bits & OPTION_BIN_LOG) ||
+          !mysql_bin_log.is_open());
 }
