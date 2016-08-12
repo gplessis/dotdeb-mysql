@@ -1,7 +1,7 @@
-commit: 772309f84c1daae2e8cbd3c40764d404d6e8aeb6
-date: 2016-01-15 10:32:57 +0800
-build-date: 2016-01-15 03:47:12 +0100
-short: 772309f
-branch: mysql-5.6.29-release
+commit: f84c9522f86cdee413b8c7461de3d7fd01044ace
+date: 2016-07-11 11:12:36 +0200
+build-date: 2016-07-11 11:20:13 +0200
+short: f84c952
+branch: mysql-5.6.32-release
 
-MySQL source 5.6.29
+MySQL source 5.6.32
