@@ -7,12 +7,12 @@ Index: dotdeb-mysql/man/mysql_client_test_embedded.1
 --- dotdeb-mysql.orig/man/mysql_client_test_embedded.1
 +++ dotdeb-mysql/man/mysql_client_test_embedded.1
 @@ -1 +1 @@
--.so man/mysql_client_test.1
+-.so mysql_client_test.1
 +.so man1/mysql_client_test.1
 Index: dotdeb-mysql/man/mysqltest_embedded.1
 ===================================================================
 --- dotdeb-mysql.orig/man/mysqltest_embedded.1
 +++ dotdeb-mysql/man/mysqltest_embedded.1
 @@ -1 +1 @@
--.so man/mysqltest.1
+-.so mysqltest.1
 +.so man1/mysqltest.1

@@ -169,7 +169,7 @@ Index: dotdeb-mysql/sql/log_event.cc
 ===================================================================
 --- dotdeb-mysql.orig/sql/log_event.cc
 +++ dotdeb-mysql/sql/log_event.cc
-@@ -4662,7 +4662,7 @@ int Query_log_event::do_apply_event(Rela
+@@ -4654,7 +4654,7 @@ int Query_log_event::do_apply_event(Rela
      if ((error= rows_event_stmt_cleanup(const_cast<Relay_log_info*>(rli), thd)))
      {
        const_cast<Relay_log_info*>(rli)->report(ERROR_LEVEL, error,
@@ -182,7 +182,7 @@ Index: dotdeb-mysql/sql/rpl_utility.cc
 ===================================================================
 --- dotdeb-mysql.orig/sql/rpl_utility.cc
 +++ dotdeb-mysql/sql/rpl_utility.cc
-@@ -1619,7 +1619,7 @@ bool Deferred_log_events::execute(Relay_
+@@ -1644,7 +1644,7 @@ bool Deferred_log_events::execute(Relay_
  void Deferred_log_events::rewind()
  {
    /*
@@ -230,7 +230,7 @@ Index: dotdeb-mysql/sql/sql_yacc.cc
 ===================================================================
 --- dotdeb-mysql.orig/sql/sql_yacc.cc
 +++ dotdeb-mysql/sql/sql_yacc.cc
-@@ -37165,7 +37165,7 @@ yyreduce:
+@@ -37171,7 +37171,7 @@ yyreduce:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -243,7 +243,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
 ===================================================================
 --- dotdeb-mysql.orig/sql/sql_yacc.yy
 +++ dotdeb-mysql/sql/sql_yacc.yy
-@@ -14585,7 +14585,7 @@ opt_var_ident_type:
+@@ -14591,7 +14591,7 @@ opt_var_ident_type:
          | SESSION_SYM '.' { $$=OPT_SESSION; }
          ;
  
@@ -252,7 +252,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
  option_value_following_option_type:
            internal_variable_name equal set_expr_or_default
            {
-@@ -14602,7 +14602,7 @@ option_value_following_option_type:
+@@ -14608,7 +14608,7 @@ option_value_following_option_type:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -261,7 +261,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
                */
                my_parse_error(ER(ER_SYNTAX_ERROR));
                MYSQL_YYABORT;
-@@ -14610,7 +14610,7 @@ option_value_following_option_type:
+@@ -14616,7 +14616,7 @@ option_value_following_option_type:
            }
          ;
  
