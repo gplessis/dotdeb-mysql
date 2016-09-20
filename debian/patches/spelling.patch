@@ -230,7 +230,7 @@ Index: dotdeb-mysql/sql/sql_yacc.cc
 ===================================================================
 --- dotdeb-mysql.orig/sql/sql_yacc.cc
 +++ dotdeb-mysql/sql/sql_yacc.cc
-@@ -37171,7 +37171,7 @@ yyreduce:
+@@ -37176,7 +37176,7 @@ yyreduce:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -243,7 +243,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
 ===================================================================
 --- dotdeb-mysql.orig/sql/sql_yacc.yy
 +++ dotdeb-mysql/sql/sql_yacc.yy
-@@ -14591,7 +14591,7 @@ opt_var_ident_type:
+@@ -14596,7 +14596,7 @@ opt_var_ident_type:
          | SESSION_SYM '.' { $$=OPT_SESSION; }
          ;
  
@@ -252,7 +252,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
  option_value_following_option_type:
            internal_variable_name equal set_expr_or_default
            {
-@@ -14608,7 +14608,7 @@ option_value_following_option_type:
+@@ -14613,7 +14613,7 @@ option_value_following_option_type:
              {
                /*
                  Not in trigger assigning value to new row,
@@ -261,7 +261,7 @@ Index: dotdeb-mysql/sql/sql_yacc.yy
                */
                my_parse_error(ER(ER_SYNTAX_ERROR));
                MYSQL_YYABORT;
-@@ -14616,7 +14616,7 @@ option_value_following_option_type:
+@@ -14621,7 +14621,7 @@ option_value_following_option_type:
            }
          ;
  

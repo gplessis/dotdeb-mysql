@@ -31,7 +31,7 @@ Index: dotdeb-mysql/scripts/mysqld_safe.sh
        ;;
      *)
        echo "Internal program error (non-fatal):" \
-@@ -740,6 +737,13 @@ mysqld daemon not started"
+@@ -749,6 +746,13 @@ mysqld daemon not started"
  fi
  
  #
