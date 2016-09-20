@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_19672687_1468228915_75_DIST_GPL_SQL_SQL_YACC_H_INCLUDED
-# define YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_19672687_1468228915_75_DIST_GPL_SQL_SQL_YACC_H_INCLUDED
+#ifndef YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_20199989_1472210623_26_DIST_GPL_SQL_SQL_YACC_H_INCLUDED
+# define YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_20199989_1472210623_26_DIST_GPL_SQL_SQL_YACC_H_INCLUDED
 /* Enabling traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -1292,7 +1292,7 @@ extern int MYSQLdebug;
 typedef union YYSTYPE
 {
 /* Line 2058 of yacc.c  */
-#line 968 "/export/home/pb2/build/sb_0-19672687-1468228915.75/mysql-5.6.32-release-export-9727928_gpl/sql/sql_yacc.yy"
+#line 968 "/export/home/pb2/build/sb_0-20199989-1472210623.26/mysql-5.6.33-release-export-9935476_gpl/sql/sql_yacc.yy"
 
   int  num;
   ulong ulong_num;
@@ -1352,7 +1352,7 @@ typedef union YYSTYPE
 
 
 /* Line 2058 of yacc.c  */
-#line 1356 "/export/home/pb2/build/sb_0-19672687-1468228915.75/dist_GPL/sql/sql_yacc.h"
+#line 1356 "/export/home/pb2/build/sb_0-20199989-1472210623.26/dist_GPL/sql/sql_yacc.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -1374,4 +1374,4 @@ int MYSQLparse ();
 #endif
 #endif /* ! YYPARSE_PARAM */
 
-#endif /* !YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_19672687_1468228915_75_DIST_GPL_SQL_SQL_YACC_H_INCLUDED  */
+#endif /* !YY_MYSQL_EXPORT_HOME_PB2_BUILD_SB_0_20199989_1472210623_26_DIST_GPL_SQL_SQL_YACC_H_INCLUDED  */
