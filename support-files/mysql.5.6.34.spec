@@ -1,4 +1,4 @@
-# Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 %global mysql_vendor_2          Sun Microsystems, Inc.
 %global mysql_vendor            Oracle and/or its affiliates
 
-%global mysql_version   5.6.33
+%global mysql_version   5.6.34
 
 %global mysqld_user     mysql
 %global mysqld_group    mysql
@@ -242,7 +242,7 @@
 Name:           MySQL%{product_suffix}
 Summary:        MySQL: a very fast and reliable SQL database server
 Group:          Applications/Databases
-Version:        5.6.33
+Version:        5.6.34
 Release:        %{release}%{?distro_releasetag:.%{distro_releasetag}}
 Distribution:   %{distro_description}
 License:        Copyright (c) 2000, 2016, %{mysql_vendor}. All rights reserved. Under %{license_type} license as shown in the Description field.
@@ -562,6 +562,7 @@ install -d $RBR%{_includedir}
 install -d $RBR%{_libdir}
 install -d $RBR%{_mandir}
 install -d $RBR%{_sbindir}
+install -d $RBR/var/lib/mysql-files
 
 mkdir -p $RBR%{_sysconfdir}/my.cnf.d
 
@@ -1131,6 +1132,7 @@ echo "====="                                     >> $STATUS_HISTORY
 %attr(755, root, root) %{_sysconfdir}/init.d/mysql
 %attr(755, root, root) %{_datadir}/mysql/
 %dir %attr(755, mysql, mysql) /var/lib/mysql
+%dir %attr(750, mysql, mysql) /var/lib/mysql-files
 
 # ----------------------------------------------------------------------------
 %files -n MySQL-client%{product_suffix}
