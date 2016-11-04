@@ -102,6 +102,7 @@ configure-stamp configure-pic-stamp:
 		-DMYSQL_SERVER_SUFFIX="-$(DEBVERSION)" \
 		-DSYSTEM_TYPE="debian-$(DEB_BUILD_GNU_SYSTEM)" \
 		-DINSTALL_LAYOUT=RPM \
+		-DINSTALL_SECURE_FILE_PRIVDIR=/var/lib/mysql \
 		-DINSTALL_LIBDIR=lib/$(DEB_HOST_MULTIARCH) \
 		-DINSTALL_PLUGINDIR=lib/mysql/plugin \
 		-DWITH_EMBEDDED_SERVER=ON \
