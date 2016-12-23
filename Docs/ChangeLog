@@ -1,45 +1,1406 @@
-commit 5b49064e2f605240a13b7d7541ae6f50bcca09dd
+commit 1920b22f480ad50b125d77d42971a878e7ca4ea5
+Author: Balasubramanian Kandasamy <balasubramanian.kandasamy@oracle.com>
+Date:   Mon Nov 28 16:43:06 2016 +0530
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+    
+    (cherry picked from commit d66d9a678b1b11ce940b2afb624621286af98ab8)
+
+commit d0b26ca8edccb6f965533d30c5eba479cf9b6239
+Author: Dyre Tjeldvoll <Dyre.Tjeldvoll@oracle.com>
+Date:   Thu Nov 24 21:55:42 2016 +0100
+
+    Merge ../bug_25092566 into mysql-5.6
+    
+    (cherry picked from commit a1d52171de9b20130ef4b6de6e5e018ad16dbaf1)
+
+commit dd55b22b015e19310319c70b8d200d78ee432c93
+Author: Dyre Tjeldvoll <Dyre.Tjeldvoll@oracle.com>
+Date:   Thu Nov 24 10:03:12 2016 +0100
+
+    Merge ../bug_25092566 into mysql-5.6
+    
+    (cherry picked from commit 234bf1c47b2271c345847b2b3927bc6a78dabe3b)
+
+commit 8b8f0d2550d4b6028b5633347051057e52b68ee7
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Wed Nov 16 14:11:02 2016 +0100
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+    
+    (cherry picked from commit 00189280432ac459d657417f7ec42aed651d5ec0)
+
+commit ec8601f166006df651cb36927082ad3a63233a0f
+Author: Jon Olav Hauglid <jon.hauglid@oracle.com>
+Date:   Wed Jun 29 10:51:20 2016 +0200
+
+    Bug#25103242: 5.6 DOES NOT BUILD ON FEDORA 25 DUE TO READDIR_R BEING DEPRECATED
+    
+    Backport from trunk to 5.6 of:
+    
+    Bug#23708395: GLIBC 2.24 DEPRECATES READDIR_R() BREAKING
+                  DEBUG BUILD OF MYSQL SERVER
+    
+    As of glibc 2.24, readdir_r() has been deprecated. This breaks
+    our debug builds since the deprecation warning is upgraded to
+    an error during compilation.
+    
+    This patch fixes the problem by removing use of readdir_r() and
+    using readdir() instead. This is thread safe as long as readdir()
+    is only used concurrently on different DIR* - which it is in
+    our case.
+    
+    POSIX quote: "The pointer returned by readdir() points to data
+    which may be overwritten by another call to readdir() on the same
+    directory stream. This data is not overwritten by another call
+    to readdir() on a different directory stream."
+    
+    Change-Id: I85a6f5da2d48c8d5a9804cd6281411d9e757f46c
+    (cherry picked from commit ba5245e9fef2257d60213076598268f544ca7109)
+    (cherry picked from commit 865c124d1bdfd4eeee5eb42ea9faa9c8b45bfbb0)
+    (cherry picked from commit d083887ca7cf90ac370b1a564b5090358f9a097f)
+
+commit 797def9523e60db92b95bf590af0b1c5bc0e217c
+Author: Bjorn Munch <bjorn.munch@oracle.com>
+Date:   Mon Oct 31 13:06:30 2016 +0100
+
+    Adding connection_control-plugin to deb packaging
+
+commit 6079b9033b5e1eb1e39e1b210f5cbd6f1e20d4c0
+Author: Bjorn Munch <bjorn.munch@oracle.com>
+Date:   Mon Oct 31 12:58:32 2016 +0100
+
+    Clean up merge conflicts in RPM spec file changelogs
+
+commit 6ffe3b91c1a1caea3e175c83d6803eab46747abd
+Author: Sreeharsha Ramanavarapu <sreeharsha.ramanavarapu@oracle.com>
+Date:   Fri Oct 28 21:13:03 2016 +0530
+
+    Bug #22312771: VALGRIND(UNINITIALISED BYTE) ERRORS AT
+                   WRITE_KEYS IN FILESORT.CC
+    
+    
+    Signature for the function find_all_keys has changed.
+    Replacing it with a wild-card in valgrind.supp.
+    
+    This is similar to Bug#22214867 (fixed on mysql-5.5).
+
+commit 15ab1ee1ad195ea0ac8e16736d3bd55aa4e003a5
+Merge: 6d8d31a c49f9a1
+Author: Thayumanavar S <thayumanavar.x.sachithanantha@oracle.com>
+Date:   Fri Oct 28 14:45:51 2016 +0200
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit c49f9a1263df92a5fc7cf2f67c3f52129e202d37
+Author: Thayumanavar S <thayumanavar.x.sachithanantha@oracle.com>
+Date:   Fri Oct 28 14:45:03 2016 +0200
+
+    BUG#24487120 - SLAVE'S SLAVE_SQL_RUNNING IS STOPPED DURING
+     LOAD DATA AT MASTER.
+    
+    Revert "BUG#23080148 - BACKPORT BUG 14653594 AND BUG 20683959 TO"
+    
+    This reverts commit 1d31f5b3090d129382b50b95512f2f79305715a1.
+    The commit causes replication incompatibility between minor revisions
+    and based on discussion with Srinivasarao, the patch is reverted.
+
+commit 6d8d31a09f6eb04b32d736388eadc4b4c339872b
+Author: Harin Vadodaria <harin.vadodaria@oracle.com>
+Date:   Fri Oct 28 16:05:05 2016 +0530
+
+    WL#8885: Introduce a delay in authentication process
+             based on successive failed login attempts
+    
+    Post push fix : Fixing copyright issue
+
+commit 9b0ea01379f72c3fef40f61110f5e014410b7914
+Author: Harin Vadodaria <harin.vadodaria@oracle.com>
+Date:   Fri Oct 28 12:20:33 2016 +0530
+
+    WL#8885: Introduce a delay in authentication process
+             based on successive failed login attempts
+    
+    Post push fix : fixing valgrind issue.
+
+commit 86f2a191a7094fb6e34d923194a6727ae1e3cb4a
+Author: Harin Vadodaria <harin.vadodaria@oracle.com>
+Date:   Thu Oct 27 19:26:19 2016 +0530
+
+    WL#8885: Introduce a delay in authentication process
+             based on successive failed login attempts
+    
+    Post push fix : Fixing build issues.
+
+commit 219420ff76222ccaf7a2fe02bc7c384ab424a65d
+Author: Harin Vadodaria <harin.vadodaria@oracle.com>
+Date:   Thu Oct 27 15:33:52 2016 +0530
+
+    WL#8885: Introduce a delay in authentication process
+             based on successive failed login attempts
+    
+    Description: This patch introduces a new audit plugin named
+                 connection_control. Using this plugin, it is
+                 possible to introduce an incremental delay in
+                 server response if consecutive failed login
+                 attempts for a given user account crosses user
+                 defined threshold value.
+    
+                 It is possible to configure threshold value
+                 to trigger delay, minimum/maximum amount of
+                 delay through system variables introduced by
+                 connection_control plugin.
+    
+                 This patch also introduces a new information
+                 schema view through an information schema plugin,
+                 connection_control_failed_attempts_view. This view
+                 provides information about consecutive failed
+                 attempts for various user account.
+
+commit b0715f192f80c56f025a81135dbcc7471d95ee03
+Author: Tor Didriksen <tor.didriksen@oracle.com>
+Date:   Thu Oct 20 18:13:13 2016 +0200
+
+    Bug#24926839 ENABLE DEVELOPERSTUDIO12.5 FOR MYSQL 5.6
+    
+    configuring unit tests fails, we do not recognize developer studio 12.5
+    build with -DCMAKE_CXX_FLAGS='-std=c++03 -m64' -DCMAKE_C_FLAGS='-m64'
+    
+    Fix: backport compiler version check in cmake/os/SunOS.cmake from 5.7
+
+commit a9066d6184d35e8ee979eb137ba75946856abf7d
+Merge: 77c0480 db5f61a
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Mon Oct 24 13:15:48 2016 +0200
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit db5f61ad9f0e22473664f30f60e5e8a1872819cb
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Mon Oct 24 13:11:34 2016 +0200
+
+    Bug#24925181 INCORRECT ISA DETECTION CODE IN OEL RPM SPEC
+    
+    Wrapper for mysql_config used in multilib installs modified to work as
+    intended, added more archs (aarch64, ppc64le, s390x, s390, sparc and
+    sparc64) to lists in fallback mode and use same script for EL and
+    Fedora.
+    
+    Thanks to Alexey Kopytov for report and fix.
+
+commit 77c0480a2f16b12630f5b92cac1ea0c64de280c2
+Author: Nisha Gopalakrishnan <nisha.gopalakrishnan@oracle.com>
+Date:   Tue Oct 4 16:30:18 2016 +0530
+
+    BUG#24595992: NULL POINTER DEREFERENCE IN CHECK_DUPLICATE_KEY()
+    
+    Analysis:
+    ========
+    CREATE TABLE using SELECT can cause a null pointer dereference
+    while printing the warning message.
+    
+    During the processing of SELECT in CREATE TABLE, the first
+    element of the global query table_list is pruned. Later
+    while trying to print a warning message, it tries to access
+    the global query table list to get the schema name and
+    table name which is set to NULL.
+    
+    Fix:
+    ===
+    Passed the schema name and table name from the upper layer
+    so that it is accessible in check_duplicate_key().
+
+commit 6efc620be265cde12d35b7cb8c376fbc304d7f67
+Author: Neha Kumari <neha.n.kumari@oracle.com>
+Date:   Fri Oct 14 13:07:15 2016 +0530
+
+    Bug#24715790: BUG#23509275 FIX MERGE TO 5.6 BROKEN
+    
+    Problem:
+    While merging BUG#23509275 upwards from mysql-5.5 to mysql-5.6
+    some part of the fix was missed and as a result it was missed in
+    all the upper versions as well.
+    
+    Fix:
+    Implement the changes which were missed while merging from mysql-5.5 to
+    mysql-5.6.
+
+commit de32c11540fe57f6b58cbffc85b11d826dde71ca
+Merge: f1a5698 53fc6bf
+Author: Karthik Kamath <karthik.kamath@oracle.com>
+Date:   Thu Oct 13 14:52:19 2016 +0530
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 53fc6bf3ff24652dae844b60c066e8eb343a49da
+Author: Karthik Kamath <karthik.kamath@oracle.com>
+Date:   Thu Oct 13 14:48:45 2016 +0530
+
+    BUG#23499695: MYSQL SERVER NORMAL SHUTDOWN WITH TIME STAMP
+                  700101
+    
+    ANALYSIS:
+    =========
+    To set the time 'start_time' of query in THD, current time
+    is obtained by calling 'gettimeofday()'. On Solaris
+    platform, due to some system level issues, time obtained is
+    invalid i.e. its either greater than 2038 (max signed value
+    to hold microseconds since 1970) or 1970 (0 microseconds
+    since 1970). In these cases, validation checks infer that
+    the 'start_time' is invalid and mysql server initiates the
+    shutdown process. But the reason for shutdown is not logged.
+    
+    FIX:
+    ====
+    We are now logging appropriate message when shutdown is
+    triggered in the above mentioned scenarios. Now, even if
+    the initial validation checks infer that the 'start_time'
+    is invalid, server shutdown is not initiated immediately.
+    Before initiating the server shutdown, the process of
+    setting 'start_time' and validating it is reiterated (for
+    max 5 times). If correct time is obtained in these 5
+    iterations then server continues to run.
+
+commit f1a56982f8d90990894983ced755112ab6cdb6d9
+Author: Lars Tangvald <lars.tangvald@oracle.com>
+Date:   Fri Oct 7 15:02:01 2016 +0200
+
+    Default datadir should not be changed for existing GA
+    
+    The DATADIR_DEB setting isn't directly used by most server installations, as the packages provide
+    their own config files, but it's used by cluster, which has GA released based on 5.6, so the value
+    should not be changed here.
+
+commit 5ab91b2064965d47416c049313513f823bf7c382
+Merge: 9eedc2a 5b49064
+Author: Prashant Tekriwal <prashant.tekriwal@oracle.com>
+Date:   Wed Oct 12 18:17:02 2016 +0200
+
+    Merge branch 'mysql-5.6.34-release' into mysql-5.6
+
+commit 9eedc2a9256104387680145d75a339c8035a8a28
+Merge: 7217e1a c95aa85
+Author: Nawaz Nazeer Ahamed <nawaz.nazeer.ahamed@oracle.com>
+Date:   Wed Oct 12 21:24:03 2016 +0530
+
+    Upmerge of the 5.5.53 build
+
+commit c95aa85ae7bba2272cf4045522b4c659e0175c93
+Merge: 9f5a91f 94723a5
+Author: Nawaz Nazeer Ahamed <nawaz.nazeer.ahamed@oracle.com>
+Date:   Wed Oct 12 21:10:29 2016 +0530
+
+    Merge branch 'mysql-5.5.53-release' into mysql-5.5
+
+commit 7217e1a9f064c68c74d1af09a40f21e199b10d04
+Merge: f4634f4 9f5a91f
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Thu Oct 6 13:27:40 2016 +0200
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 9f5a91f5b6d830d31a0a274580fa884d09ba15d9
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Thu Oct 6 13:26:16 2016 +0200
+
+    Bug#24483092 UNSAFE USE OF VARIOUS SHELL UTILITIES
+    
+     - Remove use of touch and chmod.
+     - Restrict usage of chown to cases where target directory is /var/log.
+     - Due to limited feature set in /bin/sh on Solaris, /bin/bash will be
+       used on this platform.
+     - Give error if directory for UNIX socket file is missing.
+     - Privileged user should not log to files owned by different user
+       (mysqld will log as before).
+
+commit f4634f4a8c9da0d71b29c33bcc24004d155d62b8
+Author: Jon Olav Hauglid <jon.hauglid@oracle.com>
+Date:   Mon Oct 3 14:30:18 2016 +0200
+
+    Bug#24748505: RELWITHDEBINFO BUILD USING VS2015 FAILS FOR MYSQL-5.6 ON WINDOWS
+    
+    Remove 'inline' from function definitions in my_time.c in
+    order to fix linking issues on VS2015.
+
+commit e9a1d98ff1e06fad540c0d2244e32e163f2a1230
+Merge: e23c9bd d3509e4
+Author: Vasil Dimov <vasil.dimov@oracle.com>
+Date:   Mon Oct 3 14:44:42 2016 +0300
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+    
+    * mysql-5.5:
+      Fix Bug#24707869 GCC 5 AND 6 MISCOMPILE MACH_PARSE_COMPRESSED
+
+commit d3509e4ffa62b8dc3133745138ceb9b4a0a7b761
+Author: Vasil Dimov <vasil.dimov@oracle.com>
+Date:   Tue Sep 27 14:09:54 2016 +0300
+
+    Fix Bug#24707869 GCC 5 AND 6 MISCOMPILE MACH_PARSE_COMPRESSED
+    
+    Prevent GCC from moving a mach_read_from_4() before we have checked that
+    we have 4 bytes to read. The pointer may only point to a 1, 2 or 3
+    bytes in which case the code should not read 4 bytes. This is a
+    workaround to a GCC bug:
+    https://gcc.gnu.org/bugzilla/show_bug.cgi?id=77673
+    
+    Patch submitted by: Laurynas Biveinis <laurynas.biveinis@gmail.com>
+    RB: 14135
+    Reviewed by: Pawel Olchawa <pawel.olchawa@oracle.com>
+
+commit e23c9bd1a18e4914b0371be049a2af8ee01e6e02
 Author: Lars Tangvald <lars.tangvald@oracle.com>
 Date:   Fri Sep 30 12:58:19 2016 +0200
 
     Bug#24761774	PACKAGE UPGRADE FROM 5.6.33 TO 34 FAILING DUE TO SECURE-FILE-PRIV PROBLEMS
     
     Added creation of missing directory to server postinst
-    
-    (cherry picked from commit e23c9bd1a18e4914b0371be049a2af8ee01e6e02)
 
-commit 757e64549a14a3ac89068ec87a06e1edd3870ed9
+commit 90a38b3065fe749ca7fbca464ccebc4253f57ac8
+Merge: 1403ef6 e7621e1
+Author: Arun Kuruvila <arun.kuruvila@oracle.com>
+Date:   Thu Sep 29 11:05:30 2016 +0530
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit e7621e188f4a3bd186a8ae5abe6fb4d63146e119
+Author: Arun Kuruvila <arun.kuruvila@oracle.com>
+Date:   Thu Sep 29 11:02:05 2016 +0530
+
+    Bug #23303391: HANDLE_FATAL_SIGNAL (SIG=11) IN ALLOC_QUERY
+                   USING CHARACTER-SET-SERVER=UTF16
+    
+    Post push patch to fix test case failure.
+
+commit 94723a51d41d7b89bc44b2b09935cb5c422ba380
+Author: Robert Golebiowski <robert.golebiowski@oracle.com>
+Date:   Tue Sep 27 11:17:38 2016 +0200
+
+    Bug #24740291: YASSL UPDATE TO 2.4.2
+
+commit 41d99c054bcb230a1cd614002b62ebf349510499
+Author: Arun Kuruvila <arun.kuruvila@oracle.com>
+Date:   Wed Sep 28 15:52:05 2016 +0530
+
+    Bug#24707666: DEFAULT SETTING FOR SECURE-FILE-PRIV SHOULD BE
+                  RESTRICTED IN ALL GA RELEASES
+    
+    Back port of WL#6782 to 5.5 and 5.6. This also includes
+    back port of Bug#20771331, Bug#20741572 and Bug#20770671.
+    Bug#24695274 and Bug#24679907 are also handled along with
+    this.
+
+commit 1403ef65161f177fc6b680808f071ddb798f2fe5
+Merge: 34c82ee 61c5486
 Author: Arun Kuruvila <arun.kuruvila@oracle.com>
 Date:   Wed Sep 28 16:03:29 2016 +0530
 
     Merge branch 'mysql-5.5' into mysql-5.6
-    
-    (cherry picked from commit 1403ef65161f177fc6b680808f071ddb798f2fe5)
 
-commit 8a8cb3dee903131d54abfd4abe94d351ba0db4e9
+commit 61c548628fd199ccdb6b34a9599439964aecd269
+Author: Arun Kuruvila <arun.kuruvila@oracle.com>
+Date:   Wed Sep 28 15:52:05 2016 +0530
+
+    Bug#24707666: DEFAULT SETTING FOR SECURE-FILE-PRIV SHOULD BE
+                  RESTRICTED IN ALL GA RELEASES
+    
+    Back port of WL#6782 to 5.5 and 5.6. This also includes
+    back port of Bug#20771331, Bug#20741572 and Bug#20770671.
+    Bug#24695274 and Bug#24679907 are also handled along with
+    this.
+
+commit 34c82ee6618599a2117e4d412179185cc5b94a4d
+Author: Georgi Kodinov <georgi.kodinov@oracle.com>
+Date:   Tue Sep 27 17:48:32 2016 +0300
+
+    Addendum to the fix for bug #24557925: fixed the test to be platform independent
+
+commit a99a348b756ff2cccb8d283e6b494ccbef2a8f6b
+Author: Marc Alff <marc.alff@oracle.com>
+Date:   Tue Sep 27 16:14:06 2016 +0200
+
+    Bug#22320066 EVENTS_STATEMENTS_SUMMARY_BY_DIGEST: NO UNIQUE ROWS BY
+    DIGEST/SCHEMA_NAME
+    
+    Fix for 5.6 (backported from 5.7 and 8.0)
+    
+    Before this fix, table events_statements_summary_by_digest
+    exposed many rows for the same statement digest and schema,
+    breaking the expected uniqueness of digests.
+    
+    The root cause is in function find_or_create_digest(),
+    which does not handle duplicate inserts in the LF_HASH properly.
+    
+    When two different sessions execute
+    the same statement for the first time,
+    each session creates an entry for the statement digest.
+    
+    In this case, the index is maintained properly with only one entry,
+    but the table data itself still contained duplicated rows, orphan.
+    
+    The fix is to:
+    - use a pfs_lock for a statement digest record
+    - free the duplicate record when duplication is detected in the unique index
+    - loop in the entire buffer to find an empty record,
+      so that duplicate entries do not create holes and do not cause leaks
+    - honor the pfs_lock when exposing the data.
+    
+    With this fix, the allocation pattern is similar to other instrumentations,
+    like the mutex instances for example.
+    
+    Tested manually with debug code added to expose the race conditions.
+    Not testable by MTR scripts.
+
+commit e13b035f43422a64057ea36e1305437c19a50285
+Author: Georgi Kodinov <georgi.kodinov@oracle.com>
+Date:   Fri Sep 2 17:04:55 2016 +0300
+
+    Bug #24557925: MYSQL_CONFIG_EDITOR CAN MAKE SERVER UNBOOTABLE
+    
+    By default all mysys based programs are sourcing the login file.
+    The server should not be doing this since it's not a client program.
+    
+    Thus added a new global to mysys, that, when set to FALSE disables
+    the sourcing of the login path file.
+    And then changed mysqld to set that variable to FALSE from its
+    mysys default TRUE.
+    
+    Added a test case.
+
+commit 33b874c3b38c4a551f51ee3df33a9e9a3c8725b6
+Merge: cdcd97c 14f8b26
 Author: Robert Golebiowski <robert.golebiowski@oracle.com>
 Date:   Tue Sep 27 11:18:14 2016 +0200
 
     Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 14f8b268cd55d15b9d39b90a0af5bb375bbcf543
+Author: Robert Golebiowski <robert.golebiowski@oracle.com>
+Date:   Tue Sep 27 11:17:38 2016 +0200
+
+    Bug #24740291: YASSL UPDATE TO 2.4.2
+
+commit cf80548b00dafbbc060db75925f5ba4d7fdef1e8
+Merge: 5b0fd61 f105d1e
+Author: Nawaz Nazeer Ahamed <nawaz.nazeer.ahamed@oracle.com>
+Date:   Mon Sep 26 21:28:41 2016 +0530
+
+    Merge branch 'mysql-5.5.52-release' into mysql-5.5.53-release
+
+commit cdcd97c3bcfb66d8a5459c71b39956e911015aa3
+Merge: b9d76be 2bc08b2
+Author: Bjorn Munch <bjorn.munch@oracle.com>
+Date:   Mon Sep 26 14:46:13 2016 +0200
+
+    Raise version number after cloning 5.6.34
+
+commit 2bc08b2db4fc66e40200d9d0ab0059fbabc5cb1a
+Author: Bjorn Munch <bjorn.munch@oracle.com>
+Date:   Mon Sep 26 14:42:56 2016 +0200
+
+    Raise version number after cloning 5.5.53
+
+commit b9d76be8bb5453ed484c164b66ba8bdca6c30b7c
+Author: Jon Olav Hauglid <jon.hauglid@oracle.com>
+Date:   Thu Sep 15 14:09:39 2016 +0200
+
+    Bug#24572381: UPDATE GMOCK DOWNLOAD LINK
     
-    (cherry picked from commit 33b874c3b38c4a551f51ee3df33a9e9a3c8725b6)
+    This patch updates the googletest download link to point to
+    googletest's new home at:
+    https://github.com/google/googletest/archive/
+    
+    The patch also upgrades to version 1.8 of googletest.
+    Partly because versions 1.6 and 1.7 now consists of
+    two separate .zip files (googletest + googlemock),
+    while 1.8 still contains both in one.
+    
+    Since googletest 1.8 does not compile with
+    SunStudio12u2, gunit tests are now disabled if compiled
+    on Solaris with anything older than Solaris Studio 12.4.
 
-commit 854254ccb35dc3724713c13ba8cc85f712e9d142
-Merge: 4809c9b 259f2ca
-Author: Balasubramanian Kandasamy <balasubramanian.kandasamy@oracle.com>
-Date:   Mon Sep 26 23:49:46 2016 +0530
+commit e284ccf2b149427f198bba736904918f9e632042
+Author: Karthik Kamath <karthik.kamath@oracle.com>
+Date:   Thu Sep 15 15:24:42 2016 +0530
 
-    Merge branch 'mysql-5.6.33-release' into mysql-5.6.34-release
+    BUG#24566529: BACKPORT BUG#23575445 TO 5.6
+    
+    Stack traces were not printed by our signal handler on FreeBSD
+    since we didn't find backtrace(). However, since FreeBSD 10.0
+    backtrace() is available, but it requires the execinfo library.
+    
+    This patch fixes the problem by adding -lexecinfo when
+    doing CMake configure checks and when linking the server
+    (if execinfo exists). Note that the number of stack frames
+    returned by backtrace() seems very limited - at least on
+    FreeBSD 10.2.
+    
+    Also, the PTR_SANE macro which tries to check if a pointer
+    is invalid (used when printing pointer values in stack traces)
+    gave false negatives on OSX/FreeBSD. On these platforms we
+    now simply check if the pointer is non-null. This also removes
+    a sbrk() deprecation warning when building on OS X. (It was
+    before only disabled with building using XCode).
 
-commit 4809c9b03e4c45cbc3a001f21ae57eb20606022c
-Merge: e945f3b6 5b0fd61
-Author: Balasubramanian Kandasamy <balasubramanian.kandasamy@oracle.com>
-Date:   Mon Aug 8 15:18:39 2016 +0530
+commit 1a08bd048aa9ff452a56ccde4bc586c81485ecb7
+Author: Vasil Dimov <vasil.dimov@oracle.com>
+Date:   Mon Sep 12 10:54:45 2016 +0300
 
-    Raise version number after cloning 5.6.33
+    Fix Bug#24605956 SERVER MAY CRASH DUE TO A GLIBC BUG IN HANDLING SHORT-LIVED DETACHED THREADS
+    
+    Avoid detaching and exiting from threads that may finish before the
+    caller has returned from pthread_create(). Only exit from such threads,
+    without detach and join with them later.
+    
+    Patch submitted by: Laurynas Biveinis <laurynas.biveinis@gmail.com>
+    RB: 13983
+    Reviewed by: Sunny Bains <sunny.bains@oracle.com>
 
-commit 5b0fd618e5b8155c4533f51cb6cf3b460aee8463
-Author: Balasubramanian Kandasamy <balasubramanian.kandasamy@oracle.com>
-Date:   Mon Aug 8 15:15:17 2016 +0530
+commit 8f605aa42e23a4e9804bed153a289c32fdbc42e9
+Merge: 9b69e89 1fa6fe4
+Author: Georgi Kodinov <georgi.kodinov@oracle.com>
+Date:   Thu Sep 8 18:13:38 2016 +0300
 
-    Raise version number after cloning 5.5.52
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 1fa6fe46557993b987f20cf7a381cdc61b40d81a
+Author: Georgi Kodinov <georgi.kodinov@oracle.com>
+Date:   Thu Sep 1 13:30:44 2016 +0300
+
+    Bug #24496214:  MISLEADING ERROR EXECUTING MYSQLADMIN SHUTDOWN AGAINST A SERVER
+    RUNNING FIREWALL
+    
+    mysqladmin shutdown will try to extract the server's pid file before executing
+    the actual shutdown command.
+    It will do that by executing a SHOW VARIABLES query and processing the result.
+    However if that query fails it print a (somewhat confusing) error mesasage
+    and will still continue to do the shutdown command.
+    If that passes then the mysqladmin user will get an error but the shutdown will
+    still be successful.
+    This is confusing so the error message text is changed to say that this is a
+    non-fatal error and execution continues.
+    No test case added since it'd require a selective query failure device that's
+    not available in 5.5.
+
+commit 9b69e8937e983f3c7742fb7bd56c7dfbada16225
+Author: Marko Mäkelä <marko.makela@oracle.com>
+Date:   Tue Sep 6 09:09:09 2016 +0300
+
+    Bug#22923426 LOG_FILE_SIZE_1 FAILS TO REPORT INNODB: CANNOT RESIZE LOG FILES IN READ-ONLY
+    
+    The InnoDB change buffer is deleted lazily in a background task.
+    If a previously completed test has caused something to remain in
+    the InnoDB change buffer on the server instance, restarting the
+    server with --innodb-read-only would be refused with an unexpected
+    error message:
+    
+    "Change buffer must be empty when --innodb-read-only is set."
+    
+    This WL#6494 test is expecting another error message, for InnoDB
+    refusing to resize the InnoDB redo logs in read-only mode.
+    
+    The test failed to initiate a slow shutdown (forcing a change buffer merge)
+    before restarting the server in --innodb-read-only mode.
+    
+    Reviewed-by: Vinay Fisrekar <vinay.fisrekar@oracle.com>
+
+commit 86fe5e94b01293f1eb4102b774386623b6254c12
+Author: Aditya A <aditya.a@oracle.com>
+Date:   Tue Sep 6 16:03:47 2016 +0530
+
+    Bug #23333990	PERSISTENT INDEX STATISTICS UPDATE BEFORE TRANSACTION IS COMMITTED
+    
+    Disabling the test for valgrind ,since inserts..selects were taking
+    long time and giving false alarms.
+
+commit 6c0fdea8bb3c084e362e811f66acf4221ab24954
+Merge: b8b8cef 3b3930e
+Author: Nawaz Nazeer Ahamed <nawaz.nazeer.ahamed@oracle.com>
+Date:   Tue Sep 6 12:51:31 2016 +0530
+
+    Upmerge of the 5.5.52 build
+
+commit 3b3930e494b4eab6a6537c01f416c3023f63a672
+Merge: e6dc0c5 f105d1e
+Author: Nawaz Nazeer Ahamed <nawaz.nazeer.ahamed@oracle.com>
+Date:   Tue Sep 6 11:55:24 2016 +0530
+
+    Merge branch 'mysql-5.5.52-release' into mysql-5.5
+
+commit b8b8cefe87b7a1914150c24f3bde2e5b27fbed34
+Author: Aditya A <aditya.a@oracle.com>
+Date:   Mon Sep 5 18:57:24 2016 +0530
+
+    Bug#23333990 PERSISTENT INDEX STATISTICS UPDATE BEFORE TRANSACTION IS COMMITTED
+    
+    Fixing pb2 failures. Made tests more deterministic my adding analyze table.
+
+commit cb04f126c6373950f07e75ac2462182c4acad428
+Author: Tor Didriksen <tor.didriksen@oracle.com>
+Date:   Fri Sep 2 12:46:33 2016 +0200
+
+    Bug#22558597 MYSQL BUILD FAILS, MEMORY LEAK IN GEN_LEX_HASH, CLANG ADDRESS SANITIZER
+    
+    If we use clang-3.5+ instead of gcc and enable its AddessSanitizer (ASAN),
+    the gen_lex_hash utility aborts on clang's LeakSanitizer memory leak
+    checks.
+    
+    This patch adds memory deallocation to gen_lex_hash.cc to make
+    LeakSanitizer happy (normally this is superfluous, since gen_lex_has is
+    a compile-time utility, and OS does the job itself).
+    
+    Note: for for 5.6 only. Fixed in 5.7 and up by patch for Bug#20720615
+
+commit 70058d86c6c0c171f1687a33f0446a4e3a58d7a2
+Merge: 65c278e e6dc0c5
+Author: Kailasnath Nagarkar <kailasnath.nagarkar@oracle.com>
+Date:   Fri Sep 2 15:14:59 2016 +0530
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit e6dc0c550720b878bbec2998ff6f62076aa73735
+Author: Kailasnath Nagarkar <kailasnath.nagarkar@oracle.com>
+Date:   Fri Sep 2 15:13:52 2016 +0530
+
+    Bug #24489302 : ZEROFILL CAUSE MEMORY-CORRUPTION AND CRASH
+    
+    ISSUE: Heap corruption occurs and hence mysql server
+           terminates abnormally in String variable destructor
+           when ZEROFILL is used for a column.
+           Though the abnormal termination is observed in the
+           String destructor, heap corruption occurs at earlier
+           stage when function Field_num::prepend_zeros() is called.
+           This function, prepends zeros to the actual data and
+           works on entire field length. Since the allocated memory
+           could be less than the field length, heap corruption occurs.
+           Later, when String destructor tries to free heap, the server
+           terminates abnormally since the heap is corrupt.
+    
+    
+    
+    SOLUTION: In Field_num::prepend_zeros() function, if allocated memory
+              is less than the field length, re-allocate memory enough to
+              hold field length size data.
+
+commit 65c278e384b04d32a45bd76851f16c959d55f752
+Author: Aditya A <aditya.a@oracle.com>
+Date:   Fri Sep 2 12:48:28 2016 +0530
+
+    Bug#23333990 PERSISTENT INDEX STATISTICS UPDATE BEFORE TRANSACTION IS COMMITTED
+    
+    Post push test case fix
+
+commit 21d738cfd0e0768ae61bd9de375bba886aeb8d1f
+Author: Marko Mäkelä <marko.makela@oracle.com>
+Date:   Thu Sep 1 16:13:57 2016 +0300
+
+    Post-push fix for Bug#24444831: Fix the test for innodb_page_size=4k.
+
+commit 215218378c354a54bcbe7e04abcb88fad5a717a1
+Author: Sreeharsha Ramanavarapu <sreeharsha.ramanavarapu@oracle.com>
+Date:   Thu Sep 1 12:37:50 2016 +0530
+
+    Bug #23259872: OPTIMIZER CHOOSES TO USE NON PRIMARY INDEX,
+                   EVEN THOUGH COST IS HIGHER
+    
+    Post-push to correct results of innodb.innodb_mysql.
+    big-test option is required to run this test.
+
+commit 9eb01e18099d88c1a1143cead79d2fe7ef54ff9f
+Author: Marko Mäkelä <marko.makela@oracle.com>
+Date:   Wed Aug 31 09:21:13 2016 +0300
+
+    Bug#24444831 MY_ERROR(ER_INNODB_ONLINE_LOG_TOO_BIG)
+    CALLED WITH INVALID INDEX NAME
+    
+    This bug was introduced in MySQL 5.6.8 with WL#6255.
+    When an error occurs while rebuilding a table that only has a
+    hidden GEN_CLUST_INDEX inside InnoDB, ha_alter_info->key_info_buffer
+    would be invalid and should not be dereferenced.
+    
+    get_error_key_name(): Get the name of an erroneous key.
+    Avoid dereferencing ha_alter_info->key_info_buffer when no keys
+    exist in the SQL layer.
+    
+    ha_innobase::inplace_alter_table(),
+    ha_innobase::commit_try_rebuild(): Invoke get_error_key_name()
+    for reporting ER_INNODB_ONLINE_LOG_TOO_BIG or ER_INDEX_CORRUPT.
+    
+    RB: 13834
+    Reviewed-by: Jimmy Yang <jimmy.yang@oracle.com>
+
+commit e8e0ee5eed37d06114c279956a326cee70bc347b
+Author: Aditya A <aditya.a@oracle.com>
+Date:   Wed Aug 31 20:16:48 2016 +0530
+
+    WL9513
+    Bug#23333990 PERSISTENT INDEX STATISTICS UPDATE BEFORE TRANSACTION IS COMMITTED
+    
+    PROBLEM
+    
+    By design stats estimation always reading uncommitted data. In this scenario
+    an uncommitted transaction has deleted all rows in the table. In Innodb
+    uncommitted delete records are marked as delete but not actually removed
+    from Btree until the transaction has committed or a read view for the rows
+    is present.While calculating persistent stats we were ignoring the delete
+    marked records,since all the records are delete marked we were estimating
+    the number of rows present in the table as zero which leads to bad plans
+    in other transaction operating on the table.
+    
+    
+    Fix
+    
+    Introduced a system variable called innodb_stats_include_delete_marked
+    which when enabled includes delete marked records for stat
+    calculations .
+
+commit a9aa985d892629dcc5803aba763fe6a22d9e6396
+Author: Sreeharsha Ramanavarapu <sreeharsha.ramanavarapu@oracle.com>
+Date:   Wed Aug 31 09:57:11 2016 +0530
+
+    Bug #23259872: OPTIMIZER CHOOSES TO USE NON PRIMARY INDEX,
+                   EVEN THOUGH COST IS HIGHER
+    
+    Issue:
+    ------
+    Optimizer tries to choose between a range-access and
+    ref-access, based on various parameters like
+    records_per_key, CPU cost and I/O cost. When the
+    row-estimate for ref access is inaccurate, optimizer
+    uses the estimate from range access on the same index.
+    
+    In the current issue the ref access's row-estimate comes
+    from range-access's estimate. The ref-access on a secondary
+    index is calculated to be cheaper than the best
+    range-access on the primary key. This will result in a bad
+    performance.
+    
+    Solution (mysql-trunk):
+    ---------
+    Ignore the index for ref access when we have the above mentioned
+    problem.
+    
+    Solution (mysql-5.7):
+    ---------
+    Shift from ref-access to range-access when:
+    1) Ref-access row estimate is overly-optimistic and it has
+       borrowed range-access's estimate on the same index.
+    2) Range-access uses more index key parts than ref access.
+    
+    We already do this in cases where the above conditions are
+    met and range access on the same index is the cheapest.
+    
+    With this fix, we shift to range-access on that index, even
+    if it is not considered the cheapest. To do this, we run
+    the range optimizer on that index alone.
+    
+    
+    sql/sql_select.h:
+    A new boolean 'dodgy_ref_cost' has been added to JOIN_TAB.
+    Setting this flag means ref is using lesser number of
+    key-parts than range and it borrows range's row estimate.
+    
+    sql/sql_planner.h:
+    find_best_ref should be able to modify the flag
+    'dodgy_ref_cost', so removing the const.
+    
+    sql/sql_planner.cc:
+    In find_best_ref, keep track of whether ref access's
+    row-estimate is problematic and set the 'dodgy_ref_cost'
+    flag.
+    
+    sql/sql_optimizer.cc:
+    Conditions 3, 4 were earlier tested for negation. Now
+    they are tested before 2 and false is returned. Check if
+    the 'dodgy_ref_cost' flag is set. Then it is better we
+    shift to range on the same index since it uses more
+    keyparts and its row-estimate is more reliable. We do
+    this by calling the range optimizer again on that index
+    alone.
+    
+    Solution (mysql-5.6):
+    ---------
+    Same approach as 5.7. With the following changes:
+    
+    sql/sql_optimizer.cc:
+    A new function can_switch_from_ref_to_range, similar to the
+    one in 5.7+ has been created.
+
+commit dc7886e429276612abcc0a4252d3755bd15f4fdc
+Author: Marc Alff <marc.alff@oracle.com>
+Date:   Tue Aug 30 18:32:04 2016 +0200
+
+    Bug#22551677 SIGNAL 11 IN LF_PINBOX_PUT_PINS
+    
+    Rework, relaxed abusive assert, for thread pools.
+
+commit 64650c2fb67f46e557c4b218d1cbc048e80063db
+Author: Marc Alff <marc.alff@oracle.com>
+Date:   Tue Aug 30 12:14:07 2016 +0200
+
+    Bug#22551677 SIGNAL 11 IN LF_PINBOX_PUT_PINS
+    
+    Backport to 5.6
+
+commit a9c014ff39847f209dd326ce05e4f22820c19f1f
+Author: Thirunarayanan Balathandayuthapani <thirunarayanan.balathandayuth@oracle.com>
+Date:   Mon Aug 29 12:11:07 2016 +0530
+
+    Bug #20989615   INNODB AUTO_INCREMENT PRODUCES SAME VALUE TWICE
+    
+    	- Adding have_debug.inc in test case.
+
+commit acaaf61e66d898344efd62dd3d259ec13cc75091
+Merge: fa1aafe efc8bc3
+Author: Arun Kuruvila <arun.kuruvila@oracle.com>
+Date:   Mon Aug 29 11:43:37 2016 +0530
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit efc8bc3ef32e37cf716f4448dd0b4ec9ef6763cc
+Author: Arun Kuruvila <arun.kuruvila@oracle.com>
+Date:   Mon Aug 29 11:41:50 2016 +0530
+
+    Bug#23303391: HANDLE_FATAL_SIGNAL (SIG=11) IN ALLOC_QUERY
+                  USING CHARACTER-SET-SERVER=UTF16
+    
+    This is a backport of Bug#15985752 to mysql-5.5
+
+commit f105d1ed869c2a978686ebc3ed77413bb1fdabb3
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Fri Aug 26 11:25:40 2016 +0200
+
+    Bug#24464380 PRIVILEGE ESCALATION USING MYSQLD_SAFE
+    
+    Post push fix: Solaris 10 /bin/sh don't understand $().
+
+commit fa1aafe9819cb2d9389968f95f91f00f58997df4
+Merge: 1e1a1ac 509b3ad
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Fri Aug 26 11:26:23 2016 +0200
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 509b3ad4cec67bc17d3702521ae4bc6b9b30e8ab
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Fri Aug 26 11:25:40 2016 +0200
+
+    Bug#24464380 PRIVILEGE ESCALATION USING MYSQLD_SAFE
+    
+    Post push fix: Solaris 10 /bin/sh don't understand $().
+
+commit 1e1a1acdeae837b0c5ecaece1f5e2d41b0d7f3cb
+Author: Thirunarayanan Balathandayuthapani <thirunarayanan.balathandayuth@oracle.com>
+Date:   Fri Aug 26 14:43:33 2016 +0530
+
+    Bug #20989615   INNODB AUTO_INCREMENT PRODUCES SAME VALUE TWICE
+    
+    	- Post push fix to avoid test case failure in 32 bit machine
+    
+    Reviewed-by: Jimmy Yang <jimmy.yang@oracle.com>
+    Approved via :IM
+
+commit 22bc179cd72b57aa066a321c4a6cfc56cc5db1be
+Merge: 28dd78c e655297
+Author: Kailasnath Nagarkar <kailasnath.nagarkar@oracle.com>
+Date:   Fri Aug 26 11:13:24 2016 +0530
+
+    Null Merge branch 'mysql-5.5' into mysql-5.6
+
+commit e655297b283420883999ccc4588a84993aa71a35
+Author: Kailasnath Nagarkar <kailasnath.nagarkar@oracle.com>
+Date:   Fri Aug 26 11:11:27 2016 +0530
+
+    Bug #23303485 : HANDLE_FATAL_SIGNAL (SIG=11) IN
+                    SUBSELECT_UNION_ENGINE::NO_ROWS
+    
+    This patch is specific for mysql-5.5
+    
+    ISSUE: When max_join_size is used and union query
+           results in evaluation of tuples greater than
+           max_join_size, the join object is not created,
+           and is set to NULL.
+           However, this join object is further dereferenced
+           by union logic to determine if query resulted in
+           any number of rows being returned.
+           Since, the object is NULL, it results in
+           program terminating abnormally.
+    
+    SOLUTION: Added check to verify if join object is created.
+              If join object is created, it will be used to
+              determine if query resulted in any number of rows.
+              Else, when join object is not created, we return
+              'false' indicating that there were no rows for the
+              query.
+
+commit 28dd78c19dd3cbbf0d0d076431b109a07183ffc2
+Author: Thirunarayanan Balathandayuthapani <thirunarayanan.balathandayuth@oracle.com>
+Date:   Fri Aug 26 11:00:44 2016 +0530
+
+    Bug #20989615	INNODB AUTO_INCREMENT PRODUCES SAME VALUE TWICE
+    
+    Problem:
+    =======
+    Autoincrement value gives duplicate values because of the following reasons.
+    
+    (1) In InnoDB handler function, current autoincrement value is not changed
+    based on newly set auto_increment_increment or auto_increment_offset variable.
+    
+    (2) Handler function does the rounding logic and changes the current
+    autoincrement value and InnoDB doesn't aware of the change in current
+    autoincrement value.
+    
+    Solution:
+    ========
+    Fix the problem(1), InnoDB always respect the auto_increment_increment
+    and auto_increment_offset value in case of current autoincrement value.
+    By fixing the problem (2), handler layer won't change any current
+    autoincrement value.
+    
+    Reviewed-by: Jimmy Yang <jimmy.yang@oracle.com>
+    RB: 13748
+
+commit 429bb89ef5826ad8d5063f2dc8a497b767f3e9ca
+Author: Venkatesh Duggirala <venkatesh.duggirala@oracle.com>
+Date:   Thu Aug 25 15:39:54 2016 +0530
+
+    Bug#22916743    RBR DOES NOT USE DEFAULT CURRENT_TIMESTAMP FOR
+    EXTRA COLUMN ON SLAVE
+    
+    Analysis: In prepare_record(), which is called to prepare the
+    basic record, we call restore_record to fill the tuple with
+    all the default values which are maintained in memory at
+    table->s->default_values. But for the special DEFAULT clauses
+    like DEFAULT CURRENT_TIMESTAMP/NOW(), it is not maintained
+    in table->s->default_values. It will be populated only when
+    we explicit ask to do it (i.e., calling set_default()) function.
+    
+    Fix: For the extra fields that are present only on slave and  that
+    does not have 'DEFAULT' clause, replication calls 'set_default()'
+    which will fill the record with default values (like for integer
+    types 'zero' even though there is no DEFAULT 0 for the field).
+    This logic is executed only for the field's that does not have
+    default clause. Now the logic is extended to call set_default when
+    there is special default clause (has_insert_default_function()).
+
+commit 4ad01643fa79d66d49ea0a5dc073291f14e6d198
+Author: Sivert Sorumgard <sivert.sorumgaard@oracle.com>
+Date:   Mon Aug 22 14:30:02 2016 +0200
+
+    Bug#24388753: PRIVILEGE ESCALATION USING MYSQLD_SAFE
+    
+    [This is the 5.5/5.6 version of the bugfix].
+    
+    The problem was that it was possible to write log files ending
+    in .ini/.cnf that later could be parsed as an options file.
+    This made it possible for users to specify startup options
+    without the permissions to do so.
+    
+    This patch fixes the problem by disallowing general query log
+    and slow query log to be written to files ending in .ini and .cnf.
+
+commit 46aa20b0e1baa6fd1f03a5c18da09487f96a8c17
+Author: Jon Olav Hauglid <jon.hauglid@oracle.com>
+Date:   Tue Aug 16 15:35:19 2016 +0200
+
+    Bug#24388746: PRIVILEGE ESCALATION AND RACE CONDITION USING CREATE TABLE
+    
+    During REPAIR TABLE of a MyISAM table, a temporary data file (.TMD)
+    is created. When repair finishes, this file is renamed to the original
+    .MYD file. The problem was that during this rename, we copied the
+    stats from the old file to the new file with chmod/chown. If a user
+    managed to replace the temporary file before chmod/chown was executed,
+    it was possible to get an arbitrary file with the privileges of the
+    mysql user.
+    
+    This patch fixes the problem by not copying stats from the old
+    file to the new file. This is not needed as the new file was
+    created with the correct stats. This fix only changes server
+    behavior - external utilities such as myisamchk still does
+    chmod/chown.
+    
+    No test case provided since the problem involves synchronization
+    with file system operations.
+
+commit cbba9c0fd5530ff7297b04e5b85ab7f38680295f
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Fri Aug 12 12:38:20 2016 +0200
+
+    Bug#24464380 PRIVILEGE ESCALATION USING MYSQLD_SAFE
+    
+    Argument to malloc-lib must be included in restricted list of
+    directories, symlink guards added, and mysqld and mysqld-version
+    options restricted to command line only. Don't redirect errors to
+    stderr.
+
+commit a683f14f849831ccb494303506b8d2f57c733cdf
+Merge: 3084723 170b528
+Author: Jon Olav Hauglid <jon.hauglid@oracle.com>
+Date:   Wed Aug 24 16:02:49 2016 +0200
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 170b52867cc956f648b10da44d8bcafaafb196ee
+Author: Jon Olav Hauglid <jon.hauglid@oracle.com>
+Date:   Fri Aug 19 12:06:16 2016 +0200
+
+    Bug#24400628: DEBUG ASSETION KICKS IN WHEN LONG SUBPARTITION NAME
+                  IS USED IN CREATE TABLE
+    
+    The problem was that using a very long subpartition name could
+    lead to the server exiting abnormally.
+    
+    This patch fixes the problem by reporting ER_TOO_LONG_IDENT
+    if a name with more than 64 characters are used as partition
+    and subpartition name.
+
+commit 3084723f76d19990f3573c5ec614709f567df78b
+Merge: 01bcf39 30dd69a
+Author: Sivert Sorumgard <sivert.sorumgaard@oracle.com>
+Date:   Wed Aug 24 14:03:11 2016 +0200
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 30dd69ad66a7f3d3ab74e4c18fd7c8d0dd11789e
+Author: Sivert Sorumgard <sivert.sorumgaard@oracle.com>
+Date:   Mon Aug 22 14:30:02 2016 +0200
+
+    Bug#24388753: PRIVILEGE ESCALATION USING MYSQLD_SAFE
+    
+    [This is the 5.5/5.6 version of the bugfix].
+    
+    The problem was that it was possible to write log files ending
+    in .ini/.cnf that later could be parsed as an options file.
+    This made it possible for users to specify startup options
+    without the permissions to do so.
+    
+    This patch fixes the problem by disallowing general query log
+    and slow query log to be written to files ending in .ini and .cnf.
+
+commit 01bcf39b78db346f96c224918c594724373700b7
+Author: Karthik Kamath <karthik.kamath@oracle.com>
+Date:   Mon Aug 22 16:38:05 2016 +0530
+
+    BUG#23224078: BACKPORT THE PATCH FOR BUG 19678930/73979 TO MYSQL 5.6
+    
+    The problem was that the allocator used by the lock-free container
+    implementations misused alloca() when scanning for objects which
+    could be safely deallocated. The code tried to calculate how much
+    memory could safely be allocated on the stack for qsort based
+    pre-sort, but these calculations were not accurate.
+    
+    This could manifest itself as stack overflow errors with high
+    number of concurrent connections to the server. (e.g. 8000
+    connections with default 256Kb stack size).
+    
+    This patch fixes the problem by removing the use of alloca
+    and replacing qsort approach by a linear scan through all
+    pointers (pins) owned by each thread. We remove each
+    such pointer from the list of pointers to objects the current
+    thread has marked as unused (purgatory). At the end we have
+    a list of pointers to objects not in use by any thread. Since
+    there are few active (non-null) pointers at any given time,
+    this turns out to be quite efficent.
+    
+    The patch also fixes a bug in the code determining when
+    scanning for unused objects should be performed. Instead
+    of doing this scan only at certain intervals (for perf reasons),
+    the old code did this scan almost always.
+    
+    Micro-benchmarks show that these two changes give a
+    a clear performance improvement over the old approach.
+    
+    Some #include directives in the LF code was also changed
+    so that they only use <> for system headers. This reduces
+    the likelyhood of conflicts between system headers and
+    MySQL headers with generic names (e.g. hash.h).
+    
+    The patch also reduces usage of thread-local storage.
+    
+    NOTE:
+    =====
+    This is a backport of the patch for BUG#19678930 to mysql-5.6.
+
+commit f601e1c1f1685dc60bcfc18ed3b59ce33d6d2258
+Author: Arun Kuruvila <arun.kuruvila@oracle.com>
+Date:   Mon Aug 22 16:08:40 2016 +0530
+
+    Bug#19687742: CREATE_ASYMMETRIC_PRIV_KEY : TOO EASY TO
+                  SLOW DOWN SERVER BY MAXING OUT CPU
+    
+    Post push patch to fix windows build failure.
+
+commit d03f3b65d34abcdbbe7a2b795aa9acd0cc651ff0
+Author: Arun Kuruvila <arun.kuruvila@oracle.com>
+Date:   Mon Aug 22 11:18:47 2016 +0530
+
+    Bug#19687742: CREATE_ASYMMETRIC_PRIV_KEY : TOO EASY TO
+                  SLOW DOWN SERVER BY MAXING OUT CPU
+    
+    Description:- User defined functions used with improper key
+    length value hogs the CPU and can be used to slow down a
+    server.
+    
+    Analysis:- The increased CPU utilization is expected since
+    the cryptography algorithms used require large prime
+    numbers.
+    
+    Fix:- Environment variables
+    (MYSQL_OPENSSL_UDF_RSA_BITS_THRESHOLD,
+    MYSQL_OPENSSL_UDF_DSA_BITS_THRESHOLD and
+    MYSQL_OPENSSL_UDF_DH_BITS_THRESHOLD) are introduced for setting
+    the threshold values for key length.
+
+commit 3682c8928e0b538739ca3d7c93b74e3bd2f9a001
+Merge: b91d851 28313bb
+Author: Jon Olav Hauglid <jon.hauglid@oracle.com>
+Date:   Fri Aug 19 09:16:27 2016 +0200
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 28313bb8462493defab1d57a7f0b19518b48cd62
+Author: Jon Olav Hauglid <jon.hauglid@oracle.com>
+Date:   Tue Aug 16 15:35:19 2016 +0200
+
+    Bug#24388746: PRIVILEGE ESCALATION AND RACE CONDITION USING CREATE TABLE
+    
+    During REPAIR TABLE of a MyISAM table, a temporary data file (.TMD)
+    is created. When repair finishes, this file is renamed to the original
+    .MYD file. The problem was that during this rename, we copied the
+    stats from the old file to the new file with chmod/chown. If a user
+    managed to replace the temporary file before chmod/chown was executed,
+    it was possible to get an arbitrary file with the privileges of the
+    mysql user.
+    
+    This patch fixes the problem by not copying stats from the old
+    file to the new file. This is not needed as the new file was
+    created with the correct stats. This fix only changes server
+    behavior - external utilities such as myisamchk still does
+    chmod/chown.
+    
+    No test case provided since the problem involves synchronization
+    with file system operations.
+
+commit b91d851f82ba70bf775422d42c0e853f9116cbb1
+Merge: 483c60e 32c9503
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Thu Aug 18 16:49:08 2016 +0200
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 32c950391ddd3dc698cf3bd464048040be41bac2
+Author: Terje Rosten <terje.rosten@oracle.com>
+Date:   Fri Aug 12 12:38:20 2016 +0200
+
+    Bug#24464380 PRIVILEGE ESCALATION USING MYSQLD_SAFE
+    
+    Argument to malloc-lib must be included in restricted list of
+    directories, symlink guards added, and mysqld and mysqld-version
+    options restricted to command line only. Don't redirect errors to
+    stderr.
+
+commit 483c60e9184e863e08487ea0c5e6f7a68a78e6dd
+Merge: 7d57599 c9d8b21
+Author: Chaithra Gopalareddy <chaithra.gopalareddy@oracle.com>
+Date:   Thu Aug 18 12:14:06 2016 +0530
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit c9d8b21cc1b161d44f85e0ea61de4a4c60f317fb
+Author: Chaithra Gopalareddy <chaithra.gopalareddy@oracle.com>
+Date:   Thu Aug 18 12:12:09 2016 +0530
+
+    Post push fix - Does not give error on some platforms
+
+commit 7d57599249f858856dbb078375eb214a295a85eb
+Merge: 9e9e0cd 0e73899
+Author: Chaithra Gopalareddy <chaithra.gopalareddy@oracle.com>
+Date:   Thu Aug 18 10:00:27 2016 +0530
+
+    Merge branch 'mysql-5.5' into mysql-5.6
+
+commit 0e7389935866c29a8939998b3745894672a37c6b
+Author: Chaithra Gopalareddy <chaithra.gopalareddy@oracle.com>
+Date:   Thu Aug 18 09:56:48 2016 +0530
+
+    Bug #23135667: CRASH AFTER DEEPLY NESTED BUILD_EQUAL_ITEMS_FOR_COND
+    
+    Problem:
+    When build_equal_items_for_cond gets called for a big query
+    recursively, the specified thread_stack_size exceeds. But
+    optimizer does not handle this condition. As a result, server
+    exits.
+    
+    Solution:
+    Check if we exceed specified stack size and if yes exit
+    gracefully by throwing an error.
+
+commit 9e9e0cd44c686292762532851499feee5accd6ec
+Author: Marko Mäkelä <marko.makela@oracle.com>
+Date:   Mon Aug 8 14:19:32 2016 +0300
+
+    Bug#24397406 INNODB: ALGORITHM=INPLACE FAILS TO PROMOTE UNIQUE KEY TO CLUSTERED INDEX
+    
+    When a table has no PRIMARY KEY, but there is a UNIQUE INDEX
+    defined on NOT NULL columns that are not column prefixes,
+    that unique index must be treated as the primary key.
+    
+    This property was being violated by InnoDB when a column was changed
+    to NOT NULL, such that a UNIQUE INDEX on that column became eligible
+    to being treated as a primary key.
+    
+    innobase_create_key_defs(): Instead of checking each ADD [UNIQUE] INDEX
+    request, check if a GEN_CLUST_INDEX can be replaced with any unique index
+    in the altered_table definition. So, we can have new_primary even
+    if n_add==0.
+    
+    prepare_inplace_alter_table_dict(): When the table is not being rebuilt,
+    assert that TABLE_SHARE::primary_key is not changing.
+    
+    RB: 13595
+    Reviewed-by: Kevin Lewis <kevin.lewis@oracle.com>
+
+commit 228b8c109dc49f6ab061055b462eed969a19e5aa
+Author: Dyre Tjeldvoll <Dyre.Tjeldvoll@oracle.com>
+Date:   Wed Nov 5 13:19:57 2014 +0100
+
+    Bug#24469860 BACKPORT BUG#19635706 TO 5.6
+    
+    Bug#19635706 `!!NEW_CLUSTERED == (INNOBASE_NEED_REBUILD(HA_ALTER_INFO) || ADD_FTS_DOC_ID)'
+    
+    Problem: Adding a unique index to a NOT NULL POINT column would
+    trigger a warning and the key would not be promoted. Creating a
+    unique index on a different NON-NULL column in the same table would
+    then trigger an assert.
+    
+    The issue was introduced in the fix for Bug 17665767 which added
+    special handling of unique indices on NON NULL POINT columns when
+    reading frm-files, which ensured that such indices were promoted to
+    primary keys. Since TABLE_SHARE::primary_key is set when reading
+    the frm file, it was set to the index of the POINT column.
+    
+    But such columns were not excluded when setting the
+    HA_KEY_HAS_PART_KEY_SEG bitfield, and since this is used by ALTER
+    TABLE (sql and innodb) to determine if a key is promotable, the
+    result was an inconsistency. Specifically, the warning was issued
+    because TABLE_SHARE::primary_key was different from MAX_KEY when no
+    key had been promoted.
+    
+    On the second alter the sql layer trusts TABLE_SHARE::primary_key (via
+    candidate_key) to imply that the table already has a primary key, and
+    so does not set Alter_inplace_info::ADD_PK_INDEX. This then triggers
+    an assert in Innodb which has created a new clustered index, but sees
+    innobase_need_rebuild(ha_alter_info) returning false (because
+    Alter_inplace_info::ADD_UNIQUE_INDEX is not covered by the
+    INNOBASE_ALTER_REBUILD mask, but Alter_inplace_info::ADD_PK_INDEX is).
+    
+    Solution: Use the algorithm from frm reading also when setting the
+    HA_KEY_HAS_PART_KEY_SEG bit field, i.e. do not consider keys on POINT
+    columns as partial.
+    
+    Note! This is not a good(tm) solution as too many code fragments need
+    to be kept in sync manually. A better solution would be remove the
+    dangerous non-persistent HA_KEY_HAS_PART_KEY_SEG bit field and create
+    an is_key_partial() predicate which could provide this info from
+    persisted data. Unfortunately, it looks like this approach will
+    require more refactoring than what is reasonable, now that we're on
+    the verge of getting a new data dictionary.
+    
+    (cherry picked from commit 2a3907076385512b1c4dbd8e2c0d21739031c573)
+
+commit fb49b67897d63a5c53c59f0ec158568a5202631e
+Author: Sujatha Sivakumar <sujatha.sivakumar@oracle.com>
+Date:   Tue Aug 16 10:39:57 2016 +0530
+
+    Bug#22202516: ENABLING SEMI-SYNC DURING COMMIT CAN CAUSE
+    MASTER TO ASSERT.
+    
+    Problem:
+    ========
+    To be more specific, the problematic code is in
+    ReplSemiSyncMaster::commitTrx() , line 792 , with
+    assert(entry);
+    
+    In fact, 'entry' is not NULL only if semi-sync was enabled
+    when the commit phase started. If semi-sync is enabled
+    between commit and after_commit() then 'entry' will be NULL
+    and the above assert will cause mysqld to assert.
+    
+    Analysis:
+    =========
+    In semi sync replication a transaction that gets committed
+    on master will wait for an acknowledgement from slave.
+    In order to achieve this there are few steps that are
+    carried out during different stages of commit. First comes
+    flush stage. One 'Entry' node (active transaction node) is
+    created and it is associated with a single transaction or a
+    group of transactions that got flushed at the flush stage.
+    This object gets inserted into active transaction list. Next
+    comes sync stage. After sync stage the commit is finalized.
+    At this stage for each thread trx_wait_binlog_name and
+    trx_wait_binlog_pos are set with respect to their
+    corresponding binary log positions. While the dump thread
+    sends these transactions across the network and receives
+    their ack,  the thread that performed commit has to wait. In
+    order to do that the committed thread gets its
+    trx_wait_binlog_name and trx_wait_binlog_pos and tries to
+    retrieve the corresponding entry node that is associated
+    with this position. There are two scenarios where the Entry
+    node may not be present.
+    
+    case 1: Where the transaction was already acknowledged as
+    the slave's reply positions are higher than the current
+    threads waiting positions.
+    
+    case 2: When transaction entered into flush stage of
+    ordered_commit semi sync was not enabled and there was no
+    corresponding active transaction node that got created.
+    
+    Case 1 will never get to waiting stage as it has already
+    got the ack. It will simply go away. But case 2 will result
+    in the above assert as it is trying to wait for an ack.
+    
+    Transactions which fall under case 2 should not wait for
+    ack. They should simply exit and they should be considered
+    as async transactions.
+    
+    Fix:
+    ===
+    If a transaction doesn't find a corresponding 'Entry' in the
+    active transaction list and it has not received
+    acknowledgement from slave then this transaction will not be
+    considered as semi sync transaction and it will not wait for
+    an ack.
+
+commit 6ae4c060e8b583fe6e5071e671c6d985492f0caf
+Author: Shaohua Wang <shaohua.wang@oracle.com>
+Date:   Tue Aug 16 03:33:21 2016 +0200
+
+    BUG#24331265 MEMORY LEAK IN SOME INNODB FTS TESTS
+    
+    We don't free some memory used by fts optimize thread in release build.
+    
+    Patch approved by Allen.Lai over IM.
+
+commit ad24c9abcfbacd57835aa1a2f5ede1582e43b02a
+Author: Ajo Robert <ajo.robert@oracle.com>
+Date:   Thu Aug 11 14:51:01 2016 +0530
+
+    Bug#21974225 THREADS STAYING IN "CLEANING UP" STATE FOREVER
+    
+    Analysis
+    =========
+    Show engine InnoDB status shows "cleaning up" for threds which
+    is in "Sleep" state as per information_schema.processlist.
+    
+    Show engine InnoDB status displays thread state info
+    (thd->proc_info). This is not reset after completion of
+    statement execution leading to have last updated status
+    ("cleaning up") when thread is Idle.
+    Information_schema.processlist does not display status info
+    when thread is in sleep mode, thus causing a mismatch.
+    
+    Fix:
+    =======
+    thd->proc_info reset to NULL on completion of statement execution.
+    NULL is the default value for proc_info after init.
