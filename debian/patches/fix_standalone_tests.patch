@@ -15,5 +15,5 @@ Index: dotdeb-mysql/mysql-test/lib/mtr_cases.pm
 +                             ["lib/mysql-testsuite/suite",
 +                              "share/mysql-test/suite",
  			      "mysql-test/suite",
+                               "lib/mysql-test/suite",
  			      "internal/mysql-test/suite",
- 			      "mysql-test",
