@@ -1,3 +1,4 @@
-# See debian/README.source for more information about the DFSG repacking here.
 version=3
-http://mysql.mirrors.pair.com/Downloads/MySQL-5.6/mysql-([\d\.]+).tar.gz
+opts=\
+downloadurlmangle=s/\/downloads\/gpg\/?\?file=(mysql-([\d\.]*).tar.gz)/\/get\/Downloads\/MySQL-5.6\/$1/,filenamemangle=s/\/downloads\/gpg\/?\?file=mysql\-5\.6_([\d\.]*)\.tar\.gz/mysql-$1.tar.gz/ \
+http://dev.mysql.com/downloads/mysql/5.6.html?os=src /downloads/gpg/\?file=mysql-([\d\.]*).tar.gz
