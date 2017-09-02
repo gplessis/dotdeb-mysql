@@ -12,7 +12,7 @@ Index: dotdeb-mysql/scripts/mysqld_safe.sh
 ===================================================================
 --- dotdeb-mysql.orig/scripts/mysqld_safe.sh
 +++ dotdeb-mysql/scripts/mysqld_safe.sh
-@@ -29,9 +29,6 @@ err_log=
+@@ -31,9 +31,6 @@ err_log_append=
  syslog_tag_mysqld=mysqld
  syslog_tag_mysqld_safe=mysqld_safe
  
@@ -22,7 +22,7 @@ Index: dotdeb-mysql/scripts/mysqld_safe.sh
  # MySQL-specific environment variable. First off, it's not really a umask,
  # it's the desired mode. Second, it follows umask(2), not umask(3) in that
  # octal needs to be explicit. Our shell might be a proper sh without printf,
-@@ -169,7 +166,7 @@ eval_log_error () {
+@@ -171,7 +168,7 @@ eval_log_error () {
        # sed buffers output (only GNU sed supports a -u (unbuffered) option)
        # which means that messages may not get sent to syslog until the
        # mysqld process quits.
@@ -31,7 +31,7 @@ Index: dotdeb-mysql/scripts/mysqld_safe.sh
        ;;
      *)
        echo "Internal program error (non-fatal):" \
-@@ -813,6 +810,13 @@ mysqld daemon not started"
+@@ -819,6 +816,13 @@ mysqld daemon not started"
  fi
  
  #
