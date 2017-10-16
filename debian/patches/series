@@ -5,4 +5,3 @@ disable_tests.patch
 fix_standalone_tests.patch
 kfreebsd_tests.patch
 spelling.patch
-fix-mysqlhotcopy-test-failure.patch

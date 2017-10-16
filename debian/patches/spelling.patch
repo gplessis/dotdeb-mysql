@@ -195,7 +195,7 @@ Index: dotdeb-mysql/sql/sql_optimizer.cc
 ===================================================================
 --- dotdeb-mysql.orig/sql/sql_optimizer.cc
 +++ dotdeb-mysql/sql/sql_optimizer.cc
-@@ -974,7 +974,7 @@ JOIN::optimize()
+@@ -976,7 +976,7 @@ JOIN::optimize()
          }
        }
      }

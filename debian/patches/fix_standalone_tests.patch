@@ -7,7 +7,7 @@ Index: dotdeb-mysql/mysql-test/lib/mtr_cases.pm
 ===================================================================
 --- dotdeb-mysql.orig/mysql-test/lib/mtr_cases.pm
 +++ dotdeb-mysql/mysql-test/lib/mtr_cases.pm
-@@ -287,7 +287,8 @@ sub collect_one_suite($)
+@@ -329,7 +329,8 @@ sub collect_one_suite($)
      else
      {
        $suitedir= my_find_dir($::basedir,
