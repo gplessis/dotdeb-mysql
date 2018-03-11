@@ -24,7 +24,7 @@
 %global mysql_vendor_2          Sun Microsystems, Inc.
 %global mysql_vendor            Oracle and/or its affiliates
 
-%global mysql_version   @VERSION@
+%global mysql_version   5.6.39
 
 %global mysqld_user     mysql
 %global mysqld_group    mysql
@@ -242,11 +242,11 @@
 Name:           MySQL%{product_suffix}
 Summary:        MySQL: a very fast and reliable SQL database server
 Group:          Applications/Databases
-Version:        @MYSQL_RPM_VERSION@
+Version:        5.6.39
 Release:        %{release}%{?distro_releasetag:.%{distro_releasetag}}
 Distribution:   %{distro_description}
-License:        Copyright (c) 2000, @MYSQL_COPYRIGHT_YEAR@, %{mysql_vendor}. All rights reserved. Under %{license_type} license as shown in the Description field.
-Source:         http://www.mysql.com/Downloads/MySQL-@MYSQL_BASE_VERSION@/%{src_dir}.tar.gz
+License:        Copyright (c) 2000, 2017, %{mysql_vendor}. All rights reserved. Under %{license_type} license as shown in the Description field.
+Source:         http://www.mysql.com/Downloads/MySQL-5.6/%{src_dir}.tar.gz
 URL:            http://www.mysql.com/
 Packager:       MySQL Release Engineering <mysql-build@oss.oracle.com> 
 Vendor:         %{mysql_vendor}
