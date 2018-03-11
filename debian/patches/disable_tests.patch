@@ -3,10 +3,10 @@ Subject: Convenient place to disable tests that are currently failing
 Forwarded: not-needed
 Last-Update: 2012-03-07
 Reviewed-by: Nicholas Bamber <nicholas@periapt.co.uk>
-Index: dotdeb-mysql/mysql-test/t/disabled.def
+Index: Local/mysql-test/t/disabled.def
 ===================================================================
---- dotdeb-mysql.orig/mysql-test/t/disabled.def
-+++ dotdeb-mysql/mysql-test/t/disabled.def
+--- Local.orig/mysql-test/t/disabled.def
++++ Local/mysql-test/t/disabled.def
 @@ -18,3 +18,4 @@ mysql_embedded_client_test      : Bug#13
  mysql_client_test_embedded : Bug#16084066 2013-01-08 Disabled since this test is failing
  mysqlhotcopy_archive @solaris : DBD-mysql perl module not available on Solaris

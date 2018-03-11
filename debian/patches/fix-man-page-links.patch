@@ -2,17 +2,17 @@ From: Akhil Mohan <akhil.mohan@oracle.com>
 Description: Fix path in man page link.
 Bug: http://bugs.mysql.com/bug.php?id=70952
 
-Index: dotdeb-mysql/man/mysql_client_test_embedded.1
+Index: Local/man/mysql_client_test_embedded.1
 ===================================================================
---- dotdeb-mysql.orig/man/mysql_client_test_embedded.1
-+++ dotdeb-mysql/man/mysql_client_test_embedded.1
+--- Local.orig/man/mysql_client_test_embedded.1
++++ Local/man/mysql_client_test_embedded.1
 @@ -1 +1 @@
 -.so mysql_client_test.1
 +.so man1/mysql_client_test.1
-Index: dotdeb-mysql/man/mysqltest_embedded.1
+Index: Local/man/mysqltest_embedded.1
 ===================================================================
---- dotdeb-mysql.orig/man/mysqltest_embedded.1
-+++ dotdeb-mysql/man/mysqltest_embedded.1
+--- Local.orig/man/mysqltest_embedded.1
++++ Local/man/mysqltest_embedded.1
 @@ -1 +1 @@
 -.so mysqltest.1
 +.so man1/mysqltest.1

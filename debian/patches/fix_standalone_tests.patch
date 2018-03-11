@@ -3,10 +3,10 @@ Description: makes mtr look in the standard location from the
  mysql-testsuite-5.5 package.
 Forwarded: not-needed
 
-Index: dotdeb-mysql/mysql-test/lib/mtr_cases.pm
+Index: Local/mysql-test/lib/mtr_cases.pm
 ===================================================================
---- dotdeb-mysql.orig/mysql-test/lib/mtr_cases.pm
-+++ dotdeb-mysql/mysql-test/lib/mtr_cases.pm
+--- Local.orig/mysql-test/lib/mtr_cases.pm
++++ Local/mysql-test/lib/mtr_cases.pm
 @@ -329,7 +329,8 @@ sub collect_one_suite($)
      else
      {
